@@ -17,7 +17,7 @@ It consists of three important components:
 
     We can now prove the following properties:
     1. $P(\emptyset) = 0$.
-        >Proof: Let $A_i = \emptyset$ for $i \geq 1$, $A_i \cap A_j = \emptyset$ for $i \neq j$, by axioms we have $P(\bigcup_{i=1}^{\infty} A_i) = \sum_{i=1}^{\infty} P(A_i)$ and $0 \leq P(\emptyset) \leq 1$, therefore, $P(\emptyset) = 0$.
+        >Proof: Let $A_i = \emptyset$ for $i \geq 1$, $A_i \cap A_j = \emptyset$ for $i \neq j$, by axioms we have $P(\bigcup_{i=1}^{\infty} A_i) = \sum_{i=1}^{\infty} P(A_i)$, or in other words, $P(\emptyset)=\sum_{i=1}^{\infty}P(\emptyset)$. Additionally, $0 \leq P(\emptyset) \leq 1$, therefore, $P(\emptyset) = 0$.
     2. Let A denote an event. Let $\bar{A}$ denote the complementary event of A, which means $\bar{A}$ saitifies two conditions:
         1) $\bar{A} \cap A = \emptyset$, and
         2) $\bar{A} \cup A = S$.
