@@ -1,10 +1,11 @@
 ## Table of Contents
 2. [Univariate Random Variables](#2-univariate-random-variables)
+
     2.1 [Introduction to probability model](#21-introduction-to-probability-model)
 
 <div style="page-break-after: always"></div>
 
-## 2 Univariate Random Variables
+## 2. Univariate Random Variables
 ### 2.1 Introduction to probability model
 - <b>Probability model</b> is used to describe a random exprienment.
 It consists of three important components:
