@@ -84,8 +84,7 @@ This function satisfies that for any $x\in \mathbb{R}$, $\{X\leq x\}=\{\omega|X(
     >Proof: $\{X \leq x_1\}$ is an event. $\{X \leq x_1\} \subseteq \{X \leq x_2\}$ if $x_1 < x_2$, since $\{\omega|X(\omega) \leq x_1\} \leq \{\omega|X(\omega) \leq x_2\}$.
     2. $\displaystyle \lim_{x \to -\infty} F(x) = 0$, $\displaystyle \lim_{x \to \infty} F(x) = 1$.
     3. $F(x)$ is a right-continuous function, i.e., for any $a\in \mathbb{R}$, $\displaystyle \lim_{x \to a^+} F(x) = F(a)$. 
-    ![image](images/IMG_346946769558-1.jpeg)
-    ![image](images/IMG_5D20C2386F19-1.jpeg)
+    <img src="images/IMG_5D20C2386F19-1.jpeg" width=40%> <img src="images/IMG_346946769558-1.jpeg" width=40%>
 
     1, 2 and 3 are three basic properties of a c.d.f.
     Some extra properties of a c.d.f.:
