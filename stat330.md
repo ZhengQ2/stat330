@@ -35,11 +35,11 @@ It consists of three important components:
             >Proof: Define $A_i = \emptyset$ for $i \geq 3$, so $S = A_i \cap A_j = \emptyset$, for $i \neq j$. Then $\displaystyle P\left(\bigcup_{i=1}^{\infty} A_i\right) = \sum_{i=1}^{\infty} P(A_i)$, or in other words, $P(A_1 \cup A_2) = P(A_1) + P(A_2) + 0$.
         4. In general, $P(A_1 \cup A_2) = P(A_1) + P(A_2) - P(A_1 \cap A_2)$.
             >![image](images/IMG_75BD3B0AF84D-1.jpeg)
-            Proof: Define $B=\{\omega|\omega \in A_1, \bar{\omega} \in A_2\}$, since $A_1 = B\cup (A_1\cap A_2)$, we can get $B\cap (A_1 \cap A_2) = \emptyset$, $B\cup (A_1 \cap A_2) = A_1$, $B\cap (A_1 \cap A_2) = \emptyset$, $B\cap A_2 = \emptyset$, and therefore  $B\cup A_2 = A_1 \cup A_2$.
+            Proof: Define $B=\{\omega|\omega \in A_1, \omega \notin A_2\}$, since $A_1 = B\cup (A_1\cap A_2)$, we can get $B\cap (A_1 \cap A_2) = \emptyset$, $B\cup (A_1 \cap A_2) = A_1$, $B\cap (A_1 \cap A_2) = \emptyset$, $B\cap A_2 = \emptyset$, and therefore  $B\cup A_2 = A_1 \cup A_2$.
             Then $P(A_1 \cup A_2) = P(B \cup A_2) = P(B) + P(A_2)$. Note $P(A_1 \cup A_2) = P(A_2) + P(B)$ and $P(B) = P(A_1) - P(A_1 \cap A_2)$. Hence, $P(A_1 \cup A_2) = P(A_1) + P(A_2) - P(A_1 \cap A_2)$.
         5. If $A_1 \subseteq A_2$, then $P(A_1) \leq P(A_2)$
             >![image](images/IMG_8F2FC167373A-1.jpeg)
-            Proof: $A_2 \setminus A_1 := B  = \{\omega | \omega \in A_2, \bar{\omega} \in A_1\}$, we have $B\cap A_1 = \emptyset$, $B \cup A_1 = A_2$. Then $P(A_2) = P(A_1 \cup B) = P(A_1) + P(B) \geq P(A_1)$.
+            Proof: $A_2 \setminus A_1 := B  = \{\omega | \omega \in A_2, \omega \notin A_1\}$, we have $B\cap A_1 = \emptyset$, $B \cup A_1 = A_2$. Then $P(A_2) = P(A_1 \cup B) = P(A_1) + P(B) \geq P(A_1)$.
         
         
         >e.g. Toss a coin twice
@@ -87,7 +87,7 @@ This function satisfies that for any $x\in \mathbb{R}$, $\{X\leq x\}=\{\omega|X(
     ![image](images/IMG_346946769558-1.jpeg)
     ![image](images/IMG_5D20C2386F19-1.jpeg)
 
-    (a),(b),(c) are three basic properties of a c.d.f.
+    1, 2 and 3 are three basic properties of a c.d.f.
     Some extra properties of a c.d.f.:
     4. $P(a < X \leq b) = F(b) - F(a)$.
     5. $P(X = a) = P(X\leq a) - P(x<a)=F(a)-F(a^-)$.
