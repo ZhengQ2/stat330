@@ -2,6 +2,7 @@
 2. [Univariate Random Variables](#2-univariate-random-variables)
 
     2.1 [Introduction to probability model](#21-introduction-to-probability-model)
+    2.2 [Discrete random variable](#22-discrete-random-variable)
 
 <div style="page-break-after: always"></div>
 
@@ -81,12 +82,58 @@ This function satisfies that for any $x\in \mathbb{R}$, $\{X\leq x\}=\{\omega|X(
     For any $x \in \mathbb{R}$, the c.d.f. of $X$ is defined as $F(x) = P(X \leq x)$.
     It satisfies the following property:
     1. $F(x)$ is a non-decreasing fucntion, i.e., if $x_1 \leq x_2$, then $F(x_1) \leq F(x_2)$.
-    >Proof: $\{X \leq x_1\}$ is an event. $\{X \leq x_1\} \subseteq \{X \leq x_2\}$ if $x_1 < x_2$, since $\{\omega|X(\omega) \leq x_1\} \leq \{\omega|X(\omega) \leq x_2\}$.
+        >Proof: $\{X \leq x_1\}$ is an event. $\{X \leq x_1\} \subseteq \{X \leq x_2\}$ if $x_1 < x_2$, since $\{\omega|X(\omega) \leq x_1\} \leq \{\omega|X(\omega) \leq x_2\}$.
     2. $\displaystyle \lim_{x \to -\infty} F(x) = 0$, $\displaystyle \lim_{x \to \infty} F(x) = 1$.
     3. $F(x)$ is a right-continuous function, i.e., for any $a\in \mathbb{R}$, $\displaystyle \lim_{x \to a^+} F(x) = F(a)$. 
     <img src="images/IMG_5D20C2386F19-1.jpeg" width=40%> <img src="images/IMG_346946769558-1.jpeg" width=40%>
 
     1, 2 and 3 are three basic properties of a c.d.f.
     Some extra properties of a c.d.f.:
+
     4. $P(a < X \leq b) = F(b) - F(a)$.
+        >Proof: Define $A=\{X\leq b\}, B:=\{X\leq a\}, C=\{a<x\leq b\}$, we want to prove: $P(a<X\leq b) = P(X\leq b) = P(X\leq a) \iff P(C)=P(A)-P(B)$. Note $B\cap C = \emptyset$, $B\cup C = A$. Then $P(A) = P(B\cup C) = P(B) + P(C)$.
     5. $P(X = a) = P(X\leq a) - P(x<a)=F(a)-F(a^-)$.
+        > Proof: $P(X=a) = P(X\leq a) - P(X<a) = F(a) - \displaystyle \lim_{x \to a^-} F(x) = \lim_{x \to a^+}F(x)- \lim_{x \to a^-}F(x)$.
+        <img src="images/IMG_5D20C2386F19-1.jpeg">
+
+### 2.2 Discrete random variable
+>Definition:
+> If a random variable $X$ can only take on a finite or countably infinite number of values, then $X$ is called a discrete random variable.
+- <b>cdf</b> of a discrete r.v. is a right continuous step funciton
+    ![image](images/IMG_2F858FF929D1-1.jpeg)
+- <b>Probability function (pf):</b> $f(x) = P(X=x)$.
+    For a discrete r.v., $f(x)\begin{cases}>0, \text{if }X \text{ can take value }x\\=0, \text{if } X \text{ cannot take value } x\end{cases}$
+- <b>Support</b>: The set $A = \{x: f(x) > 0\}$ is called the support of $X$. These are all the possible values that $X$ can take.
+- Properties of a p.f. $f$ for a discrete r.v. $X$.
+    1. $f(x) \geq 0$ for any $x \in \mathbb{R}$.
+    2. $\displaystyle \sum_{x\in A} f(x) = 1$.
+        > Proof: The support of X is a countable set, $A = \{x_1, \dots, x_n\}$. Let $B_i=\{X=x_i\}$ is an event for $i=1,...,n$. $B_i$ are pairwise mutually exclusive events, i.e. $B_i \cap B_j = \emptyset$ for $i \neq j$. Then, $\displaystyle \bigcup_{i=1}^n B_i = S$. Then, $\displaystyle1=P(S)=P\left( \bigcup_{i=1}^n B_i\right)=\sum_{i=1}^n P(B_i) = \sum_{i=1}^n P(X=x_i)$.
+- Some commonly used discrete r.v.
+    1. Bernoulli r.v. $X \sim \text{Bern}(p)$.
+        X can only take two possible values, 0 and 1. $A = \{0,1\}$.
+        $f(1) = P(X=1) = p$.
+    2. Binomial distribution
+        Toss a coin $n$ times.
+        a. different tosses are indepedent
+        b. probability of getting a head is fixed, which is denoted by $p$.
+        $X$: # of heads across $n$ tosses, then $X \sim \text{Bin}(n,p)$.
+        Hence the support of $X$, $A = \{0,1,2,\dots, n\}$.
+        The p.f. of $X$ is $f(x) = P(X=x) = \displaystyle \binom{n}{x}p^x(1-p)^{n-x}$, $x\in A$.
+        $\displaystyle \sum_{x=0}^{n} \binom{n}{x}p^x(1-p)^{n-x}=[p+(1-p)]^n=1$
+    3. Geometric distribution
+        $X$: # of failures before the first success.
+        The support of $X$ is $A=\{0,1,...\}$.
+        $f(x) = P(X=x) = (1-p)^xp$, $x\in A$.
+        $\displaystyle \sum_{x=0}^{\infty} (1-p)^xp = \frac{p}{1-(1-p)} = 1$
+    4. Negative binomial r.v. $X \sim \text{NegBin}(r, p)$
+        $X$: # of failures before the $r$th success.
+    5. Poisson r.v. $X \sim \text{Poisson}(\mu)$
+        The support of $X$, $A = \{0,1,\dots\}$.
+        The probability function $f(x) = P(X=x) = \frac{\mu^x}{x!}e^{-\mu}$, $x\in A$.
+        $\displaystyle \sum_{x\in A} f(x) = \sum_{x=0}^{\infty} \frac{\mu^x}{x!}e^{-\mu} = e^{-\mu}\sum_{x=0}^{\infty} \frac{\mu^x}{x!} = e^{-\mu}e^{\mu} = 1$.
+        Aside: $\displaystyle e^x = \sum_{k=0}^{\infty} \frac{x^k}{k!}$.
+
+### 2.3 Continuous random variable
+> Definition: If thr collection of all possible values $X$ can take is an interval or the real line, then X is called a continuous r.v.
+
+> Remark: If $X$ is continuous r.v., its cdf $F(x)$ is continuous everywhere. Moreover, $F$ is differentialbe almost everywhere. It is not differentiable at atmost countable locations.
