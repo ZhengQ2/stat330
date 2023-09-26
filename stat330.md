@@ -139,11 +139,11 @@ This function satisfies that for any $x\in \mathbb{R}$, $\{X\leq x\}=\{\omega|X(
         Aside: $\displaystyle e^x = \sum_{k=0}^{\infty} \frac{x^k}{k!}$.
 
 ### 2.3 Continuous random variable
-> Definition: If thr collection of all possible values $X$ can take is an interval or the real line, then X is called a continuous r.v.
+> Definition: If the collection of all possible values $X$ can take is an interval or the real line, then X is called a continuous r.v.
 >
 > - Remark: If $X$ is continuous r.v., its cdf $F(x)$ is continuous everywhere. Moreover, $F$ is differentialbe almost everywhere. It is not differentiable at atmost countable locations.
 
-> Definition of Probability density function (pdf): $$f(x) = \begin{cases}F'(x)&\text{ if F is differentiable at }x\\0&\text{ otherwise}\end{cases}$$
+- Probability density function (pdf): $$f(x) = \begin{cases}F'(x)&\text{ if F is differentiable at }x\\0&\text{ otherwise}\end{cases}$$
 
 - Support of X: $A = \{x| f(x) > 0\}$.
 - Basic property of f:
