@@ -344,3 +344,74 @@ Suppose $X \sim N(0,1)$. Find the mgf of X.
     Suppose that $X$ and $Y$ are two r.v.s. The joint cdf of $X$ and $Y$ is defined by $F(x,y) = P(X \leq x, Y \leq y)$ for $x, y \in \mathbb{R}$.
     > Remark: This definition can be extended to $n$ r.v.s. $X_1, X_2, \dots, X_n$.
         Joint cdf is $F(x_1, x_2, \dots, x_n) = P(X_1 \leq x_1, X_2 \leq x_2, \dots, X_n \leq x_n)$.
+        However, we will focus on the case of $n=2$.
+- Properties of joint cdf
+    1. Fix $y$, $F(x,y)$ is monotone increasing function of $x$, i.e., $F(x_1,y) \leq F(x_2,y)$ if $x_1 < x_2$.
+        > Proof: $F(x_1,y) = P(X\leq x_1, Y\leq y)$, since $\{X\leq x_1, Y\leq y\} \subset \{X\leq x_2, Y\leq y\}$, $F(x_1,y) \leq F(x_2,y)$.
+    2. Fix $x$, $F(x,y)$ is monotone increasing function of $y$, i.e., $F(x,y_1) \leq F(x,y_2)$ if $y_1 < y_2$.
+    3. $\lim_{x\to -\infty} F(x,y) = 0 =\lim_{y\to -\infty} F(x,y)$.
+        > Proof: $F(x,y) = P(X \leq x, Y \leq y) \leq P(X \leq x)$, and consider $\lim_{x\to -\infty} P(X \leq x) = 0$, additionally, by property of joint cdf, $F(x,y) \geq 0$, then by squeeze theorem, $\lim_{x\to -\infty} F(x,y) = 0$.
+    4. $\lim_{x\to \infty, y\to \infty} F(x,y)= 1$.
+        > Proof: Consider set $Axy = \{X \leq x\} \cup \{Y \leq y\}$, then as $x,y \to \infty$, $P(\overline{Axy}) \to 0$, then $F(x,y) = P(Axy) \to 1$.
+    5. How to find marginal cdf from the joint one?
+        $F_1(x) = P(X\leq x) = \lim_{y\to \infty} F(x,y)$.
+        Define $Ax = \{X\leq x\}, By = \{Y\leq y\}$.
+        As $y\to \infty$, $Ax \cup By \to Ax$.
+        $F_2(y) = P(Y\leq y) = \lim_{x\to \infty} F(x,y)$.
+
+### 3.2 Joint Discrete r.v.s
+- Definition: If both $X$ and $Y$ are discrete r.v.s, then as a pair, $$X \& Y$_{(X,Y)}$ are joint discrete r.v.s $X$ and $Y$.
+
+- Definition of joint p.f.:
+    The joint p.f. of $X$ and $Y$ is given by $f(x,y) = P(X=x, Y=y)$ for any $x,y \in \mathbb{R}$.
+
+- Definition of join support: The support of $(X,Y)$ is the set $A = \{(x,y) \in \mathbb{R}^2: f(x,y) > 0\}$.
+
+- Basic properties of joint p.f.:
+    1. $f(x,y) \geq 0$ for any $(x,y) \in \mathbb{R}^2$.
+    2. $\sum_{(x,y) \in A} f(x,y) = 1$.
+
+    > Question: How to find probability over a region $C \subseteq \mathbb{R}^2$?
+    3. P((X,Y) \in C) = \sum_{(x,y) \in C} f(x,y).
+    
+    > Question: How to find marginal p.f. from the joint one?
+    4. $f_1(x) = P(X=x) = P(X=x Y<\infty) = \sum_{y\in \mathbb{R}} f(x,y)$.
+        >E.g. Suppose $X$ and $Y$ are independent discrete r.v.s with joint p.f. $f(x,y) = kq^2p^{x+y}$ for $x = 0,1,...$ and $y = 0,1,...$, and $0$ elsewhere. Here $p\in(0,1)$ is a constant, $q = 1-p$.
+        >1. Find $k$.
+        >> Solution: Since $f(x,y) \geq 0$ for any $(x,y) \in \mathbb{R}^2$, $k > 0$.Since $\sum_{x=0}^\infty f(x,y) = 1$, Then, $$k\left(\sum_{x=0}^\infty p^{x+y}q^2\right) = kq^2\left(\sum_{x=0}^\infty p^x\right)\left(\sum_{x=0}^\infty p^y\right) = kq^2\left(\frac{1}{1-p}\right)\left(\frac{1}{1-p}\right) = k$$
+        Therefore, $k = 1$
+        >2. Find the marginal p.f. of $X$ and find marginal p.f. of $Y$.
+        >> Solution: The support of $X$ is $Ax = \{0,1,2,...\}$.
+        Here, $f_1(x) = \sum_{y \in \mathbb{R}} f(x,y) = 0$ if $x \notin Ax$
+        Given $X\in Ax$, then $f_1(x) = \sum_{y \in \mathbb{R}} f(x,y) = \sum_{y=0}^\infty f(x,y) = \sum_{y=0}^\infty p^{x+y}q^2 = q^2p^x\sum_{y=0}^\infty p^y = q^2p^x\frac{1}{1-p} = qp^x$.
+        >3. $P(X\leq Y)$
+        ![Image](images/image11.png)
+        >> Solution: $P(X\leq Y) = \sum_{(x,y) \in C} f(x,y)$ where $C = \{(x,y) \in \mathbb{R}^2= x \leq y\}$, therefore, $P(X\leq Y) = \sum_{y=0}^\infty \sum_{x=0}^y p^{x+y}q^2 = \sum_{x=0}^\infty p^xq^2\sum_{y=x}^\infty p^y = \sum_{x=0}^\infty p^xq^2\frac{p^x}{1-p} = q\sum_{x=0}^\infty p^{2x} = q\frac{1}{1-p^2} = \frac{1}{1+p}$.
+
+### 3.3 Joint Continuous r.v.s
+- Definition: If joint cdf of $(X,Y)$ can be written as $F(x,y) = \int_{-\infty}^x \int_{-\infty}^yf(u,v)dudv$ then $X$ and $Y$ are joint continuous r.v.s with joint pdf $f(x,y)$.
+    Namely, $f(x,y) = \begin{cases}\frac{\partial^2}{\partial x \partial y}F(x,y)&\text{if exists}\\0&\text{o.w.}\end{cases}$.
+
+- Definition of joint support: $A = \{(x,y) \in \mathbb{R}^2: f(x,y) > 0\}$.
+
+- Properties of joint pdf:
+    1. $f(x,y) \geq 0$ for any $(x,y) \in \mathbb{R}^2$.
+    2. $\int_{-\infty}^\infty \int_{-\infty}^\infty f(x,y)dxdy = 1$.
+
+    > Question: How to find probability over a region $C \subseteq \mathbb{R}^2$?
+    3. $P((X,Y) \in C) = \int\int_{(x,y) \in C} f(x,y)dxdy$.
+
+    > Question: How to find marginal pdf from the joint one?
+    4. $f_1(x) = \int_{-\infty}^\infty f(x,y)dy$ and $f_2(y) = \int_{-\infty}^\infty f(x,y)dx$.
+        >E.g. $X$ and $Y$ are joint continuous r.v.s with joint pdf $f(x,y) = \begin{cases}x+y&\text{if }0\leq x \leq 1, 0 \leq y \leq 1\\0&\text{o.w.}\end{cases}$.
+        >1. Show $f$ is a joint pdf.
+        >> Solution: $f(x,y) \geq 0$ for any $(x,y) \in \mathbb{R}^2$.
+            $\int_{-\infty}^\infty \int_{-\infty}^\infty f(x,y)dxdy = \int_{0}^1 \int_{0}^1 (x+y)dxdy = \int_{0}^1 \left(\frac{x^2}{2}+xy\right)\bigg|_{x=0}^{x=1}dy = \int_{0}^1 \left(\frac{1}{2}+y\right)dy = \frac{1}{2}+\frac{1}{2} = 1$.
+        >2. Find
+        >>1. $P(X\leq 1/3, Y\leq 1/2)$
+        >>> Solution: $P(X\leq 1/3, Y\leq 1/2) = \int_{0}^{1/3} \int_{0}^{1/2} (x+y)dydx = \int_{0}^{1/3} \left(xy+\frac{y^2}{2}\right)\bigg|_{y=0}^{y=1/2}dx = \int_{0}^{1/3} \left(\frac{x}{2}+\frac{1}{8}\right)dx = \frac{1}{36}+\frac{1}{24} = \frac{5}{72}$.
+        >>2. $P(X\leq Y)$
+        >>> Solution: $P(X\leq Y) = \int\int_C f(x,y) dxdy = \int_0^1dx\int_x^1(x+y)dy = \int_0^1dy\int_0^y(x+y)dx = \int_0^1\left(\frac{x^2}{2}+xy\right)\bigg|_{x=0}^{x=y}dy = \int_0^1\left(\frac{y^2}{2}+y^2\right)dy = \frac{1}{2}$.
+        >>3. $P(X+Y\leq 1/2)$
+        >>4. $P(XY\leq 1/2)$
+        >3. Find marginal pdf of $X$ and $Y$.
