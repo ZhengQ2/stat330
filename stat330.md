@@ -232,7 +232,7 @@ This function satisfies that for any $x\in \mathbb{R}$, $\{X\leq x\}=\{\omega|X(
     Then, $E(X)=\sum_{x\in A} xf(x)$ provided $\sum_{x\in A} |x|f(x) < \infty$.
 - Definition of expectation for continuous r.v.
     Suppose that $X$ is a continuous r.v. with support $A$ and pdf $f(x)$.
-    Then $E(X)=\int_{-\infty}^{infty}xf(x)dx$ provided $\int_{-\infty}^{\infty}|x|f(x)dx < \infty$.
+    Then $E(X)=\int_{-\infty}^{\infty}xf(x)dx$ provided $\int_{-\infty}^{\infty}|x|f(x)dx < \infty$.
     >Example (Cauchy distribution):
     The pdf of $X$ is $f(x) = \frac{1}{\pi(1+x^2)}$ for $x\in \mathbb{R}$.
     Find $E(X)$.
@@ -360,7 +360,7 @@ Suppose $X \sim N(0,1)$. Find the mgf of X.
         $F_2(y) = P(Y\leq y) = \lim_{x\to \infty} F(x,y)$.
 
 ### 3.2 Joint Discrete r.v.s
-- Definition: If both $X$ and $Y$ are discrete r.v.s, then as a pair, $$X \& Y$_{(X,Y)}$ are joint discrete r.v.s $X$ and $Y$.
+- Definition: If both $X$ and $Y$ are discrete r.v.s, then as a pair, $X \& Y_{(X,Y)}$ are joint discrete r.v.s $X$ and $Y$.
 
 - Definition of joint p.f.:
     The joint p.f. of $X$ and $Y$ is given by $f(x,y) = P(X=x, Y=y)$ for any $x,y \in \mathbb{R}$.
@@ -372,7 +372,7 @@ Suppose $X \sim N(0,1)$. Find the mgf of X.
     2. $\sum_{(x,y) \in A} f(x,y) = 1$.
 
     > Question: How to find probability over a region $C \subseteq \mathbb{R}^2$?
-    3. P((X,Y) \in C) = \sum_{(x,y) \in C} f(x,y).
+    3. $P((X,Y) \in C) = \sum_{(x,y) \in C} f(x,y)$.
     
     > Question: How to find marginal p.f. from the joint one?
     4. $f_1(x) = P(X=x) = P(X=x Y<\infty) = \sum_{y\in \mathbb{R}} f(x,y)$.
