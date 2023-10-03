@@ -399,7 +399,7 @@ Suppose $X \sim N(0,1)$. Find the mgf of X.
     2. $\int_{-\infty}^\infty \int_{-\infty}^\infty f(x,y)dxdy = 1$.
 
     > Question: How to find probability over a region $C \subseteq \mathbb{R}^2$?
-    3. $P((X,Y) \in C) = \int\int_{(x,y) \in C} f(x,y)dxdy$.
+    3. $P((X,Y) \in C) = \iint_{(x,y) \in C} f(x,y)dxdy$.
 
     > Question: How to find marginal pdf from the joint one?
     4. $f_1(x) = \int_{-\infty}^\infty f(x,y)dy$ and $f_2(y) = \int_{-\infty}^\infty f(x,y)dx$.
@@ -411,7 +411,45 @@ Suppose $X \sim N(0,1)$. Find the mgf of X.
         >>1. $P(X\leq 1/3, Y\leq 1/2)$
         >>> Solution: $P(X\leq 1/3, Y\leq 1/2) = \int_{0}^{1/3} \int_{0}^{1/2} (x+y)dydx = \int_{0}^{1/3} \left(xy+\frac{y^2}{2}\right)\bigg|_{y=0}^{y=1/2}dx = \int_{0}^{1/3} \left(\frac{x}{2}+\frac{1}{8}\right)dx = \frac{1}{36}+\frac{1}{24} = \frac{5}{72}$.
         >>2. $P(X\leq Y)$
-        >>> Solution: $P(X\leq Y) = \int\int_C f(x,y) dxdy = \int_0^1dx\int_x^1(x+y)dy = \int_0^1dy\int_0^y(x+y)dx = \int_0^1\left(\frac{x^2}{2}+xy\right)\bigg|_{x=0}^{x=y}dy = \int_0^1\left(\frac{y^2}{2}+y^2\right)dy = \frac{1}{2}$.
+        >>> Solution: $P(X\leq Y) = \iint_C f(x,y) dxdy = \int_0^1dx\int_x^1(x+y)dy = \int_0^1dy\int_0^y(x+y)dx = \int_0^1\left(\frac{x^2}{2}+xy\right)\bigg|_{x=0}^{x=y}dy = \int_0^1\left(\frac{y^2}{2}+y^2\right)dy = \frac{1}{2}$.
         >>3. $P(X+Y\leq 1/2)$
+        >>> Solution: Let $C=\{(x,y) | x+y \leq \frac{1}{2}, 0\leq x \leq 1, 0\leq y \leq 1\}$.
+        Then, $P(X+Y\leq 1/2) = \iint_C f(x,y)dxdy = \int_0^{1/2}\int_0^{1/2-x}(x+y)dydx = \int_0^{1/2}\left(xy+\frac{y^2}{2}\right)\bigg|_{y=0}^{y=1/2-x}dx = \int_0^{1/2}\left(\frac{x}{2}-\frac{x^2}+\frac{1}{2}(x^2-x+\frac{1}{4}\right)dx = \int_0^{1/2}\left(-\frac{x^2}{2}+\frac{1}{8}\right)dx = \left.\left(-\frac{x^3}{16}+\frac{x}{8}\right)\right|_0^{1/2} = \frac{1}{24}$.
         >>4. $P(XY\leq 1/2)$
+        >>> Solution: Find $P(XY > 1/2)$ first.
+        $P(XY > 1/2) = \int_0^{1/2}\int_0^{1/2/x}(x+y)dydx = \int_0^{1/2}\left(xy+\frac{y^2}{2}\right)\bigg|_{y=0}^{y=1/2x}dx = \int_0^{1/2}\left(x-\frac{1}{8x^2}\right)dx = \left.\left(\frac{x^2}{2}+\frac{1}{8x}\right)\right|_0^{1/2} = \frac{1}{4}$.
+        Therefore, $P(XY\leq 1/2) = 1 - P(XY > 1/2) = 1 - \frac{1}{4} = \frac{3}{4}$
         >3. Find marginal pdf of $X$ and $Y$.
+        >> Solution: The support of $X$ is $[0,1]$.
+        Given $x \in [0,1]$, $f_1(x) = \int_{-\infty}^\infty f(x,y)dy = \int_0^1(x+y)dy = \left(xy+\frac{y^2}{2}\right)\bigg|_{y=0}^{y=1} = x+\frac{1}{2}$.
+
+        >E.g. Suppose $f(x) = \begin{cases} ke^{-x-y}& 0<x<y<\infty\\0&\text{o.w.}\end{cases}$ is the joint pdf of $(X,Y)$.
+        >1. Find $k$.
+        >> Solution: $f(x,y) \geq 0$ for any $(x,y) \in \mathbb{R}^2$, therefore, $k \geq 0$.
+        Now, $\int_{-\infty}^\infty\int_{-\infty}^\inftyf(x,y)dxdy = \int_{0}^\infty\int_{x}^\infty ke^{-x-y} dydx = \int_{0}^\infty ke^{-x}\left.(-e^-y)\right|_x^\infty dx = \int_{0}^\infty ke^{-2x}dx = \left.-\frac{k}{2}e^{-2x}\right|_0^\infty = \frac{k}{2} = 1$, therefore, $k = 2$.
+        >2. Find:
+        >>1. $P(X\leq \frac{1}{3}, Y\leq \frac{1}{2})$
+        >>> Solution: Let $C = \{(x,y)| x\leq 1/3, y\leq 1/2, 0 <x < y\}$. Then, $P(X\leq \frac{1}{3}, Y\leq \frac{1}{2}) = \iint_C f(x,y)dxdy = \int_0^{1/3}\int_x^{1/2} 2e^{-x-y}dydx = \int_0^{1/3}2e^{-x}\left(-e^{-y}\right)\bigg|_x^{1/2}dx = \int_0^{1/3}2e^{-x}\left(-e^{-1/2}+e^{-x}\right)dx = \int_0^{1/3}2e^{-x}\left(e^{-x}-e^{-1/2}\right)dx = \int_0^{1/3}2e^{-2x}-2e^{-1/2}e^{-x}dx = \left.-e^{-2x}+2e^{-1/2}e^{-x}\right|_0^{1/3} = 1 -2e^{-1/2} - e^{-2/3} - e^{-5/6}$.
+        >>2. $P(X\leq Y)$
+        >>> Solution: $P(X\leq Y) = 1$
+        >>3. $P(X+Y\geq 1)$
+        >>> Solution: Let $C = \{(x,y)|x+y \geq 1, 0 < x < y\}$
+        Let's find $P(X+Y < 1)$ first.
+        $P(X+Y<1) = \iint_{x,y\in \mathbb{R}} 2e^{-x-y}dydx = \int_0^{1/2}\int_x^{1-x}2e^{-x-y}dydx = \int_0^{1/2}2e^{-x}\left(-e^{-y}\right)\bigg|_x^{1-x}dx = \int_0^{1/2}2e^{-x}\left(-e^{x-1}+e^{-x}\right)dx = \int_0^{1/2}2e^{-2x}-2e^{-1}dx = \left.-e^{-2x}-2e^{-1}x\right|_0^{1/2} = 1 - 2e^{-1}$.
+        Hence, $P(X+Y\geq 1) = 1 - P(X+Y < 1) = 2e^{-1}$.
+        >3. Find marginal pdf of $X$ and $Y$.
+        Joint support is $A = \{(x,y)|0<x<y<\infty\}$. The support of $X$ is $A_X = \{0<x<\infty\}$.
+        Given $x \in (0,\infty)$, $f_1(x) = \int_{-\infty}^\infty f(x,y)dy = \int_x^\infty 2e^{-x-y}dy = \left.2e^{-x}\left(-e^{-y}\right)\right|_x^\infty = 2e^{-2x}$.
+        The support of $Y$ is $A_Y = \{0<y<\infty\}$.
+        Given $y \in (0,\infty)$, $f_2(y) = \int_{-\infty}^\infty f(x,y)dx = \int_0^y 2e^{-x-y}dx = \left.2e^{-y}\left(-e^{-x}\right)\right|_0^y = 2e^{-y}-2e^{-2y}$.
+        >4. Find the distribution of $T=X+Y$.
+        >> Solution: The support of T is $A_T = \{0<t<\infty\}$.
+        >> 1. If $t \leq 0$, $P(T\leq t) = 0$.
+        >> 2. If $t > 0$, $F_T(t)=P(T\leq t) = P(X+Y\leq t) = \iint_{(x,y) \in C} 2e^{-x-y}dxdy = \int_0^{t/2}\int_x^{t-x} 2e^{-x-y}dydx = \int_{0}^{t/2}\left.(-2e^{-x}e^{-y})\right|_x^{t-x} = \left.-e^{-2x}-2e^{-t}x\right|_0^{t/2} = 1 - e^{-t} - te^{-t}$.
+        The pdf of $T$ is $f_T(t) = \frac{d}{dt}F_T(t) = e^{-t} + te^{-t} = e^{-t} -e^{-t} + te^{-t} = te^{-t}$ for $t > 0$ and 0 otherwise.
+
+### 3.4 Independent of random variables
+- Definition: For any two r.v.s $X$ and $Y$, we say $X$ and $Y$ are independent if and only if $P(X\in A, Y\in B) = P(X\in A)P(Y\in B)$ for any $A,B \subseteq \mathbb{R}$.
+    Here, $X \in A$ is an event, meaning $\{\omega \in \Omega: X(\omega) \in A\}$.
+    > e.g. Let $A=(-\infty, x), B = (-\infty, y)$, $x,y\in \mathbb{R}$.
+    > Therefore, if $X$ and $Y$ are independent, $P(X\leq x, Y\leq y) = P(X\leq x)P(Y\leq y)$ for any $x,y \in \mathbb{R}$.
