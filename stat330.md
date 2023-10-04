@@ -426,7 +426,7 @@ Suppose $X \sim N(0,1)$. Find the mgf of X.
         >E.g. Suppose $f(x) = \begin{cases} ke^{-x-y}& 0<x<y<\infty\\0&\text{o.w.}\end{cases}$ is the joint pdf of $(X,Y)$.
         >1. Find $k$.
         >> Solution: $f(x,y) \geq 0$ for any $(x,y) \in \mathbb{R}^2$, therefore, $k \geq 0$.
-        Now, $\int_{-\infty}^\infty\int_{-\infty}^\inftyf(x,y)dxdy = \int_{0}^\infty\int_{x}^\infty ke^{-x-y} dydx = \int_{0}^\infty ke^{-x}\left.(-e^-y)\right|_x^\infty dx = \int_{0}^\infty ke^{-2x}dx = \left.-\frac{k}{2}e^{-2x}\right|_0^\infty = \frac{k}{2} = 1$, therefore, $k = 2$.
+        Now, $\int_{-\infty}^\infty\int_{-\infty}^\infty f(x,y)dxdy = \int_{0}^\infty\int_{x}^\infty ke^{-x-y} dydx = \int_{0}^\infty ke^{-x}\left.(-e^-y)\right|_x^\infty dx = \int_{0}^\infty ke^{-2x}dx = \left.-\frac{k}{2}e^{-2x}\right|_0^\infty = \frac{k}{2} = 1$, therefore, $k = 2$.
         >2. Find:
         >>1. $P(X\leq \frac{1}{3}, Y\leq \frac{1}{2})$
         >>> Solution: Let $C = \{(x,y)| x\leq 1/3, y\leq 1/2, 0 <x < y\}$. Then, $P(X\leq \frac{1}{3}, Y\leq \frac{1}{2}) = \iint_C f(x,y)dxdy = \int_0^{1/3}\int_x^{1/2} 2e^{-x-y}dydx = \int_0^{1/3}2e^{-x}\left(-e^{-y}\right)\bigg|_x^{1/2}dx = \int_0^{1/3}2e^{-x}\left(-e^{-1/2}+e^{-x}\right)dx = \int_0^{1/3}2e^{-x}\left(e^{-x}-e^{-1/2}\right)dx = \int_0^{1/3}2e^{-2x}-2e^{-1/2}e^{-x}dx = \left.-e^{-2x}+2e^{-1/2}e^{-x}\right|_0^{1/3} = 1 -2e^{-1/2} - e^{-2/3} - e^{-5/6}$.
@@ -452,4 +452,67 @@ Suppose $X \sim N(0,1)$. Find the mgf of X.
 - Definition: For any two r.v.s $X$ and $Y$, we say $X$ and $Y$ are independent if and only if $P(X\in A, Y\in B) = P(X\in A)P(Y\in B)$ for any $A,B \subseteq \mathbb{R}$.
     Here, $X \in A$ is an event, meaning $\{\omega \in \Omega: X(\omega) \in A\}$.
     > e.g. Let $A=(-\infty, x), B = (-\infty, y)$, $x,y\in \mathbb{R}$.
-    > Therefore, if $X$ and $Y$ are independent, $P(X\leq x, Y\leq y) = P(X\leq x)P(Y\leq y)$ for any $x,y \in \mathbb{R}$.
+    > Therefore, if $X$ and $Y$ are independent, $P(X\leq x, Y\leq y) = P(X\leq x)P(Y\leq y) = F_1(x)F_2(y)$ for any $x,y \in \mathbb{R}$.
+    > Conclusion: $X$ and $Y$ are independent if and only if $F(x,y) = F_1(x)F_2(y)$ for any $x,y \in \mathbb{R}$. (Above shows this is a necessary condition, proof of this is a sufficient condition is beyond the scope of this course.)
+
+    Suppose $X$ and $Y$ has joint p.f. or joint p.d.f, which is denoted by $f(x,y)$, and marginal p.f. or marginal p.d.f, denoted by $f_1(x)$ and $f_2(y)$, then $X$ and $Y$ are independent iff $f(x,y) = f_1(x)f_2(y)$ for every $x,y\in\mathbb{R}$.
+    Remark: If $X$ and $Y$ are independent, then $g(X)$ and $h(Y)$ must be independent for any real functions $g$ and $h$.
+    > e.g. If $X$ is independent of $Y$, then $X^2$ is independent of $Y^2$. But $X^2$ is independent of $Y^2$, we cannot conclude $X$ is independent of $Y$.
+    > Suppose $P(X=1)=P(X=-1)=\frac{1}{2}$. Let $Y=X$. $P(X=1, Y=1) = P(X=1) = \frac{1}{2}$, but $P(X=1)P(Y=1) = \frac{1}{4}$.
+    > $P(Y^2=1)=P(X^2=1) = 1$.
+
+    > Example: (Joint Discrete r.v.s)
+    > Consider the joint p.f. of $X$ and $Y$ is $f(x,y) = q^2p^{x+y}$ for $x = 0,1,...$ and $y = 0,1,...$, and $0$ elsewhere. Here $p\in(0,1)$ is a constant, $q = 1-p$.
+    > Marginal p.f. of $X$ is $f_1(x) = qp^x$ for $x = 0,1,...$ and $0$ elsewhere.
+    > Marginal p.f. of $Y$ is $f_2(y) = qp^y$ for $y = 0,1,...$ and $0$ elsewhere.
+    > Thus, $f(x,y) = f_1(x)f_2(y)$ for every $x,y \in \mathbb{R}$ therefore, $X$ and $Y$ are independent.
+
+    > Example (Joint Continuous r.v.s)
+    > Suppose the joint pdf of $X$ and $Y$ is $f(x,y) = \begin{cases}x+y&\text{if }0\leq x \leq 1, 0 \leq y \leq 1\\0&\text{o.w.}\end{cases}$.
+    > The marginal pdf of $X$ is $f_1(x) = x+\frac{1}{2}$ for $x \in [0,1]$ and 0 otherwise.
+    > The marginal pdf of $Y$ is $f_2(y) = y+\frac{1}{2}$ for $y \in [0,1]$ and 0 otherwise.
+    > Hence, $f(x,y) \neq f_1(x)f_2(y)$ fpr $x \in (0,1)$ and $y \in (0,1)$, therefore, $X$ and $Y$ are not independent.
+- Factorization theorem for independence 
+    Condition 1: $f(x,y) = g(x)h(y)$ for every $x,y \in \mathbb{R}$ for some function $g$ and $h$ where f(x,y) denotes the joint p.f. or joint p.d.f. of $X$ and $Y$.
+    Condition 2: Let $A$ be the joint support of $X$ and $Y$, and let $A_1$ be the marginal support of $X$ and $A_2$ be the marginal support of $Y$. Then, $A = A_1 \times A_2 = \{(x,y) \in \mathbb{R}^2: x \in A_1, y \in A_2\}$. (Interpretation: $A$ is a ractangle or the range of $X$ and $Y$ are independent.)
+    Conditions 1 and 2 are satisfied if and only if $X$ and $Y$ are independent.
+
+    > Example: If the joint p.f. of $X$ and $Y$ is $f(x,y)=\frac{\mu^{x+y}e^{-2\mu}}{x!y!}$ for $x=0,1,...$ and $y=0,1,...$ and $0$ elsewhere.
+    > 1. Is $X$ independent of $Y$?
+    >> Solution: Condition 1: $f(x,y)=\frac{\mu^{x+y}e^{-2\mu}}{x!y!} = \frac{\mu^xe^{-\mu}}{x!}\frac{\mu^ye^{-\mu}}{y!}$. If we take $g(x) = \begin{cases}\frac{\mu^xe^{-\mu}}{x!}&\text{if }x=0,1,...\\0&\text{o.w.}\end{cases}$ and $h(y) = \begin{cases}\frac{\mu^ye^{-\mu}}{y!}&\text{if }y=0,1,...\\0&\text{o.w.}\end{cases}$, then $f(x,y) = g(x)h(y)$ for every $x,y \in \mathbb{R}$.
+    >> Condition 2: $A = \{(x,y) \in \mathbb{R}^2: x \in A_1, y \in A_2\}$, where $A_1 = \{0,1,...\}$ and $A_2 = \{0,1,...\}$.
+    >> Therefore, by factorization theorem, $X$ and $Y$ are independent.
+    > 2. Find the marginal p.f. of $X$ and $Y$.
+    >> Solution: A shortcut: $f_1(x) = C\cdot g(x)$ for some constant $C$.
+    >> Property 1: $f_1(x) \geq 0$ for any $x \in \mathbb{R}$. Here $g(x) = \begin{cases}\frac{\mu^xe^{-\mu}}{x!}&\text{if }x=0,1,...\\0&\text{o.w.}\end{cases}$, therefore, $C\geq 0$.
+    >> Property 2: The support of $X$ is $A_1 = \{0,1,...\}$. Therefore, $\sum_{0}^{\infty} f_1(x) = \sum_{0}^{\infty}C\frac{\mu^xe^{-\mu}}{x!} = C\sum_{0}^{\infty}\frac{\mu^xe^{-\mu}}{x!}$, then $C = 1$.
+    >> Therefore, $f_1(x) = \begin{cases}\frac{\mu^xe^{-\mu}}{x!}&\text{if }x=0,1,...\\0&\text{o.w.}\end{cases}$.
+    >> Similarly, $f_2(y) = \begin{cases}\frac{\mu^ye^{-\mu}}{y!}&\text{if }y=0,1,...\\0&\text{o.w.}\end{cases}$.
+
+    > Example (Joint Continuous r.v.s)
+    > Suppose the joint pdf of $X$ and $Y$ is $f(x,y) = \begin{cases}\frac{3}{2}y(1-x^2)& -1\leq x \leq 1, 0 \leq y \leq 1\\0&\text{o.w.}\end{cases}$.
+    > 1. Is X independent of Y?
+    >> Solution: Condition 1: $f(x,y) = \left(\frac{3}{2}y\right)(1-x^2)$, then $g(x) = \begin{cases}1-x^2&\text{if }-1\leq x \leq 1\\0&\text{o.w.}\end{cases}$ and $h(y) = \begin{cases}\frac{3}{2}y&\text{if }0\leq y \leq 1\\0&\text{o.w.}\end{cases}$.
+    >> Then $f(x,y) = g(x)h(y)$ for every $x,y \in \mathbb{R}$.
+    >> Condition 2: $A = \{(x,y) \in \mathbb{R}^2: x \in A_1, y \in A_2\}$, where $A_1 = [-1,1]$ and $A_2 = [0,1]$.
+    >> Therefore, by factorization theorem, $X$ and $Y$ are independent.
+    > 2. Find the marginal pdf of $X$ and $Y$.
+    >> Solution: A shortcut: $f_1(x) = C\cdot g(x)$ for some constant $C$, the support of $X$ is $A_1 = [-1,1]$.
+    >> Property 1: $f_1(x) \geq 0$ for any $x \in \mathbb{R}$. Here $g(x) = \begin{cases}1-x^2&\text{if }-1\leq x \leq 1\\0&\text{o.w.}\end{cases}$, therefore, $C\geq 0$.
+    >> Property 2: $\int_{-\infty}^\infty f_1(x)dx = \int_{-1}^1 C(1-x^2)dx = C\left(x-\frac{x^3}{3}\right)\bigg|_{-1}^1 = 2C\left(1-\frac{1}{3}\right) = 1$, therefore, $C = \frac{3}{4}$.
+    >> Therefore, $f_1(x) = \begin{cases}\frac{3}{4}(1-x^2)&\text{if }-1\leq x \leq 1\\0&\text{o.w.}\end{cases}$.
+    >> Support of $Y$ is $A_2 = [0,1]$, given $y \in [0,1]$, $f_2(y) = \frac{f(x,y)}{f_1(x)} = \frac{\frac{3}{2}y(1-x^2)}{\frac{3}{4}(1-x^2)} = 2y$. Therefore, $f_2(y) = \begin{cases}2y&\text{if }0\leq y \leq 1\\0&\text{o.w.}\end{cases}$.
+
+    > Example (Uniform distribution over a region)
+    > Suppose $(X,Y)$ follows a uniform distribution over $C = \{(x,y)|x\geq 0, x^2+y^2\leq 1\}$.
+    > Namely, $f(x,y) = \begin{cases}c&\text{if }(x,y) \in C\\0&\text{o.w.}\end{cases}$.
+    >> Here, by graph, $c = \frac{2}{\pi}$.![Image](images/image34.png)
+    > 1. Is $X$ independent of $Y$?
+    >> Solution: Given $x\in [0,1]$,  $Y$ can take value in $[-\sqrt{1-x^2}, \sqrt{1-x^2}]$, therefore, $X$ and $Y$ are not independent.
+    > 2. Find the marginal pdf of $X$ and $Y$.
+    >> Solution: The support of $X$ is $A_1 = [0,1]$, given $x \in [0,1]$, $f_1(x) = \int_{-\sqrt{1-x^2}}^{\sqrt{1-x^2}}\frac{2}{\pi}dy = \frac{4}{\pi}\sqrt{1-x^2}$.
+    >> The support of $Y$ is $A_2 = [-1,1]$, given $y \in [-1,1]$, $f_2(y) = \int_{0}^{\sqrt{1-y^2}}\frac{2}{\pi}dx = \frac{2}{\pi}\sqrt{1-y^2}$.
+
+### 3.5 Joint expectation
+- Definition: Suppose $h(x,y)$ is a bivariate function, then $E[h(x,y)] = \begin{cases} \sum_x \sum_y h(x,y) f(x,y) & \text{if } X \text{ and } Y \text{ are joint discrete} \\ \int_{-\infty}^\infty \int_{-\infty}^\infty h(x,y) f(x,y) dxdy & \text{if } X \text{ and } Y \text{ are joint continuous} \end{cases}$, provided $E[|h(x,y)|]<\infty$.
+    e.g. $E[XY] = \begin{cases} \sum_x \sum_y (xy) f(x,y) & \text{if } X \text{ and } Y \text{ are joint discrete} \\ \int_{-\infty}^\infty \int_{-\infty}^\infty (xy) f(x,y) dxdy & \text{if } X \text{ and } Y \text{ are joint continuous} \end{cases}$, provided $E[|XY|]<\infty$.
