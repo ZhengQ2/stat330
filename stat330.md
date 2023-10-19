@@ -515,4 +515,114 @@ Suppose $X \sim N(0,1)$. Find the mgf of X.
 
 ### 3.5 Joint expectation
 - Definition: Suppose $h(x,y)$ is a bivariate function, then $E[h(x,y)] = \begin{cases} \sum_x \sum_y h(x,y) f(x,y) & \text{if } X \text{ and } Y \text{ are joint discrete} \\ \int_{-\infty}^\infty \int_{-\infty}^\infty h(x,y) f(x,y) dxdy & \text{if } X \text{ and } Y \text{ are joint continuous} \end{cases}$, provided $E[|h(x,y)|]<\infty$.
-    e.g. $E[XY] = \begin{cases} \sum_x \sum_y (xy) f(x,y) & \text{if } X \text{ and } Y \text{ are joint discrete} \\ \int_{-\infty}^\infty \int_{-\infty}^\infty (xy) f(x,y) dxdy & \text{if } X \text{ and } Y \text{ are joint continuous} \end{cases}$, provided $E[|XY|]<\infty$.
+    > e.g. $E[XY] = \begin{cases} \sum_x \sum_y (xy) f(x,y) & \text{if } X \text{ and } Y \text{ are joint discrete} \\ \int_{-\infty}^\infty \int_{-\infty}^\infty (xy) f(x,y) dxdy & \text{if } X \text{ and } Y \text{ are joint continuous} \end{cases}$, provided $E[|XY|]<\infty$.
+
+    > e.g. E[X] (i.e. h(x,y) = x))
+    > - Method 1: $$E(X) = \begin{cases} \sum_x \sum_y x f(x,y) &\text{ joint discrete} \\ \iint_{\mathbb{R}^2} xf(x,y) dxdy &\text{ joint continuous} \end{cases}$$
+    > - Method 2: find the marginal distribution, i.e., the marginal p.f. or marginal p.d.f. of $X$ first, denoted by $f_1(x)$, then $$E(X) = \begin{cases} \sum_x x f_1(x) &\text{ joint discrete} \\ \int_{\mathbb{R}^2} xf_1(x) dx &\text{ joint continuous} \end{cases}$$
+
+- Properties of joint expectation:
+    1. linearity: $E[ag(X,Y)+bh(X,Y)] = aE[g(X,Y)]+bE[h(X,Y)]$ where $a,b$ are constants, $g,h$ are bivariate functions.
+    2. Under independence assumption ($X$ is independent of $Y$), $E(XY) = E(X)E(Y)$ and $E[g(X)h(Y)] = E[g(X)]E[h(Y)]$. Further, if $X_1,...,X_n$ are independent, then $E\left[\prod_{i=1}^n h_i(X_i)\right] = \prod_{i=1}^n E[h_i(X_i)]$.
+
+- Covariance of $X$ and $Y$
+    Definition: Covariance of $X$ and $Y$ is defined as $Cov(X,Y) = E[(X-E(X))(Y-E(Y))] = E(XY) - E(X)E(Y)$.
+    If $X$ and $Y$ are independent, then $Cov(X,Y) = 0$.
+    > An example where $X$ and $Y$ are uncorrlated, but not independent.
+    > Let $X \sim N(0,1)$ and $Y = X^2$, then $E(X) = 0, E(XY) = E(X^3), Cov(X,Y) = 0$.
+    > Now, we find a pair of $a$ and $b$ such that $P(X\leq a, Y\leq b) \neq P(X\leq a)P(Y\leq b)$. Consider $a = -2, b = 1$, then $P(X \leq a) = P(X \leq -2) > 0, P(Y \leq b) = P(X^2 \leq 1) = P(-1 \leq X \leq 1) > 0$, but $P(X\leq a, Y\leq b) = P(X\leq -2, Y\leq 1) = 0$.
+
+- Results for covariance
+    1. $Cov(X,X) = E[(X-\mu_X)(X-\mu_X)] = E[(X-\mu_X)^2] = Var(X)$.
+    2. $Cov(X+Y, Z) = Cov(X,Z) + Cov(Y,Z)$.
+
+- Variance formula
+    1. $$\begin{align*} Var(aX+bY) &= Cov(aX+bY, aX+bY)\\
+    Cov(aX, aX)+ Cov(aX, bY) + Cov(bY, aX) + Cov(bY, bY) &= Var(aX) + 2abCov(X,Y) + Var(bY) = a^2Var(X) + 2abCov(X,Y) + b^2Var(Y)\end{align*}$$
+    2. $$Var\left(\sum_{i=1}^n\right) = \sum_{i=1}^n Var(X_i) + 2\sum_{i<j}Cov(X_i, X_j)$$
+    3. If $X_1,...,X_n$ are independent, $$Var\left(\sum_{i=1}^n\right) = \sum_{i=1}^n Var(X_i)$$
+
+    > Example 1: Suppose the joint p.f. of $X$ and $Y$ is $f(x,y) = \begin{cases}\frac{\mu^{x+y}e^{-2\mu}}{x!y!}&\text{if }x=0,1,...\text{ and }y=0,1,...\\0&\text{o.w.}\end{cases}$. Find $Var(2X+3Y) = 4Var(X) + 12Cov(X,Y) + 9Var(Y)$.
+    >> Solution: Since $X$ and $Y$ are independent, $Cov(X,Y) = 0$, therefore, $Var(2X+3Y) = 4Var(X) + 9Var(Y)$.
+    >> Previously, we find $X \sim Poisson(\mu)$, $Y \sim Poisson(\mu)$, therefore $Var(X) = \mu, Var(Y) = \mu$.
+    >> Hence, $Var(2X+3Y) = 4\mu + 9\mu = 13\mu$.
+
+    > Example 2: Suppose the joint p.f. of $X$ and $Y$ is $f(x,y) = \begin{cases}x+y &\text{if }0\leq x \leq 1, 0\leq y \leq 1\\0&\text{o.w.}\end{cases}$. Find $Var(X+Y)$.
+    >> Solution: $$\begin{align*}Var(X+Y) &= Var(X) + 2Cov(X,Y) + Var(Y)\\&= 2Var(X)+2Cov(X,y)\end{align*}$$
+    >> the marginal pdf of $X$ is $f_1(x) = \begin{cases} x+1/2 &\text{if }0\leq x \leq 1\\0&\text{o.w.}\end{cases}$.
+    >> then, $E(X) = \int_0^1 x\left(x+\frac{1}{2}\right)dx = \int_0^1 \left(x^2+\frac{x}{2}\right)dx = \left.\left(\frac{x^3}{3}+\frac{x^2}{4}\right)\right|_0^1 = \frac{7}{12}$.
+    >> $E(X^2) = \int_0^1 x^2\left(x+\frac{1}{2}\right)dx = \int_0^1 \left(x^3+\frac{x^2}{2}\right)dx = \left.\left(\frac{x^4}{4}+\frac{x^3}{6}\right)\right|_0^1 = \frac{5}{12}$.
+    >> $Var(X) = E(X^2) - (E(X))^2 = \frac{5}{12} - \left(\frac{7}{12}\right)^2 = \frac{11}{144}$.
+    >> $Cov(X,Y) = E(XY) - E(X)E(Y)$, where $E(X)E(Y) = \left(\frac{7}{12}\right)^2 = \frac{49}{144}$.
+    >> $$\begin{align*} E(XY) &= \int_0^1 \int_0^1 (xy)(x+y) dxdy\\&= \int_0^1 \int_0^1 (x^2y+xy^2) dxdy\\&= \int_0^1 \left(\frac{x^3y}{3}+\frac{x^2y^2}{2}\right)\bigg|_{x=0}^{x=1}dy\\&= \int_0^1 \left(\frac{y}{3}+\frac{y^2}{2}\right)dy\\&= \left(\frac{y^2}{6}+\frac{y^3}{6}\right)\bigg|_{y=0}^{y=1}\\&= \frac{1}{3}\end{align*}$$
+    >> $Cov(X,Y) = 1/3 - 49/144 = -1/144$.
+    >> $Var(X+Y) = 2Var(X) + 2Cov(X,Y) = 2\frac{11}{144} + 2 \frac{-1}{144} = \frac{20}{144}$.
+    >> Alternatively: Let $T=X+Y$, we can calculate the moment generating function: $E(e^{t(X+Y)})$.
+
+- Corrlation coefficient
+    Definition: Correlation coefficient of $X$ and $Y$ is defined as $\rho(X,Y) = \frac{Cov(X,Y)}{\sqrt{Var(X)}\sqrt{Var(Y)}}$.
+    1. Used to describe linear association between $X$ and $Y$.
+    2. Unit free
+    3. $-1 \leq \rho(X,Y) \leq 1$.
+        > (not required): Use the fact $|E(XY)| \leq \sqrt{E(X^2)}\sqrt{E(Y^2)}$ to prove $-1 \leq \rho(X,Y) \leq 1$.
+
+- Properties of corrlation corfficient:
+    1. $\rho(X,Y) = 1 \implies Y = aX+b$ for some constants $a > 0$ and $b$.
+    2. $\rho(X,Y) = -1 \implies Y = aX+b$ for some constants $a < 0$ and $b$.
+
+> Example: Suppose $(X,Y)$ has joint pdf $f(x,y) = \begin{cases} x+y &0 \leq x \leq y, 0 \leq y \leq 1\\0&\text{o.w.}\end{cases}$. Find $\rho(X,Y)$.
+>> Solution: $Cov(X,Y) = -\frac{1}{144}$, $Var(X) = Var(Y) = \frac{11}{144}$, therefore, $\rho(X,Y) = \frac{-1/144}{\sqrt{11/144}\sqrt{11/144}} = -\frac{1}{11}$.
+
+### 3.6 Conditional distribution
+- Definition (Joint Discrete Case)
+    Suppose $X$ and $Y$ are joint discrete random variable with joint p.f. denoted by $f(x,y)$. Then, conditional p.f. of $X$ given $Y=y$ is $f_1(x|y) = \frac{f(x,y)}{f_2(y)}$, provided that $f_2(y) > 0$. 
+    > Idea: Let event $A = \{X=x\}, B=\{Y=y\}$, then $f_1(x|y) = P(X=x|Y=y) = \frac{P(A\cap B)}{P(B)} = \frac{f(x,y)}{f_2(y)}$.
+    Similarly, the conditional p.f. of $Y$ given $X=x$ is $f_2(y|x) = \frac{f(x,y)}{f_1(x)}$, provided that $f_1(x) > 0$.
+
+    - Property: Conditional p.f.s $f_1(x|y)$ and $f_2(x|y)$ are probability functions, i.e.:
+        1. $f_1(x|y) \geq 0$ for any $x \in \mathbb{R}$, and $y$ is fixed. Additionally, $\sum_{x\in \mathbb{R}} f_1(x|y) = 1$ for any $y$, where $R$ is the conditional support of $x$ and may depend on $y$.
+        2. $f_2(y|x) \geq 0$ for any $y \in \mathbb{R}$, and $x$ is fixed. Additionally, $\sum_{y\in \mathbb{R}} f_2(y|x) = 1$ for any $x$.
+
+- Definition (Joint Continuous Case)
+    Suppose $X$ and $Y$ are joint continuous random variable with joint p.d.f. denoted by $f(x,y)$. Then, conditional p.d.f. of $X$ given $Y=y$ is $f_1(x|y) = \frac{f(x,y)}{f_2(y)}$, provided that $f_2(y) > 0$. 
+    Similarly, the conditional p.d.f. of $Y$ given $X=x$ is $f_2(y|x) = \frac{f(x,y)}{f_1(x)}$, provided that $f_1(x) > 0$.
+
+    - Property: Conditional p.d.f.s $f_1(x|y)$ and $f_2(x|y)$ are probability density functions, i.e.:
+        1. $f_1(x|y) \geq 0$ for any $x \in \mathbb{R}$, and $y$ is fixed. Additionally, $\int_{-\infty}^\infty f_1(x|y) = 1$ for any $y$.
+        2. $f_2(y|x) \geq 0$ for any $y \in \mathbb{R}$, and $x$ is fixed. Additionally, $\int_{-\infty}^\infty f_2(y|x) = 1$ for any $x$.
+
+> Example 1: Let $f(x,y) = \begin{cases} 8xy &0<y<x<1\\0 &\text{o.w.}\end{cases}$.
+> Find:
+> 1. f_1(x|y)
+>> Solution: $f_1(x|y) = \frac{f(x,y)}{f_2(y)}$.
+>> The support of $Y$ is $A_2 = (0,1)$, given $y \in (0,1)$, $f_2(y) = \int_{-\infty}^{\infty}f(x,y)dx = \int_y^1 8xy dx = \left.4x^2y\right|_y^1 = 4y-4y^3$.
+>> Therefore, $f_1(x|y) = \frac{f(x,y)}{f_2(y)} = \frac{8xy}{4y-4y^3}$ for $0<y<x<1$ and 0 otherwise.
+> 2. f_2(y|x)
+>> Solution: $f_2(y|x) = \frac{f(x,y)}{f_1(x)}$.
+>> The support of $X$ is $A_1 = (0,1)$, given $x \in (0,1)$, $f_1(x) = \int_{-\infty}^{\infty}f(x,y)dy = \int_0^x 8xy dy = \left.4xy^2\right|_0^x = 4x^3$.
+>> Therefore, $f_2(y|x) = \frac{f(x,y)}{f_1(x)} = \frac{8xy}{4x^3}$ for $0<y<x<1$ and 0 otherwise.
+
+> Example 2: The joint pdf is $f(x,y) = \begin{cases} x+y &0\leq x \leq 1, 0\leq y \leq 1\\0&\text{o.w.}\end{cases}$.
+> Find $f_1(x|y)$ and $f_2(y|x)$.
+>> Solution: The marginal pdf of $Y$ is $f_2(y) = \begin{cases} \frac{1}{2}+y &0\leq y \leq 1\\0&\text{o.w.}\end{cases}$.
+>> Given $y \in [0,1]$ $f_1(x|y) = \frac{f(x,y)}{f_2(y)} = \frac{x+y}{\frac{1}{2}+y}$ for $0\leq x \leq 1$ and 0 otherwise.
+>> The marginal pdf of $X$ is $f_1(x) = \begin{cases} x+\frac{1}{2} &0\leq x \leq 1\\0&\text{o.w.}\end{cases}$.
+>> Given $x \in [0,1]$ $f_2(y|x) = \frac{f(x,y)}{f_1(x)} = \frac{x+y}{x+\frac{1}{2}}$ for $0\leq y \leq 1$ and 0 otherwise.
+
+> Example 3: The joint p.f. of $X$ and $Y$ is $f(x,y) = \begin{cases} q^2p^{x+y} &x=0,1,...\text{ and }y=0,1,...\\0&\text{o.w.}\end{cases}$, where $p\in(0,1)$ is a constant, $q = 1-p$.
+> Find $f_1(x|y)$ and $f_2(y|x)$.
+>> Solution: The marginal p.f. of $Y$ is $f_2(y) = \begin{cases} qp^y &y=0,1,...\\0&\text{o.w.}\end{cases}$.
+>> Given $y \in \{0,1,...\}$, $f_1(x|y) = \frac{f(x,y)}{f_2(y)} = \frac{q^2p^{x+y}}{qp^y} = qp^x$ for $x=0,1,...$ and 0 otherwise.
+>> The marginal p.f. of $X$ is $f_1(x) = \begin{cases} qp^x &x=0,1,...\\0&\text{o.w.}\end{cases}$.
+>> Given $x \in \{0,1,...\}$, $f_2(y|x) = \frac{f(x,y)}{f_1(x)} = \frac{q^2p^{x+y}}{qp^x} = qp^y$ for $y=0,1,...$ and 0 otherwise.
+
+- Applications of conditional distribution:
+    1. Check independence:
+        $X$ and $Y$ are independent if and only if $f_1(x|y) = f_1(x)$ for any $x\in\mathbb{R}$, or $f_2(y|x) = f_2(y)$ for any $y\in\mathbb{R}$.
+        > Proof sketch: $X$ and $Y$ are independent $\iff f(x,y) = f_1(x)f_2(y)$ for any $x,y \in \mathbb{R}$. Then, $f_1(x|y) = \frac{f(x,y)}{f_2(y)} = \frac{f_1(x)f_2(y)}{f_2(y)} = f_1(x)$ for any $x,y \in \mathbb{R}$.
+    2. Use ocnditional distribution to find joint disteibution:
+        $f(x,y) = f_1(x|y)f_2(y) = f_2(y|x)f_1(x)$ as $f_1(x|y) = \frac{f(x,y)}{f_2(y)}$ and $f_2(y|x) = \frac{f(x,y)}{f_1(x)}$.
+
+> Example 1: $Y \sim \text{Poisson}(\mu)$. $X|Y=y \sim \text{Binomial}(y,p)$, where $p \in (0,1)$ is a constant. Find the marginal p.f. of $X$.
+>> Solution: The joint pf of $(X,Y)$ is $$f(x,y) = f_2(y) f_1(x|y) = \frac{\mu^ye^{-\mu}}{y!}\binom{y}{x}p^x(1-p)^{y-x}$ <b>for $x=0,1,...,y$ and $y=0,1,...$</b>.
+>> The support of $X$ is $A=\{0,1,...\}$, given $x \in \{0,1,...\}$, $f_1(x) = \sum_{y=x}^\infty f(x,y) = \sum_{y=x}^\infty \frac{\mu^ye^{-\mu}}{y!}\binom{y}{x}p^x(1-p)^{y-x} = \sum_{y=x}^\infty \frac{\mu^ye^{-\mu}}{y!}\frac{y!}{x!(y-x)!}p^x(1-p)^{y-x} = \frac{(\mu p)^x}{x!}e^{-\mu p}\sum_{y=x}^\infty \frac{(\mu(1-p))^{y-x}}{(y-x)!} = \frac{(\mu p)^x}{x!}e^{-\mu p}\sum_{z=0}^\infty \frac{(\mu(1-p))^z}{z!} = \frac{(\mu p)^x}{x!}e^{-\mu p}e^{\mu(1-p)} = \frac{(\mu p)^x}{x!}e^{-\mu}$.
