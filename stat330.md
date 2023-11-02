@@ -624,5 +624,156 @@ Suppose $X \sim N(0,1)$. Find the mgf of X.
         $f(x,y) = f_1(x|y)f_2(y) = f_2(y|x)f_1(x)$ as $f_1(x|y) = \frac{f(x,y)}{f_2(y)}$ and $f_2(y|x) = \frac{f(x,y)}{f_1(x)}$.
 
 > Example 1: $Y \sim \text{Poisson}(\mu)$. $X|Y=y \sim \text{Binomial}(y,p)$, where $p \in (0,1)$ is a constant. Find the marginal p.f. of $X$.
->> Solution: The joint pf of $(X,Y)$ is $$f(x,y) = f_2(y) f_1(x|y) = \frac{\mu^ye^{-\mu}}{y!}\binom{y}{x}p^x(1-p)^{y-x}$ <b>for $x=0,1,...,y$ and $y=0,1,...$</b>.
->> The support of $X$ is $A=\{0,1,...\}$, given $x \in \{0,1,...\}$, $f_1(x) = \sum_{y=x}^\infty f(x,y) = \sum_{y=x}^\infty \frac{\mu^ye^{-\mu}}{y!}\binom{y}{x}p^x(1-p)^{y-x} = \sum_{y=x}^\infty \frac{\mu^ye^{-\mu}}{y!}\frac{y!}{x!(y-x)!}p^x(1-p)^{y-x} = \frac{(\mu p)^x}{x!}e^{-\mu p}\sum_{y=x}^\infty \frac{(\mu(1-p))^{y-x}}{(y-x)!} = \frac{(\mu p)^x}{x!}e^{-\mu p}\sum_{z=0}^\infty \frac{(\mu(1-p))^z}{z!} = \frac{(\mu p)^x}{x!}e^{-\mu p}e^{\mu(1-p)} = \frac{(\mu p)^x}{x!}e^{-\mu}$.
+>> Solution: The joint pf of $(X,Y)$ is $$f(x,y) = f_2(y) f_1(x|y) = \frac{\mu^ye^{-\mu}}{y!}\binom{y}{x}p^x(1-p)^{y-x}$ <b>for ==$x=0,1,...,y$ and $y=0,1,...$</b>==.
+>> The support of $X$ is $A=\{0,1,...\}$, given $x \in \{0,1,...\}$, $f_1(x) = \sum_{y=x}^\infty f(x,y) = \sum_{y=x}^\infty \frac{\mu^ye^{-\mu}}{y!}\binom{y}{x}p^x(1-p)^{y-x} = \sum_{y=x}^\infty \frac{\mu^ye^{-\mu}}{y!}\frac{y!}{x!(y-x)!}p^x(1-p)^{y-x} = \frac{(\mu p)^x}{x!}e^{-\mu p}\sum_{y=x}^\infty \frac{(\mu(1-p))^{y-x}}{(y-x)!}$. Let $t=y-x$, then, $f_1(x)= \frac{(\mu p)^x}{x!}e^{-\mu p}\sum_{t=0}^\infty \frac{(\mu(1-p))^t}{t!} = \frac{(\mu p)^x}{x!}e^{-\mu p}e^{\mu(1-p)} = \frac{(\mu p)^x}{x!}e^{-\mu p}$. Then, $X\sim \text{Poisson}(\mu p)$.
+
+> Example 2: Suppose $Y$ has pdf $f_2(y) = \frac{y^{\alpha -1}e^{-y}}{\Gamma(\alpha)}$ for $y > 0$, i.e. $Y \sim \text{Gamma}(\alpha,1)$, and the conditional pdf of $X$ given $Y=y$ is $f_1(x|y) = \frac{ye^{-xy}}$ for $x > 0$, i.e. $X|Y=y \sim \text{Gamma}(1,1/y)$. Find the marginal pdf of $X$.
+>> Solution: $f(x,y) = f_2(y)f_1(x|y) = \frac{y^{\alpha -1}e^{-y}}{\Gamma(\alpha)}ye^{-xy}$ for $x>0$ and $y>0$. The support of $X$ is $(0, \infty)$
+>> Given $x>0$, $f_1(x) = \int_{-\infty}^{\infty}f(x,y)dy = \int_0^\infty \frac{y^{\alpha -1}e^{-y}}{\Gamma(\alpha)}ye^{-xy}dy = \int_0^\infty \frac{y^{(\alpha+1)-1}e^{-(x+1)y}}{\Gamma(\alpha)}$. Aside: If $Y \sim \text{Gamma}(\alpha,\beta)$, then $f(x)=\frac{x^{\alpha-1}e^{-x/\beta}}{\Gamma(\alpha)\beta^\alpha}$ for $x>0$.
+>> Let $\bar{\alpha} = \alpha +1$, $\beta = \frac{1}{x+1}$, then, $f_1(x) = \int_0^\infty \frac{y^{\bar{\alpha}-1}e^{-y/\beta}}{\Gamma(\bar{\alpha})\beta^{\bar{\alpha}}} = \frac{\beta^{\bar{\alpha}}}{\Gamma(\bar{\alpha})}\int_0^\infty \frac{y^{\bar{\alpha}-1}e^{-y/\beta}}{\beta^{\bar{\alpha}}} = \frac{(\frac{1}{x+1})^{\alpha + 1} \Gamma(\alpha + 1)}{\Gamma(\alpha)} = \frac{\alpha \Gamma(\alpha)}{\Gamma(\alpha)}\frac{1}{(x+1)^{\alpha + 1}} = \frac{\alpha}{(x+1)^{\alpha + 1}}$, $x>0$.
+
+### 3.7 Conditional expectation
+Since $f_2(y|x)$ is a probability function (if $X$ and $Y$ are joint discrete) or probability density function (if $X$ and $Y$ are joint continuous). We can define expectation with respect to $f_2(y|x)$.
+- Definition of conditional expectation (mean):
+    The conditional expectation of $g(y)$ given $X=x$ is defined as $E[g(Y)|X=x] = \begin{cases} \sum_y g(y)f_2(y|x) &\text{if }X\text{ and }Y\text{ are joint discrete}\\ \int_{-\infty}^\infty g(y)f_2(y|x)dy &\text{if }X\text{ and }Y\text{ are joint continuous}\end{cases}$.
+    In particular, we are particularly intrested in :
+    1. $E[Y|X=x] (g(y) = y)$
+    2. $Var(Y|X=x) = E[Y^2|X=x] - (E[Y|X=x])^2$.
+    3. $E(e^{tY}|X=x) (g(y) = e^{ty})$.
+    
+    > Example: The joint pdf of $X$ and $Y$ is $f(x,y) = \begin{cases} 8xy &0<y<x<1\\0&\text{o.w.}\end{cases}$. Find $E[X|Y=y]$ and $Var(X|Y=y)$.
+    >> Solution: The conditional pdf of $X$ given $Y=y$ is $f_1(x|y) = \frac{2x}{1-y^2}, 0<y<x<1$.
+    >> Given $y\in (0,1)$, $E(X|Y=y) = \int_{-\infty}^\infty x \cdot f_1(x|y) dx = \int_y^1 x \cdot \frac{2x}{1-y^2} dx = \frac{2}{1-y^2}\int_y^1 x^2 dx = \frac{1}{1-y^2}\left(\frac{2x^3}{3}\right)\bigg|_y^1 = \frac{2(1-y^3)}{3(1-y^2)}$.
+    >> Given $y\in (0,1)$, $E(X^2|Y=y) = \int_{-\infty}^\infty x^2 \cdot f_1(x|y) dx = \int_y^1 x^2 \cdot \frac{2x}{1-y^2} dx = \frac{2}{1-y^2}\int_y^1 x^3 dx = \frac{1}{1-y^2}\left(\frac{2x^4}{4}\right)\bigg|_y^1 = \frac{2(1-y^4)}{4(1-y^2)} = \frac{1+y^2}{2}$.
+    >> $Var(X|Y=y)= E(X^2|Y=y) - (E(X|Y=y))^2 = \frac{1+y^2}{2} - \left(\frac{2(1-y^3)}{3(1-y^2)}\right)^2 = \frac{1+y^2}{2}-\left(\frac{2(1-y^3)}{3(1-y^2)})^2
+
+- Some useful results regarding conditional expectation
+    1. If $X$ and $Y$ are independent, then $E[g(Y)|X=x] = E[g(Y)]$ and $E[h(X)|Y=y] = E[h(X)]$.
+    2. Substitution rule: $E[h(X,Y)|X=x] = E[h(x,Y)|X=x] = h(x,Y)$.
+        > e.g. $E[X+Y|X=x] = E[x+Y|X=x] = E[x|X=x] + E[Y|X=x] = x + E[Y|X=x]$.
+
+        > e.g. $E(XY|X=x) = E(xY|X=x) = xE(Y|X=x)$.
+    3. Double Expectation Theorem: $E[E[g(Y)|X]] = E[g(Y)]$.
+        Note: $E[g(Y)|X] \neq E[g(Y)|X=x]$.
+        Two step method to find $E[g(Y)|X]$:
+        Step 1: For any $x$ taken from the support of $X$, calculate $E[g(Y)|X=x]$, denoted by $h(x)$.
+            i.e. $h(x) = E[g(Y)|X=x] = \begin{cases} \sum_y g(y)f_2(y|x) &\text{if }X\text{ and }Y\text{ are joint discrete}\\ \int_{-\infty}^\infty g(y)f_2(y|x)dy &\text{if }X\text{ and }Y\text{ are joint continuous}\end{cases}$.
+        Step 2: $E[g(Y)|X] = h(X)$.
+        Hence, $E[g(y)|X]$ is a function of $X$, that is why it is a random variable.
+    
+        > Example 1: Suppose $Y \sim \text{Poisson}(\mu)$, $X|Y=y \sim \text{Binomial}(y,p)$, where $p \in (0,1)$ is a constant. Find $E[X]$.
+        >> Method 1: We've found $X \sim \text{Poisson}(\mu p)$, therefore, $E[X] = \mu p$. It is computationally intensive.
+        >> Method 2: $E[X] = E[E[X|Y]]$.
+        >> Apply the two step method:
+        >> Step 1: Given $y \in \{0,1,...\}$, $E[X|Y=y] = yp$.
+        >> Step 2: $E[X|Y] = Yp$.
+        >> Therefore, $E[X] = E[E[X|Y]] = E[Yp] = pE[Y] = p\mu$.
+        >> Method 3: $E(e^{tX}) = E[E(e^{tX}|Y)]$.
+        >> Apply the two step method:
+        >> Step 1: Given $y \in \{0,1,...\}$, $E(e^{tX}|Y=y) = [pe^t+(1-p)]^y$.
+        >> Step 2: $E(e^{tX}|Y) = [pe^t+(1-p)]^Y$.
+
+# FILL IN HERE
+
+### 3.9 Multinomial Distribution
+
+- Definition: $(X_1,...,X_n)$ are joint discrete r.v.s with joint p.f. $f(x_1,..,x_k)=P(X_1=x_1,...,X_k=x_k) = \frac{n!}{x_1!...x_k!}p_1^{x_1}...p_k^{x_k}$, where $x_i=0,1,...,n$ for $i=1,...,k$. $\sum_i=1^k x_i = n$, $0<p_i<1$ and $\sum_i=1^k p_i = 1$. Then, $(X_1,...,X_k)$ follows multinomial distribution, with notation $(X_1,...,X_k) \sim \text{Mult}(n,p_1,...,p_k)$.
+
+- Properties of $\text{Mult}(n,p_1,...,p_k)$:
+    1. Joint mgf
+        1. $M(t_1,...,t_k) = E(e^{t_1X_1+...+t_kX_k})$
+        2. $M(t_1,...,t_{k-1}) = E(e^{t_1X_1+...+t_{k-1}X_{k-1}}) = (p_1e^{t_1}+...+p_{k-1}e^{t_{k-1}}+p_k)^n$
+            > e.g. $k=2$, $M(t_1) = E(e^{t_1X_1}) = (p_1e^{t_1}+p_2)^n$, where $p_1+p_2=1$.
+    2. Marginal distribution
+        $X_i \sim \text{Binomial}(n,p_i)$ for $i=1,...,k$.
+    3. Let $T=X_i+x_j, i\neq j$. Then, $T \sim \text{Binomial}(n,p_i+p_j)$.
+        > e.g. Suppose $i=1, j=2$, set $t_1=t_2=t, t_3=...=t_k=0$ in the joint mgf of $\text{Mult}(n,p_1,...,p_k)$, then, $M_T(t)=[(p_1+p_2)e^t + (1-p_1-p_2)]^n$.
+    4. Joint Moment
+        $E(X_i)=np_i$ and $Var(X_i)=np_i(1-p_i)$ for $i=1,...,k$.
+        > Question: What is $Cov(X_i,X_j)$ for $i\neq j$?
+        >> $Var(X_i+X_j) = Var(X_i) + Var(X_j) + 2Cov(X_i,X_j)$.
+        >> We know $Var(X_i = np_i(1-p_i)$, $Var(X_j) = np_j(1-p_j)$, $Var(X_i+X_j) = n(p_i+p_j)[1-(p_i+p_j)]$.
+        >> Therefore, $Cov(X_i,X_j) = -np_ip_j$.
+    5. Conditional distribution
+        $X_i|X_i+X_j=t \sim \text{Binomial}(t,p_i/(p_i+p_j))$.
+    6. $X_i|X_j=t \sim \text{Binomial}(n-t,p_i/(1-p_j))$.
+
+### 3.10 Bivariate Normal Distribution
+- Definition:
+    Suppose that $X_1$ and $X_2$ are joint continuous r.v.s with joint pdf $f(x_1,x_2) = \frac{1}{2\pi|\Sigma|^{\frac{1}{2}}}\exp\{-\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu)\}$, where $x=\begin{pmatrix}x_1\\x_2\end{pmatrix}$, $\mu=\begin{pmatrix}\mu_1\\\mu_2\end{pmatrix}$, $\Sigma=\begin{pmatrix}\sigma_1^2&\rho\sigma_1\sigma_2\\\rho\sigma_1\sigma_2&\sigma_2^2\end{pmatrix}$, $\rho \in (-1,1)$, and $|\Sigma|$ denotes the determinant of $\Sigma$, i,.e. $|\Sigma| = \sigma_1^2\sigma_2^2(1-\rho^2)$.
+    Then, $(X_1,X_2)$ follows bivariate normal distribution, with notation $X \sim \text{BVN}(\mu,\Sigma)$.
+
+- Properties:
+    1. Joint mgf
+        $M(t_1,t_2) = E(e^{t_1X_1+t_2X_2}) = E(e^{t^TX}) = e^{t^T\mu + \frac{1}{2}t^T\Sigma t}$, where $t=\begin{pmatrix}t_1\\t_2\end{pmatrix}$.
+    2. Marginally
+        $M_{X_1}(t_1) = M(t_1,t_2=0) = e^{t_1\mu_1 + \frac{1}{2}\sigma_1^2t_1^2}$, $M_{X_2}(t_2) = M(t_1=0,t_2) = e^{t_2\mu_2 + \frac{1}{2}\sigma_2^2t_2^2}$.
+        Then, $X_1 \sim \text{N}(\mu_1,\sigma_1^2)$ and $X_2 \sim \text{N}(\mu_2,\sigma_2^2)$, $E(X_1) = \mu_1$, $Var(X_1) = \sigma_1^2$, $E(X_2) = \mu_2$, $Var(X_2) = \sigma_2^2$.
+        $Cov(X_1,X_2) = E(X_1X_2) - E(X_1)E(X_2)$.
+        What is $E(X_1X_2)$?
+    3. We find the conditional distribution of $X_1$ given $X_2$, $X_1|X_2=x_2$.
+        Conclusion: $X_1|X_2=x_2$ is normally distributed.
+        Then, to find $E(X_1|X_2=x_2)$ and $Var(X_1|X_2=x_2)$.
+        $E(X_1|X_2=x_2) = \mu_1 + \rho\frac{\sigma_1}{\sigma_2}(x_2-\mu_2)$.
+        $Var(X_1|X_2=x_2) = \sigma_1^2(1-\rho^2)$.
+        Finding $X_2|X_1=x_1$ is normal.
+        $E(X_2|X_1=x_1) = \mu_2 + \rho\frac{\sigma_2}{\sigma_1}(x_1-\mu_1)$.
+        $Var(X_2|X_1=x_1) = \sigma_2^2(1-\rho^2)$.
+    4. Cov(X_1,X_2) = \rho\sigma_1\sigma_2$.
+        > Proof: To find $E(X_1X_2)$, we apply double expectation theorem.
+        > $E(X_1X_2) = E(E(X_1X_2|X_2))$
+        > Step 1: $E(X_1X_2|X_1=x_1) = x_1E(X_2|X_1=x_1)$ = $x_1(\mu_2 + \rho\frac{\sigma_2}{\sigma_1}(x_1-\mu_1))$
+        > Step 2: $E(X_1X_2) = E(x_1(\mu_2 + \rho\frac{\sigma_2}{\sigma_1}(x_1-\mu_1))) = \mu_2E(X_1) + \rho\frac{\sigma_2}{\sigma_1}E(X_1^2) - \mu_1E(X_1) - \rho\frac{\sigma_2}{\sigma_1}\mu_1E(X_1) = \mu_2\mu_1 + \rho\frac{\sigma_2}{\sigma_1}(\sigma_1^2 + \mu_1^2) - \mu_1^2 - \rho\frac{\sigma_2}{\sigma_1}\mu_1^2 = \mu_1\mu_2 + \rho\sigma_1\sigma_2$.
+        > Therefore, $Cov(X_1,X_2) = E(X_1X_2) - E(X_1)E(X_2) = \mu_1\mu_2 + \rho\sigma_1\sigma_2 - \mu_1\mu_2 = \rho\sigma_1\sigma_2$.
+        Furthermore, $\rho(X_1,X_1) = \rho = \frac{Cov(X_1,X_2)}{\sqrt{Var(X_1)}\sqrt{Var(X_2)}} = \frac{\rho\sigma_1\sigma_2}{\sigma_1\sigma_2}$.
+    5. $\rho = 0$ if and only if $X_1$ and $X_2$ are independent.
+        > Common Mistake: If $Y_1$ and $Y_2$ are normally distributed, and $Cov(Y_1,Y_2) = 0$, then $Y_1$ and $Y_2$ are independent.
+        > Counter Example: $Y_1 \sim \text{N}(0,1)$, $Y_2 = RY_1$, where $P(R=1)=P(R=-1)=1/2$, $R$ is independent of $X$.
+        > Show that $Y_2 \sim \text{N}(0,1)$ and $Cov(Y_1,Y_2) = 0$.
+        > If joint distribution $(Y_1, Y_2)$ follows BVN, then $Y_1+Y_2$ follows normal distribution, then $P(Y_1+Y_2=0) = 0$, however, $P(Y_1+Y_2=0) = P(R=-1) = 1/2$, then the joint distribution of $(Y_1,Y_2)$ is not BVN.
+    6. If $X \sim \text{BVN}(\mu, \Sigma)$ and $C=\begin{pmatrix}c_1\\c_2\end{pmatrix}$ is a constant vector, then $C^TX = c_1X_1 + c_2X_2$ is normally distributed with mean $E(C^TX) = c_1\mu_1 + c_2\mu_2 = C^T\mu$ and variance $Var(C^TX)=C^T\Sigma C$.
+        Here we only consider a single linear combination of $X_1$ and $X_2$. 
+        
+        Furthermore, such a fact can be extend, and used to prove normal tests, i.e., if $X_1, ..., X_k$ are normally distributed with mean $\mu$ and variance $\sigma^2$, then $\bar{X} = \frac{1}{k}\sum_{i=1}^k X_i$ is normally distributed with mean $\mu$ and variance $\frac{\sigma^2}{k}$.
+        > Common Mistake: For normally distributed r.v.s $Y_1$ and $Y_2$, $c_1Y_1+c_2Y_2$ is normally distributed.
+    7. If $A \in \mathbb{R}^{2\times 2}, b \in \mathbb{R}^{2\times 1}$, then $Y=AX+b \sim \text{BVN}$, with mean vector $E(Y) = AE(X)+b = A\mu +b$, and variance $Var(Y) = Cov(AX+b, AX+b) = A\Sigma A^T$.
+    8. $(X-\mu)^T\Sigma^{-1}(X-\mu) \sim \chi_2^2$
+        We define $\chi_1^2=Z^2$, where $Z \sim \text{N}(0,1)$, and $\chi_k^2 = \sum_{i=1}^k Z_i^2$, where $Z_1, ..., Z_k$ are independent and identically distributed as $\text{N}(0,1)$.
+        > Proof: Since $\Sigma$ is symmatric, then $\Sigma = Q\Lambda Q^T$, where $Q$ is orthogonal (i.e. $QQ^T = Q^TQ=I$), and $\Lambda = \begin{pmatrix}\lambda_1&0\\0&\lambda_2\end{pmatrix}$, where $\lambda_1, \lambda_2$ are eigenvalues of $\Sigma$.
+        > Let $\Sigma^{1/2} = Q\Lambda^{1/2}Q^T$, where $\Lambda^{1/2} = \begin{pmatrix}\sqrt{\lambda_1}&0\\0&\sqrt{\lambda_2}\end{pmatrix}$, then $\Sigma^{1/2}\Sigma^{1/2} = \Sigma$, and $\Sigma^{-1/2} = Q\Lambda^{-1/2}Q^T$, where $\Lambda^{-1/2} = \begin{pmatrix}\frac{1}{\sqrt{\lambda_1}}&0\\0&\frac{1}{\sqrt{\lambda_2}}\end{pmatrix}$.
+        > Now, $(X-\mu)^T\Sigma^{-1}(X-\mu) = (X-\mu)^T\Sigma^{-1/2}\Sigma^{-1/2}(X-\mu)$. Let $Z = \Sigma^{-1/2}(X-\mu)$, then $Z$ is normally distributed with mean $E(Z) = \Sigma^{-1/2}E(X-\mu) = \Sigma^{-1/2}(\mu-\mu) = 0$, and variance $Var(Z) = \Sigma^{-1/2}Var(X-\mu)\Sigma^{-1/2} = \Sigma^{-1/2}\Sigma\Sigma^{-1/2} = I$, so $Z_1, Z_2$ are independent and identically distributed as $\text{N}(0,1)$.
+        > Therefore, $(X-\mu)^T\Sigma^{-1}(X-\mu) = Z^TZ = Z_1^2 + Z_2^2 \sim \chi_2^2$.
+        A simple fact: if $X\sim \text{N}(\mu, \sigma^2)$, then $\left(\frac{X-\mu}{\sigma}\right)^2 \sim \chi_1^2$.
+        That also means if $X_1, ... , X_n$ are iid $\text{N}(\mu, \sigma^2)$, then $ \frac{\sum_{i=1}^n(X_i-\mu)^2}{\sigma^2} \sim \chi_n^2$.
+    
+## Chapter 4: Functions of Random Variables
+Problems we want to answer:
+- Given $X_1,...,X_n$, which are continuous r.v., and their pdf is known, we are interested in finding the distribution of $Y=h(X_1,...,X_n)$, where $h$ is a function.
+Three main methods to be introduced:
+1. cdf technique
+2. one-to-one bivariate transformation
+3. mgf technique
+
+### 4.1 CDF Technique
+Define $Y=h(X_1,...,X_n)$, where $h$ is a function.
+Main idea:
+- Step 1: Find the cdf of $Y$, $F_Y(y) = P(Y \leq y)$.
+- Step 2: Find the pdf of $Y$, $f_Y(y) = \frac{d}{dy}F_Y(y)$.
+
+Case 1: $Y$ is a function of one single random variable ($n=1$), i.e. $Y=h(X)$, where the distribution of $X$ is known.
+> Example ($\chi_1^2$): If $X \sim \text{N}(0,1)$, find the distribution of $Y=X^2$.
+>> Solution: The support of $Y$ is $A_Y = [0,\infty)$.
+>> 1. $y \leq 0$, $F_Y(y) = P(Y \leq y) = 0$.
+>> 2. $y > 0$, $F_Y(y) = P(Y \leq y) = P(X^2 \leq y) = P(-\sqrt{y} \leq X \leq \sqrt{y}) = \int_{-\sqrt{y}}^{\sqrt{y}} \frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}dx$.
+>> The for $y \to 0$, the pdf of $y$ us $f_Y(y) = \frac{d}{dy}F_Y(y) = \frac{1}{\sqrt{2\pi}}e^{-\frac{y}{2}}\frac{1}{2\sqrt{y}} + \frac{1}{\sqrt{2\pi}}e^{-\frac{y}{2}}\frac{1}{2\sqrt{y}} = \frac{1}{\sqrt{2\pi}}e^{-\frac{y}{2}}\frac{1}{\sqrt{y}}$.
+>> Therefore, $f^Y(y) = \begin{cases} \frac{1}{\sqrt{2\pi}}e^{-\frac{y}{2}}\frac{1}{\sqrt{y}} &y>0\\0&\text{o.w.}\end{cases}$, whcih is the pdf of $\text{Gamma}(\alpha=\frac{1}{2},\beta=\frac{1}{2})$.
+
+> Example 2: The pdf of $X$ is $f(x) = \frac{\theta}{x^{\theta+1}}$ for $x\geq 1$, where $\theta > 0$ is a constant. Find the distribution of $Y=\log X (\ln X)$.
+>> Solution: The support of $Y$ is $A_Y = [0, \infty)$.
+>> 1. $y \leq 0$, $F_Y(y) = P(Y \leq y) = 0$.
+>> 2. $y > 0$, $F_Y(y) = P(Y \leq y) = P(\ln X \leq y) = P(X \leq e^y) = \int_1^{e^y} \frac{\theta}{x^{\theta+1}}dx = \left(-\frac{1}{x^\theta}\right)\bigg|_1^{e^y} = 1 - e^{-\theta y}$.
+>> Therefore, $f_Y(y) = \begin{cases} \theta e^{-\theta y} &y\geq 0\\0&\text{o.w.}\end{cases}$, which is the pdf of $\text{Exponential}(\lambda=\theta)$.
+
+Case 2: $Y$ is a function of more than one random variable ($n>1$), i.e. $Y=h(X_1,...,X_n)$, where the distribution of $X_1,...,X_n$ is known.
+- Case 2.1: $n=2, Y=h(X_1,X_2)$
+    > Example: Joint pdf of $X$ and $Y$ is $f(x,y) = 3y$ if $0\leq x\leq y\leq 1$, and 0 otherwise. Find the distribution of $T=XY$ and $S=X/Y$.
