@@ -593,11 +593,11 @@ Suppose $X \sim N(0,1)$. Find the mgf of X.
 
 > Example 1: Let $f(x,y) = \begin{cases} 8xy &0<y<x<1\\0 &\text{o.w.}\end{cases}$.
 > Find:
-> 1. f_1(x|y)
+> 1. $f_1(x|y)$
 >> Solution: $f_1(x|y) = \frac{f(x,y)}{f_2(y)}$.
 >> The support of $Y$ is $A_2 = (0,1)$, given $y \in (0,1)$, $f_2(y) = \int_{-\infty}^{\infty}f(x,y)dx = \int_y^1 8xy dx = \left.4x^2y\right|_y^1 = 4y-4y^3$.
 >> Therefore, $f_1(x|y) = \frac{f(x,y)}{f_2(y)} = \frac{8xy}{4y-4y^3}$ for $0<y<x<1$ and 0 otherwise.
-> 2. f_2(y|x)
+> 2. $f_2(y|x)$
 >> Solution: $f_2(y|x) = \frac{f(x,y)}{f_1(x)}$.
 >> The support of $X$ is $A_1 = (0,1)$, given $x \in (0,1)$, $f_1(x) = \int_{-\infty}^{\infty}f(x,y)dy = \int_0^x 8xy dy = \left.4xy^2\right|_0^x = 4x^3$.
 >> Therefore, $f_2(y|x) = \frac{f(x,y)}{f_1(x)} = \frac{8xy}{4x^3}$ for $0<y<x<1$ and 0 otherwise.
@@ -627,7 +627,7 @@ Suppose $X \sim N(0,1)$. Find the mgf of X.
 >> Solution: The joint pf of $(X,Y)$ is $$f(x,y) = f_2(y) f_1(x|y) = \frac{\mu^ye^{-\mu}}{y!}\binom{y}{x}p^x(1-p)^{y-x}$ <b>for ==$x=0,1,...,y$ and $y=0,1,...$</b>==.
 >> The support of $X$ is $A=\{0,1,...\}$, given $x \in \{0,1,...\}$, $f_1(x) = \sum_{y=x}^\infty f(x,y) = \sum_{y=x}^\infty \frac{\mu^ye^{-\mu}}{y!}\binom{y}{x}p^x(1-p)^{y-x} = \sum_{y=x}^\infty \frac{\mu^ye^{-\mu}}{y!}\frac{y!}{x!(y-x)!}p^x(1-p)^{y-x} = \frac{(\mu p)^x}{x!}e^{-\mu p}\sum_{y=x}^\infty \frac{(\mu(1-p))^{y-x}}{(y-x)!}$. Let $t=y-x$, then, $f_1(x)= \frac{(\mu p)^x}{x!}e^{-\mu p}\sum_{t=0}^\infty \frac{(\mu(1-p))^t}{t!} = \frac{(\mu p)^x}{x!}e^{-\mu p}e^{\mu(1-p)} = \frac{(\mu p)^x}{x!}e^{-\mu p}$. Then, $X\sim \text{Poisson}(\mu p)$.
 
-> Example 2: Suppose $Y$ has pdf $f_2(y) = \frac{y^{\alpha -1}e^{-y}}{\Gamma(\alpha)}$ for $y > 0$, i.e. $Y \sim \text{Gamma}(\alpha,1)$, and the conditional pdf of $X$ given $Y=y$ is $f_1(x|y) = \frac{ye^{-xy}}$ for $x > 0$, i.e. $X|Y=y \sim \text{Gamma}(1,1/y)$. Find the marginal pdf of $X$.
+> Example 2: Suppose $Y$ has pdf $f_2(y) = \frac{y^{\alpha -1}e^{-y}}{\Gamma(\alpha)}$ for $y > 0$, i.e. $Y \sim \text{Gamma}(\alpha,1)$, and the conditional pdf of $X$ given $Y=y$ is $f_1(x|y) = ye^{-xy}$ for $x > 0$, i.e. $X|Y=y \sim \text{Gamma}(1,1/y)$. Find the marginal pdf of $X$.
 >> Solution: $f(x,y) = f_2(y)f_1(x|y) = \frac{y^{\alpha -1}e^{-y}}{\Gamma(\alpha)}ye^{-xy}$ for $x>0$ and $y>0$. The support of $X$ is $(0, \infty)$
 >> Given $x>0$, $f_1(x) = \int_{-\infty}^{\infty}f(x,y)dy = \int_0^\infty \frac{y^{\alpha -1}e^{-y}}{\Gamma(\alpha)}ye^{-xy}dy = \int_0^\infty \frac{y^{(\alpha+1)-1}e^{-(x+1)y}}{\Gamma(\alpha)}$. Aside: If $Y \sim \text{Gamma}(\alpha,\beta)$, then $f(x)=\frac{x^{\alpha-1}e^{-x/\beta}}{\Gamma(\alpha)\beta^\alpha}$ for $x>0$.
 >> Let $\bar{\alpha} = \alpha +1$, $\beta = \frac{1}{x+1}$, then, $f_1(x) = \int_0^\infty \frac{y^{\bar{\alpha}-1}e^{-y/\beta}}{\Gamma(\bar{\alpha})\beta^{\bar{\alpha}}} = \frac{\beta^{\bar{\alpha}}}{\Gamma(\bar{\alpha})}\int_0^\infty \frac{y^{\bar{\alpha}-1}e^{-y/\beta}}{\beta^{\bar{\alpha}}} = \frac{(\frac{1}{x+1})^{\alpha + 1} \Gamma(\alpha + 1)}{\Gamma(\alpha)} = \frac{\alpha \Gamma(\alpha)}{\Gamma(\alpha)}\frac{1}{(x+1)^{\alpha + 1}} = \frac{\alpha}{(x+1)^{\alpha + 1}}$, $x>0$.
@@ -645,7 +645,7 @@ Since $f_2(y|x)$ is a probability function (if $X$ and $Y$ are joint discrete) o
     >> Solution: The conditional pdf of $X$ given $Y=y$ is $f_1(x|y) = \frac{2x}{1-y^2}, 0<y<x<1$.
     >> Given $y\in (0,1)$, $E(X|Y=y) = \int_{-\infty}^\infty x \cdot f_1(x|y) dx = \int_y^1 x \cdot \frac{2x}{1-y^2} dx = \frac{2}{1-y^2}\int_y^1 x^2 dx = \frac{1}{1-y^2}\left(\frac{2x^3}{3}\right)\bigg|_y^1 = \frac{2(1-y^3)}{3(1-y^2)}$.
     >> Given $y\in (0,1)$, $E(X^2|Y=y) = \int_{-\infty}^\infty x^2 \cdot f_1(x|y) dx = \int_y^1 x^2 \cdot \frac{2x}{1-y^2} dx = \frac{2}{1-y^2}\int_y^1 x^3 dx = \frac{1}{1-y^2}\left(\frac{2x^4}{4}\right)\bigg|_y^1 = \frac{2(1-y^4)}{4(1-y^2)} = \frac{1+y^2}{2}$.
-    >> $Var(X|Y=y)= E(X^2|Y=y) - (E(X|Y=y))^2 = \frac{1+y^2}{2} - \left(\frac{2(1-y^3)}{3(1-y^2)}\right)^2 = \frac{1+y^2}{2}-\left(\frac{2(1-y^3)}{3(1-y^2)})^2
+    >> $Var(X|Y=y)= E(X^2|Y=y) - (E(X|Y=y))^2 = \frac{1+y^2}{2} - \left(\frac{2(1-y^3)}{3(1-y^2)}\right)^2 = \frac{1+y^2}{2}-\left(\frac{2(1-y^3)}{3(1-y^2)}\right)^2$
 
 - Some useful results regarding conditional expectation
     1. If $X$ and $Y$ are independent, then $E[g(Y)|X=x] = E[g(Y)]$ and $E[h(X)|Y=y] = E[h(X)]$.
@@ -660,8 +660,9 @@ Since $f_2(y|x)$ is a probability function (if $X$ and $Y$ are joint discrete) o
             i.e. $h(x) = E[g(Y)|X=x] = \begin{cases} \sum_y g(y)f_2(y|x) &\text{if }X\text{ and }Y\text{ are joint discrete}\\ \int_{-\infty}^\infty g(y)f_2(y|x)dy &\text{if }X\text{ and }Y\text{ are joint continuous}\end{cases}$.
         Step 2: $E[g(Y)|X] = h(X)$.
         Hence, $E[g(y)|X]$ is a function of $X$, that is why it is a random variable.
-    
-        > Example 1: Suppose $Y \sim \text{Poisson}(\mu)$, $X|Y=y \sim \text{Binomial}(y,p)$, where $p \in (0,1)$ is a constant. Find $E[X]$.
+
+        > Example 1: Suppose $Y \sim \text{Poisson}(\mu)$, $X|Y=y \sim \text{Binomial}(y,p)$, where $p \in (0,1)$ is a constant.
+        > 1. Find $E[X]$.
         >> Method 1: We've found $X \sim \text{Poisson}(\mu p)$, therefore, $E[X] = \mu p$. It is computationally intensive.
         >> Method 2: $E[X] = E[E[X|Y]]$.
         >> Apply the two step method:
@@ -672,8 +673,54 @@ Since $f_2(y|x)$ is a probability function (if $X$ and $Y$ are joint discrete) o
         >> Apply the two step method:
         >> Step 1: Given $y \in \{0,1,...\}$, $E(e^{tX}|Y=y) = [pe^t+(1-p)]^y$.
         >> Step 2: $E(e^{tX}|Y) = [pe^t+(1-p)]^Y$.
+        > 2. Find $Var(X)$.
+        >> Method 1: We've found $X \sim \text{Poisson}(\mu p)$, therefore, $Var(X) = \mu p$.
+        >> Method 2: By double expectation theorem, $Var(X) = E[Var(X|Y)] + Var[E(X|Y)]$.
+        >> As $E(X|Y)=Yp$, $Var[E(X|Y)] = Var(Yp) = p^2Var(Y) = p^2\mu$. ($Y\sim \text{Poisson}(\mu)$)
+        >> For $E(Var(X|Y))$, apply the two step method:
+        >> Step 1: Given $y \in \{0,1,...\}$, $Var(X|Y=y) = yp(1-p)$.
+        >> Step 2: $Var(X|Y) = Yp(1-p)$.
+        >> Therefore, $E[Var(X|Y)] = E[Yp(1-p)] = p(1-p)E[Y] = p(1-p)\mu$.
+        >> $Var(X) = E[Var(X|Y)] + Var[E(X|Y)] = p(1-p)\mu + p^2\mu = p\mu$.
 
-# FILL IN HERE
+        > Example 2 (Random variables of different types):
+        > Suppose $X \sim \text{Unif}[0,1], Y|X=x \sim \text{Binomial}(10,x)$, find E(Y) and Var(Y).
+        >> Solution: By double expectation theorem, $E(Y) = E[E(Y|X)]$.
+        >> Step 1: Given $x \in [0,1]$, $E(Y|X=x) = 10x$.
+        >> Step 2: $E(Y|X) = 10X$.
+        >> Therefore, $E(Y) = E[E(Y|X)] = E(10X) = 10E(X) = 10\cdot\frac{1}{2} = 5$.
+        >> Var(Y) = E[Var(Y|X)] + Var[E(Y|X)].
+        >> $Var[E(Y|X)] = Var(10X) = 100Var(X)$
+        >> For any $x\in [0,1]$
+        >> Step 1: $Var(Y|X=x) = 10x(1-x)$.
+        >> Step 2: $Var(Y|X) = 10X(1-X)$.
+        >> Therefore, $E[Var(Y|X)] = E[10X(1-X)] = E(10X)-10E(X^2) = 10E(X)-10(Var(X)+(E(X))^2) = 10\cdot\frac{1}{2}-10\left(\frac{1}{12}+\frac{1}{4}\right) = 5-10\cdot \frac{1}{3}$.
+        >> $Var(Y) = E[Var(Y|X)] + Var[E(Y|X)] = 5-10\cdot \frac{1}{3} + 100\cdot\frac{1}{12} = \frac{5}{3}$.
+
+### 3.8 Joint Moment Generating Function
+- Definition: If $X$ and $Y$ are two r.v.s, then $M(t_1,t_2) = E(e^{t_1X+t_2Y})$ is called the joint moment generating function (mgf) of $X$ and $Y$, if M(t_1,t_2) exists($M(t_1,t_2) < \infty$) for $|t_1|<h_1$, $|t_2|<h_2$, where $h_1,h_2>0$.
+
+- Application of joint mgf
+    1. Find marginal mgf from joint mgf.
+        Given $M(t_1,t_2) < \infty$ for $|t_1| < h_1$ and $|t_2| < h_2$. Then, $M_X(t_1) = E(e^{t_1X}) = M(t_1,0)$ for $|t_1| < h_1$ and $M_Y(t_2) = E(e^{t_2Y}) = M(0,t_2)$ for $|t_2| < h_2$.
+
+    2. Independence of r.v.s
+        $X$ and $Y$ are independent if and only if $M(t_1,t_2) = M_X(t_1)M_Y(t_2)$ for $|t_1| < h_1$ and $|t_2| < h_2$.
+
+    > Example 1 (Joint mgf):
+    > Suppose the joint pdf of $X$ and $Y$ is given by $f(x,y) = \begin{cases} e^{-y} &0<x<y\\0&\text{o.w.}\end{cases}$.
+    > 1. Find the joint mgf of $X$ and $Y$.
+    >> Solution: $M(t_1,t_2) = E(e^{t_1X+t_2Y}) = \iint_\mathbb{R} e^{t_1x+t_2y}f(x,y)dxdy = \int_0^\infty \int_x^\infty e^{t_1x+t_2y} e^{-y} dydx = \int_0^\infty e^{t_1x} \int_x^\infty e^{(t_2-1)y} dydx = \int_0^\infty e^{t_1x} \left(\frac{e^{(t_2-1)y}}{t_2-1}\right)\bigg|_x^\infty dx = \int_0^\infty e^{t_1x} \left(\frac{e^{(t_2-1)x}}{t_2-1}\right) dx = \frac{1}{t_2-1}\int_0^\infty e^{(t_1+t_2-1)x} dx = \frac{1}{t_2-1}\left(\frac{e^{(t_1+t_2-1)x}}{t_1+t_2-1}\right)\bigg|_0^\infty = \frac{1}{1-t_2}\left(\frac{1}{1-(t_1+t_2)}\right)$.
+    > 2. Are they independent?
+    >> Solution: $M_X(t_1) = M(t_1,0) = \frac{1}{1-t_1}$, $M_Y(t_2) = M(0,t_2) = \frac{1}{1-t_2}$. Therefore, $M_X(t_1)M_Y(t_2) = \frac{1}{(1-t_1)(1-t_2)} \neq M(t_1,t_2)$, therefore, $X$ and $Y$ are not independent.
+
+    > Example 2 (Additivity of Poisson r.v.s):
+    > Suppose $X \sim \text{Poisson}(\mu_1), Y \sim \text{Poisson}(\mu_2)$, $X$ is independent of $Y$.
+    > Prove $X+Y\sim \text{Poisson}(\mu_1+\mu_2)$.
+    >> Solution: We first find the mgf of $X+Y$.
+    >> Let $Z=X+Y$, then the mgf of $Z$ is $M_Z(t) = E(e^{tZ}) = E(e^{t(X+Y)}) = E(e^{tX}e^{tY}) = E(e^{tX})E(e^{tY}) = e^{(\mu_1(e^t-1)+\mu_2(e^t-1+)} = e^{(\mu_1+\mu_2)(e^t-1)}$, which is the mgf of $\text{Poisson}(\mu_1+\mu_2)$.
+    >> By the uniqueness property of mgf, $X+Y \sim \text{Poisson}(\mu_1+\mu_2)$.
+
 
 ### 3.9 Multinomial Distribution
 
@@ -776,4 +823,48 @@ Case 1: $Y$ is a function of one single random variable ($n=1$), i.e. $Y=h(X)$, 
 
 Case 2: $Y$ is a function of more than one random variable ($n>1$), i.e. $Y=h(X_1,...,X_n)$, where the distribution of $X_1,...,X_n$ is known.
 - Case 2.1: $n=2, Y=h(X_1,X_2)$
-    > Example: Joint pdf of $X$ and $Y$ is $f(x,y) = 3y$ if $0\leq x\leq y\leq 1$, and 0 otherwise. Find the distribution of $T=XY$ and $S=X/Y$.
+    > Example: Joint pdf of $X$ and $Y$ is $f(x,y) = 3y$ if $0\leq x\leq y\leq 1$, and 0 otherwise. Find the distribution of $T=XY$ and $S=Y/X$.
+    >> Solution: The support of $T$ is $A_T = [0,1]$. Now we consider the cdf:
+    >> 1. $t \leq 0$, $F_T(t) = P(T \leq t) = 0$.
+    >> 2. $t \geq 1$, $F_T(t) = P(T \leq t) = 1$.
+    >> 3. $0 < t < 1$, $F_T(t) = P(T \leq t) = P(XY \leq t)$.
+    >> We calculate $P(T > t)$ instead. ![Alt text](images/IMG_20A536FD6617-1.jpeg)
+    >> $P(T > t) = \int_{\sqrt{t}}^1 \int_{t/y}^y 3y dxdy = \int_{\sqrt{t}}^1 3y(y-\frac{t}{y})dy = \int_{\sqrt{t}}^1 3y^2-3t dy = (1-3t)-(t^{3/2}-3t^{1/2}) = 1-3t+2t^{3/2}$.
+    >> $P(T \leq t) = 1 - P(T > t) = 3t-2t^{3/2}$. Therefore, the p.d.f. of $T$ is $f_T(t) = 3-3t^{1/2}$ when $0<t<1$, and 0 otherwise. 
+    >> For $S$, the support of $S$ is $A_S = [1, \infty)$. Now we consider the cdf:
+    >> 1. $s \leq 1$, $F_S(s) = P(S \leq s) = 0$.![Alt text](images/IMG_1B0153F2E968-1.jpeg)
+    >> 2. $s > 1$, $F_S(s) = P(S \leq s) = P(Y/X \leq s) = P(Y \leq sX) = \int_0^1 \int_{y/s}^{y} 3y dxdy = \int_0^1 3y(y-y/s) dy = \int_0^1 (3y^2-3y^2/s) dy = \left. (y^3-3y^3/2s)\right|_0^1 = 1-1/s$.
+    >> Hence, the pdf of $S$ is $f_S(s) = \frac{1}{s^2}$ when $s>1$, and 0 otherwise.
+- Case 2.2: $n>2, Y=h(X_1,...,X_n)$
+    In particular, we are interested in the distribution of order statistics. More specifically, assume $X_1,...,X_n$ are iid r.v.s with pdf $f(x)$. Define the order statistics $Y_1 = \min\{X_1,...,X_n\}$, denoted as $X(1)$, and $Y_n = \max\{X_1,...,X_n\}$, denoted as $X(n)$.
+
+    > Example (Order Statistics): Suppose $X_1,...,X_n \overset{iid}{\sim} \text{Unif}[0,\theta]$. Find the distribution of $X(1)$ and $X(n)$.
+    >> Solution: For $X(n), the support of $X(n)$ is $A_{X(n)} = [0,\theta]$. Now we consider the cdf:
+    >> 1. $x \leq 0$, $F_{X(n)}(x) = P(X(n) \leq x) = 0$.
+    >> 2. $x \geq \theta$, $F_{X(n)}(x) = P(X(n) \leq x) = 1$.
+    >> 3. $0 < x < \theta$, $F_{X(n)}(x) = P(X(n) \leq x) = P(\max\{X_1,...,X_n\} \leq x) = P\left(\bigcap_{i=1}^n \{X_i \leq x\}\right) = \prod_{i=1}^n P(X_i \leq x) = \prod_{i=1}^n \frac{x}{\theta} = \left(\frac{x}{\theta}\right)^n$.
+    >> Then the pdf of $X(n)$ is $f_{X(n)}(x) = \frac{nx^{n-1}}{\theta^n}$ when $0<x<\theta$, and 0 otherwise.
+    >> For $X(1)$, the support of $X(1)$ is $A_{X(1)} = [0,\theta]$. Now we consider the cdf:
+    >> 1. $x \leq 0$, $F_{X(1)}(x) = P(X(1) \leq x) = 0$.
+    >> 2. $x \geq \theta$, $F_{X(1)}(x) = P(X(1) \leq x) = 1$.
+    >> 3. $0 < x < \theta$, $F_{X(1)}(x) = P(X(1) \leq x) = P(\min\{X_1,...,X_n\} \leq x) = 1 - P(\min\{X_1,...,X_n\} > x) = 1 - P\left(\bigcap_{i=1}^n \{X_i > x\}\right) = 1 - \prod_{i=1}^n P(X_i > x) = 1 - \prod_{i=1}^n \left(\int_x^\theta \frac{1}{\theta} dx_i\right) = 1 - \left(\frac{\theta-x}{\theta}\right)^n$.
+    >> Then the pdf of $X(1)$ is $f_{X(1)}(x) = \frac{n(\theta-x)^{n-1}}{\theta^n}$ when $0<x<\theta$, and 0 otherwise.
+
+### 4.2 One-to-One Bivariate Transformation
+Problem we are going to solve:
+    Given the joint pdf of $(X,Y)$ denoted by $f(x,y)$, we want to find $U=h_1(X,Y)$ and $V=h_2(X,Y)$.
+- Definition of one-to-one function: These two transfomations ($h_1$ and $h_2$) is one-to-one bivariate transformation if there exist other two functions ($\omega_1$ and $\omega_2$) such that $x=\omega_1(U,V)$ and $y=\omega_2(U,V)$. Note: $U = h_1(x,y)$ and $V = h_2(x,y)$.
+
+- Notation: Jacobian of $U = h_1(x,y)$ and $V = h_2(x,y)$:
+    $$\frac{\partial (U,V)}{\partial(x,y)} = \begin{vmatrix}\frac{\partial x}{\partial u} & \frac{\partial x}{\partial v}\\\frac{\partial y}{\partial u} & \frac{\partial y}{\partial v}\end{vmatrix}$$, determinet of $2\times 2$ matrix.
+
+- Theorem: The p.d.f. of $U$ and $V$ is $f_{U,V}(u,v) = f_{X,Y}(\omega_1(u,v), \omega_2(u,v))\left|\frac{\partial (U,V)}{\partial(x,y)}\right|$.
+
+    > Example 1: $X \sim N(0,1) and Y \sim N(0,1)$, assume $X$ and $Y$ are independent. Find the joint pdf of $U=X+Y$ and $V=X-Y$.
+    >> Solution: Since $U = X+Y$ and $V=X-Y$, then support of $U$ and $V$ is $A_U = (-\infty, \infty)$ and $A_V = (-\infty, \infty)$.
+    >> then, $x = \frac{U+V}{2}$ and $y = \frac{U-V}{2}$.
+    >> $\frac{\partial (U,V)}{\partial(x,y)} = \begin{vmatrix}\frac{\partial x}{\partial u} & \frac{\partial x}{\partial v}\\\frac{\partial y}{\partial u} & \frac{\partial y}{\partial v} \end{vmatrix} = \begin{vmatrix} 1/2 & 1/2\\1/2 & -1/2 \end{vmatrix} = -\frac{1}{2}$.
+    >> Then, the joint pdf of $U$ and $V$ is $g(u,v) = f(x,y) \cdot |J| = f_1(x) \cdot f_2(y) \cdot 1/2 = \frac{1}{2\pi}e^{-\frac{x^2}{2}} \cdot \frac{1}{2\pi}e^{-\frac{y^2}{2}} \cdot \frac{1}{2} = \frac{1}{4\pi}e^{-\frac{u^2+v^2}{4}}$.
+
+    > Example 2: Suppose the joint pdf of $X$ and $Y$ is $f(x,y) = e^{-x-y} for $0 < X < \infty$ and $0 < Y < \infty$, and 0 elsewhere. Find the pdf of $U=X+Y$.
+    >> Solution: Define $V = X$, then $U = X+Y$ and $V=X$, therefoer, $x=v$ and $y=u-v$.
