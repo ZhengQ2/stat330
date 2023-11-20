@@ -1,6 +1,5 @@
-## Table of Contents
+# Table of Contents
 2. [Univariate Random Variables](#2-univariate-random-variables)
-
     2.1 [Introduction to probability model](#21-introduction-to-probability-model)
     2.2 [Discrete random variable](#22-discrete-random-variable)
     2.3 [Continuous random variable](#23-continuous-random-variable)
@@ -8,6 +7,20 @@
     2.5 [Moment generating function](#25-moment-generating-function) 
 
 3. [Joint Distribution](#3-joint-distribution)
+    3.1 [Joint and Marginal cdfs](#31-joint-and-marginal-cdfs)
+    3.2 [Joint Discrete r.v.s](#32-joint-discrete-rvs)
+    3.3 [Joint Continuous r.v.s](#33-joint-continuous-rvs)
+    3.4 [Independent of random variables](#34-independent-of-random-variables)
+    3.5 [Joint expectation](#35-joint-expectation)
+    3.6 [Conditional distribution](#36-conditional-distribution)
+    3.7 [Conditional expectation](#37-conditional-expectation)
+    3.8 [Joint Moment Generating Function](#38-joint-moment-generating-function)
+    3.9 [Multinomial Distribution](#39-multinomial-distribution)
+    3.10 [Bivariate Normal Distribution](#310-bivariate-normal-distribution)
+
+4. [Functions of Random Variables](#4-functions-of-random-variables)
+    4.1 [CDF Technique](#41-cdf-technique)
+    4.2 [One-to-One Bivariate Transformation](#42-one-to-one-bivariate-transformation)
 
 <div style="page-break-after: always"></div>
 
@@ -537,8 +550,8 @@ Suppose $X \sim N(0,1)$. Find the mgf of X.
     2. $Cov(X+Y, Z) = Cov(X,Z) + Cov(Y,Z)$.
 
 - Variance formula
-    1. $$\begin{align*} Var(aX+bY) &= Cov(aX+bY, aX+bY)\\
-    Cov(aX, aX)+ Cov(aX, bY) + Cov(bY, aX) + Cov(bY, bY) &= Var(aX) + 2abCov(X,Y) + Var(bY) = a^2Var(X) + 2abCov(X,Y) + b^2Var(Y)\end{align*}$$
+    1. $Var(aX+bY) &= Cov(aX+bY, aX+bY)$
+        $Cov(aX, aX)+ Cov(aX, bY) + Cov(bY, aX) + Cov(bY, bY) &= Var(aX) + 2abCov(X,Y) + Var(bY) = a^2Var(X) + 2abCov(X,Y) + b^2Var(Y)$
     2. $$Var\left(\sum_{i=1}^n\right) = \sum_{i=1}^n Var(X_i) + 2\sum_{i<j}Cov(X_i, X_j)$$
     3. If $X_1,...,X_n$ are independent, $$Var\left(\sum_{i=1}^n\right) = \sum_{i=1}^n Var(X_i)$$
 
@@ -588,8 +601,8 @@ Suppose $X \sim N(0,1)$. Find the mgf of X.
     Similarly, the conditional p.d.f. of $Y$ given $X=x$ is $f_2(y|x) = \frac{f(x,y)}{f_1(x)}$, provided that $f_1(x) > 0$.
 
     - Property: Conditional p.d.f.s $f_1(x|y)$ and $f_2(x|y)$ are probability density functions, i.e.:
-        1. $f_1(x|y) \geq 0$ for any $x \in \mathbb{R}$, and $y$ is fixed. Additionally, $\int_{-\infty}^\infty f_1(x|y) = 1$ for any $y$.
-        2. $f_2(y|x) \geq 0$ for any $y \in \mathbb{R}$, and $x$ is fixed. Additionally, $\int_{-\infty}^\infty f_2(y|x) = 1$ for any $x$.
+        1. $f_1(x|y) \geq 0$ for any $x \in \mathbb{R}$, and $y$ is fixed. Additionally, $\int_{-\infty}^\infty f_1(x|y) dx = 1$ for any $y$.
+        2. $f_2(y|x) \geq 0$ for any $y \in \mathbb{R}$, and $x$ is fixed. Additionally, $\int_{-\infty}^\infty f_2(y|x) dy = 1$ for any $x$.
 
 > Example 1: Let $f(x,y) = \begin{cases} 8xy &0<y<x<1\\0 &\text{o.w.}\end{cases}$.
 > Find:
@@ -739,7 +752,7 @@ Since $f_2(y|x)$ is a probability function (if $X$ and $Y$ are joint discrete) o
         $E(X_i)=np_i$ and $Var(X_i)=np_i(1-p_i)$ for $i=1,...,k$.
         > Question: What is $Cov(X_i,X_j)$ for $i\neq j$?
         >> $Var(X_i+X_j) = Var(X_i) + Var(X_j) + 2Cov(X_i,X_j)$.
-        >> We know $Var(X_i = np_i(1-p_i)$, $Var(X_j) = np_j(1-p_j)$, $Var(X_i+X_j) = n(p_i+p_j)[1-(p_i+p_j)]$.
+        >> We know $Var(X_i) = np_i(1-p_i)$, $Var(X_j) = np_j(1-p_j)$, $Var(X_i+X_j) = n(p_i+p_j)[1-(p_i+p_j)]$.
         >> Therefore, $Cov(X_i,X_j) = -np_ip_j$.
     5. Conditional distribution
         $X_i|X_i+X_j=t \sim \text{Binomial}(t,p_i/(p_i+p_j))$.
@@ -766,7 +779,7 @@ Since $f_2(y|x)$ is a probability function (if $X$ and $Y$ are joint discrete) o
         Finding $X_2|X_1=x_1$ is normal.
         $E(X_2|X_1=x_1) = \mu_2 + \rho\frac{\sigma_2}{\sigma_1}(x_1-\mu_1)$.
         $Var(X_2|X_1=x_1) = \sigma_2^2(1-\rho^2)$.
-    4. Cov(X_1,X_2) = \rho\sigma_1\sigma_2$.
+    4. $Cov(X_1,X_2) = \rho\sigma_1\sigma_2$.
         > Proof: To find $E(X_1X_2)$, we apply double expectation theorem.
         > $E(X_1X_2) = E(E(X_1X_2|X_2))$
         > Step 1: $E(X_1X_2|X_1=x_1) = x_1E(X_2|X_1=x_1)$ = $x_1(\mu_2 + \rho\frac{\sigma_2}{\sigma_1}(x_1-\mu_1))$
@@ -793,7 +806,7 @@ Since $f_2(y|x)$ is a probability function (if $X$ and $Y$ are joint discrete) o
         A simple fact: if $X\sim \text{N}(\mu, \sigma^2)$, then $\left(\frac{X-\mu}{\sigma}\right)^2 \sim \chi_1^2$.
         That also means if $X_1, ... , X_n$ are iid $\text{N}(\mu, \sigma^2)$, then $ \frac{\sum_{i=1}^n(X_i-\mu)^2}{\sigma^2} \sim \chi_n^2$.
     
-## Chapter 4: Functions of Random Variables
+## 4 Functions of Random Variables
 Problems we want to answer:
 - Given $X_1,...,X_n$, which are continuous r.v., and their pdf is known, we are interested in finding the distribution of $Y=h(X_1,...,X_n)$, where $h$ is a function.
 Three main methods to be introduced:
@@ -860,11 +873,220 @@ Problem we are going to solve:
 
 - Theorem: The p.d.f. of $U$ and $V$ is $f_{U,V}(u,v) = f_{X,Y}(\omega_1(u,v), \omega_2(u,v))\left|\frac{\partial (U,V)}{\partial(x,y)}\right|$.
 
-    > Example 1: $X \sim N(0,1) and Y \sim N(0,1)$, assume $X$ and $Y$ are independent. Find the joint pdf of $U=X+Y$ and $V=X-Y$.
+    > Example 1: $X \sim N(0,1)$ and $Y \sim N(0,1)$, assume $X$ and $Y$ are independent. Find the joint pdf of $U=X+Y$ and $V=X-Y$.
     >> Solution: Since $U = X+Y$ and $V=X-Y$, then support of $U$ and $V$ is $A_U = (-\infty, \infty)$ and $A_V = (-\infty, \infty)$.
     >> then, $x = \frac{U+V}{2}$ and $y = \frac{U-V}{2}$.
     >> $\frac{\partial (U,V)}{\partial(x,y)} = \begin{vmatrix}\frac{\partial x}{\partial u} & \frac{\partial x}{\partial v}\\\frac{\partial y}{\partial u} & \frac{\partial y}{\partial v} \end{vmatrix} = \begin{vmatrix} 1/2 & 1/2\\1/2 & -1/2 \end{vmatrix} = -\frac{1}{2}$.
     >> Then, the joint pdf of $U$ and $V$ is $g(u,v) = f(x,y) \cdot |J| = f_1(x) \cdot f_2(y) \cdot 1/2 = \frac{1}{2\pi}e^{-\frac{x^2}{2}} \cdot \frac{1}{2\pi}e^{-\frac{y^2}{2}} \cdot \frac{1}{2} = \frac{1}{4\pi}e^{-\frac{u^2+v^2}{4}}$.
 
-    > Example 2: Suppose the joint pdf of $X$ and $Y$ is $f(x,y) = e^{-x-y} for $0 < X < \infty$ and $0 < Y < \infty$, and 0 elsewhere. Find the pdf of $U=X+Y$.
-    >> Solution: Define $V = X$, then $U = X+Y$ and $V=X$, therefoer, $x=v$ and $y=u-v$.
+    > Example 2: Suppose the joint pdf of $X$ and $Y$ is $f(x,y) = e^{-x-y}$ for $0 < X < \infty$ and $0 < Y < \infty$, and 0 elsewhere. Find the pdf of $U=X+Y$.
+    >> Solution: Define $V = X$, then $U = X+Y$ and $V=X$, therefoer, $x=v$ and $y=u-v$, i.e., $v>0, u-v>0$. Therefore, $0 < v < u$ is the joint support of $U$ and $V$.
+    >> The Jacbian of $x$ and $y$ with respect to $u$ and $v$ is $J= \begin{vmatrix} \frac{\partial x}{\partial u} & \frac{\partial x}{\partial v}\\\frac{\partial y}{\partial u} & \frac{\partial y}{\partial v} \end{vmatrix} = \begin{vmatrix} 0 & 1 \\ 1 & -1 \end{vmatrix} = -1$. Therefore, the joint pdf of $U$ and $V$ is $g(u,v) = f(x,y) \cdot |J| = e^{-x-y} = e^{-u}$ for $0<v<u<\infty$. The support of $U$ is $A_U = (0,\infty)$.
+    >> Given $u \in (0,\infty)$, $f_U(u) = \int_{-\infty}^\infty g(u,v)dv = \int_0^u e^{-u}dv = ue^{-u}$.
+
+- How to find the support of transformations?
+    $\begin{cases} U=h_1(x,y)\\ V=h_2(x,y) \end{cases}$, what is the support of $U$ and $V$?
+    > Example 1: Suppose the support of $X$ and $Y$ is $0<x<y<1$. Let $U=X$ and $V=XY$.
+    > Question: Find the support of $U$ and $V$.
+    >> Solution: $\begin{cases} u=x\\ x=xy \end{cases} \implies \begin{cases} x=u\\ y=v/u \end{cases}$
+    >> Therefore, $0<u<v/u<1 \implies 0<u^2<v<u$ is the support of $U$ and $V$.
+    > Example 2: Suppose the support of $X$ and $Y$ is $0<x<1$ and $0<y<1$. Find the support of $U=X/Y$ and $V=XY$.
+    >> Solution: $\begin{cases} u=x/y\\ v=xy \end{cases} \implies \begin{cases} x=\sqrt{uv}\\ y=\sqrt{v/u} \end{cases}$
+    >> Therefore, $0<\sqrt{uv}<1$ and $0<\sqrt{v/u}<1$, which tells us $uv<1, v/u<1$. Thus, $0<v<u<1/v$ is the joint support.
+
+### 4.3 MGF Technique
+Main idea:
+1. Find the mgf of the random variable of interest.
+2. By the uniqueness property of mgf, we can identify the distribution of the random variable of interest.
+    
+- Highlight one special case where the mgf technique is useful:
+    Suppose $X_1,...,X_n$ are independent and $T = \sum_{i=1}^n X_i$. Then, the mgf of T is $M_T(t) = E(e^{tT}) = E(e^{t\sum_{i=1}^n X_i}) = E(\prod_{i=1}^ne^{tX_i})= \prod_{i=1}^n E(e^{tX_i}) = \prod_{i=1}^n M_{X_i}(t)$.
+    In particular, if $X_1,...,X_n$ are iid, i.e., they have a common distribution, then having a common mgf, denoted by $M(t)$, then $M_T(t) = [M(t)]^n$.
+
+Next, we introduce properties of some important distributions (normal, $\chi^2$, $t$, $F$).
+1. Normal Distribution
+    - If $X\sim N(\mu, \sigma^2)$, then $aX+b \sim N(a\mu+b, a^2\sigma^2)$.
+        > Proof: Let $Y=aX+b$, then $M_Y(t) = M_X(at)e^{bt} = e^{bt}e^{a\mu t + \frac{1}{2}a^2\sigma^2t^2} = e^{(a\mu+b)t + \frac{1}{2}a^2\sigma^2t^2}$.
+        > Hence, by the uniqueness property of mgf, $Y \sim N(a\mu+b, a^2\sigma^2)$.
+        An immediate result (z-score): If $X\sim N(\mu, \sigma^2)$, then $\frac{X-\mu}{\sigma} \sim N(0,1)$.
+    - If $X_i \sim N(\mu_i, \sigma_i^2)$ for $i=1,...,n$ and $X_1,...,X_n$ are independent, then $\sum_{i=1}^n a_iX_i \sim N\left(\sum_{i=1}^na_i\mu_i, \sum_{i=1}^na_i^2\sigma_i^2\right)$.
+        > Proof: Let $T=\sum_{i=1}^n a_iX_i$, then the mgf of $T$ is $M_T(t) = \prod_{i=1}^n M_{a_iX_i}(t) = \prod_{i=1}^n M_{X_i}(a_it) = \prod_{i=1}^n e^{a_i\mu_it + \frac{1}{2}a_i^2\sigma_i^2t^2} = e^{\sum_{i=1}^n (a_i\mu_i)t + \frac{1}{2}\sum_{i=1}^n a_i^2\sigma_i^2t^2}$.
+        > By the uniqueness property of mgf, $T \sim N\left(\sum_{i=1}^na_i\mu_i, \sum_{i=1}^na_i^2\sigma_i^2\right)$.
+        In particular, if $X_1,...,X_n \overset{iid}{\sim} N(\mu, \sigma^2)$, then $\bar(X) = 1/n\sum_{i=1}^n X_i \sim N(\mu, \sigma^2/n)$. Hence $\frac{\sqrt{n}(\bar{X}-\mu)}{\sigma} \sim N(0,1)$.
+2. $\chi^2$ distribution
+    - $\chi_1^2 = Z^2$, where $Z \sim N(0,1)$.
+        $\chi_k^2 = \sum_{i=1}^k Z_i^2$, where $Z_i \overset{iid}{\sim} N(0,1)$.
+        An immediate result:
+            If $X \sim \text{N}(\mu, \sigma^2)$, then $\left(\frac{X-\mu}{\sigma}\right)^2 \sim \chi_1^2$.
+    - If $Y_i \sim \chi_{k_i}^2$, where $k_i \in \mathbb{N}^+$ and $Y_1, ..., Y_n$ are independent.
+        Then $T = \sum_{i=1}^n Y_i \sim \chi_d^2$, where $d = \sum_{i=1}^n k_i$.
+        > Proof: 
+        > - Step 1: $\chi_1^2 is the same as \text{Gamma}(\alpha=\frac{1}{2}, \beta=\frac{1}{2})$ (See example of $Y=Z^2$ in 4.1).
+        > - Step 2: for $\chi_n^2 = \sum_{i=1}^n Z_i$, where $Z_i \overset{iid}{\sim} N(0,1)$. Let $S = \sum_{i=1}^n Z_i^2$, then $S \sim \chi_n^2$. So the mgf of $S$ is $M_S(t) = E(e^{tS}) = E(e^{t\sum_{i=1}^n Z_i^2}) =\prod_{i=1}^n M_{Z_i^2}(t) = [M_{Z_i^2}(t)]^n$. Since $Z_i^2 \sim \text{Gamma}(\alpha=\frac{1}{2}, \beta=\frac{1}{2})$, then $M_{Z_i^2}(t) = \left(\frac{1}{1-\beta t}\right)^\alpha = \left(\frac{1}{1-2t}\right)^{\frac{1}{2}}$. Then, $M_S(t) = \left(\frac{1}{1-2t}\right)^{\frac{n}{2}}$.
+        > - Step 3: Since $Y_i \sim \chi^2_{k_i}, then mgf of $Y_i$ is $M_{Y_i}(t) = \left(\frac{1}{1-2t}\right)^{\frac{k_i}{2}}$. Now $T = \sum_{i=1}^n Y_i$ and $Y_i$s are independent, then $M_T(t) = \prod_{i=1}^n M_{Y_i}(t) = \prod_{i=1}^n \left(\frac{1}{1-2t}\right)^{\frac{k_i}{2}} = \left(\frac{1}{1-2t}\right)^{\frac{d}{2}}$. Therefore, by uniquesness property of mgf, $T \sim \chi_d^2$.
+
+3. $t$ distribution
+    Definition: If $X \sim N(0,1)$ and $Y \sim \chi_n^2$, $n \in \mathbb{N}^+$, and $X$ and $Y$ are independent, then $\frac{X}{\sqrt{Y/n}} \sim t_n$.
+    Note the support of $t_n$ is $A_{t_n} = (-\infty, \infty)$.
+    - Conclusion:
+     If $X_i \overset{iid}{\sim} N(\mu, \sigma^2)$ for $i=1,...,n$, let $\bar{X} = \frac{1}{n} \sum_{i=1}^n X_i$ and $S^2 = \frac{1}{n-1}\sum_{i=1}^n (X_i-\bar{X})^2$, then 
+        1. $\bar{X}$ is independent of $S^2$.
+            > Proof: To show this, we only need to prove $\bar{X}$ is independent of $(X_1-\bar{X}, ...,X_n-\bar{X})^T$.
+            Consider $\begin{pmatrix} \bar{X}\\X_1-\bar{X}\\...\\X_n-\bar{X}\end{pmatrix} = A \begin{pmatrix}X_1\\...\\X_n\end{pmatrix}$, where $A \in \mathbb{R}^{(n+1) \times n} and first row of $A$ is $(1/n,...,1/n)$.
+            Here $\begin{pmatrix}X_1\\...\\X_n\end{pmatrix}$ follows MVN, the joint distribution of  $\begin{pmatrix} \bar{X}\\X_1-\bar{X}\\...\\X_n-\bar{X}\end{pmatrix}$ is also MVN. 
+            Hence, it suffices to prove $\bar{X}$ and $(X_1-\bar{X}, ..., X_n-\bar{X})^T$ are uncorrelated, i.e., we need to show $Cov(\bar{X}, X_i-\bar{X}) = 0$ for $i=1,...,n$.
+            for $i=1,...,n, Cov(\bar{X}, X_i-\bar{X}) = Cov(\bar{X}, X_i) - Cov(\bar{X}, \bar{X}) = \frac{1}{n}\sum_{j=1}^nCov(X_j, X_i) - Var(X) =\sigma^2/n - \sigma^2/n = 0$. Hence, $\bar{X}$ is independent of $(X_1-\bar{X}, ...,X_n-\bar{X})^T$, which implies $\bar{X}$ is independent of $S^2$.
+        2. $\frac{(n-1)S^2}{\sigma^2} = \frac{\sum_{i=1}^n(X_1-\bar{X})^2}{\sigma^2} \sim \chi_{n-1}^2$.
+            > Proof: Firstly, note $\frac{\sum_{i=1}^n(X_i-\mu)^2}{\sigma^2} \sim \chi_n^2$. (let $Z_i= \frac{X-i-\bar{X}}{\sigma}$, then $\Sigma Z_i = 0$, thus $\sum_{i=1}^n (X_i-\bar{X}) = \sum_{i=1}^n X_i - \sum_{i=1}^n \bar{X} = 0$). $\frac{\sum_{i=1}^n(X_i-\mu)^2}{\sigma^2} = \frac{\sum_{i=1}^n(X_i-\bar{X}+\bar{X}-\mu)^2}{\sigma^2} = \frac{\sum_{i=1}^n(X_i-\bar{X})^2}{\sigma^2} + 2\frac{\sum_{i=1}^n(X_i-\bar{X})(\bar{X}-\mu)}{\sigma^2} + \frac{\sum_{i=1}^n(\bar{X}-\mu)^2}{\sigma^2}$. Now, $\frac{\sum_{i=1}^n(X_i-\mu)^2}{\sigma^2} (A) = \frac{\sum_{i=1}^n(X_i-\bar{X})^2}{\sigma^2} (B) + \frac{n(\bar{X}-\mu)}{sigma^2} (C)$.
+            > Facts: $A \sim \chi_n^2 = \text{Gamma}(\alpha = n/2, \beta = 2), C \sim \chi_1^2 = \text{Gamma}(\alpha = 1/2, \beta = 2)$, and $B$ and $C$ are independent.
+            > Question: $B \sim \chi_{n-1}^2$?
+            > We use the mgf technique. The mgf of $A$ is $M_A(t) = \left(\frac{1}{1-2t}\right)^{n/2}$, and the mgf of $C$ is $M_C(t) = \left(\frac{1}{1-2t}\right)^{1/2}$. In addition, $M_A(t) = M_B(t)M_C(t)$, then $M_B(t) = \left(\frac{1}{1-2t}\right)^{(n-1)/2}$, which is the mgf of $\chi_{n-1}^2$. Thus, by the uniqueness property of mgf, $B \sim \text{Gamma}(\alpha = n, \beta = 2) = \chi_{n-1}^2$.
+        3. $\frac{(\bar{X} - \mu)}{S/\sqrt{n}} \sim t_{n-1}$
+            > Proof: Rewrite $\frac{(\bar{X} - \mu)}{S/\sqrt{n}}$ as $\frac{\sqrt{n}(\bar{X}-mu)/\sigma}{\sqrt{S^2/\sigma^2}} = \frac{\sqrt{n}(\bar{X}-\mu)/\sigma}{\sqrt{\frac{(n-1)S^2}{\sigma^2(n-1)}}} \sim t_{n-1}$.
+    
+    4. $F$ distribution
+        Definition: If $X \sim \chi_{n}^2$ and $Y \sim \chi_{m}^2$, where $n,m \in \mathbb{N}^+$ and $X$ and $Y$ are independent, then $\frac{X/n}{Y/m} \sim F_{n,m}$.
+        > Question: If $X \sim \chi_n^2$, $Y \sim \chi_m^2$ and $X$ and $Y$ are independent, then $X+Y \sim \chi^2_{n+m}$. Does $\frac{X/n}{(X+Y)/(n+m)} \sim F_{n,n+m}$?
+        >> Solution: No. Consider $Cov(X, X+Y) = Cov(X,X) + Cov(X,Y) > 0$. Hence, $X$ and $X+Y$ are not independent. Therefore, $\frac{X/n}{(X+Y)/(n+m)} \sim F_{n,n+m}$ is not true.
+        If $X_1,...,X_n \overset{iid}{\sim} N(\mu_1,\sigma_1^2), Y_1,...,Y_m \overset{iid}{\sim} N(\mu_2,\sigma_2^2)$ are independent, let $S_1^2 = \frac{1}{n-1}\sum_{i=1}^n(X_i-\bar{X})^2$ and $S_2^2 = \frac{1}{m-1}\sum_{i=1}^m(Y_i-\bar{Y})^2$, then $\frac{(n-1)S_1^2}{\sigma_1^2} \sim \chi_{n-1}^2$, $\frac{(m-1)S_2^2}{\sigma_2^2} \sim \chi_{n-1}^2$, and \frac{\frac{(n-1)S_1^2}{\sigma_1^2}/n-1}{\frac{(m-1)S_2^2}{\sigma_2^2}/m-1} = \frac{S_1^2/\sigma_1^2}{S_2^2/\sigma_2^2} \sim F_{n-1,m-1}$.
+
+## 5 Limiting (Asymptotic) Distribution
+Problem: We are interested in the distribution of $\sqrt{n}(\bar{X} - \mu)$, where $X_1,...,X_n \overset{iid}{\sim} f(X)$ with $E(X_i)=\mu$, $Var(X_i)=\sigma^2$, $\bar{X} = \frac{1}{n}\sum_{i=1}^n X_i$.
+- Note $f$ is unknown. Therefore, it's impossible to find the exact distribution of $T$.
+Solution: Find a approximate distribution of $T$.
+Roughly speaking, we find a cdf $F$ such that when $n$ is sufficiently large, $F(x) \approx P(\sqrt{n}(\bar{X}-\mu) \leq x)$.
+### 5.1 Convergence in Distribution
+- Definition: Let $X_1, X_2, ...$ be a sequence of r.v.s with cdf $F_1(x), F_2(x), ...$. Let $X$ be a r.v. with cdf $F(x)$. If $\lim_{n\to \infty}F_n(x) = F(x)$ for all $x$ at which $F$ is continuous, then we say $X_n$ converges in distribution to $X$, denoted by $X_n \overset{d}{\to} X$.
+- Remark:
+    1. $F(x)$ is called the limiting distribution of $X_n$ as $n \to \infty$.
+    2. Note it's the convergence of cdf, rather than $X_n$.
+        > Assume $X_1=...=X_N=Z\sim N(0,1)$. Take $X = -Z \sim N(0,1)$. Then $X_n \overset{d}{\to} X$.
+    3. We only need to require $\lim_{n\to \infty} F_n(x) = F(x)$ holds for continuous points of $F$.
+        > e.g. If $F(x) = \begin{cases} 1 & x\geq a\\0 & x<a\end{cases}$ denotes the cdf of $X$, then $P(X=a) = 1$. Obviously the cdf $F$ is not continuous at $x=a$. Hence, if we want to prove $X_n \overset{d}{\to} X$, where $P(X=a) =1$, we only need to prove $\lim_{n\to \infty} F_n(x) = \begin{cases} 1 & x\geq a\\0 & x<a\end{cases}$, we are not interested in $\lim_{n\to \infty} F_n(a) = F(a)$.
+    4. This definition applies to both discrete and continuous r.v.s
+
+    > E.g. Suppose $X_1,...,X_n \overset{iid}{\sim} \text{Unif}[0,1]$. Let $X_{(1)} = \min_{1\leq i \leq n} X_i$ and $X_{(n)} = \max_{1\leq i \leq n} X_i$. Find the limiting distribution of 
+    > 1. $nX_{(1)}$ and $n(1-X_{(n)})$.
+    > 2. $X_{(1)}$ and $X_{(n)}$.
+    >> Solution:
+    >> 1. The support of $nX_{(1)}$ is $[0,n]$. Now we consider the cdf:
+        >> For $x \leq 0$, $F_n(x) = P(nX_{(1)} \leq x) = 0$.
+        >> For $x \geq n$, $F_n(x) = P(nX_{(1)} \leq x) = 1$.
+        >> For $0 < x < n$, $F_n(x) = P(nX_{(1)} \leq x) = P(X_{(1)} \leq x/n) = 1 - P(X_{(1)} > x/n) = 1 - \prod_{i=1}^n P(X_i > x/n) = 1 - \prod_{i=1}^n (1-x/n) = 1 - (1-x/n)^n$.
+        >> Thus, $F_(x) = \begin{cases} 0 & x\leq 0\\1-(1-x/n)^n & 0<x<n\\1 & x\geq n\end{cases}$.
+        >> Therefore, $\lim_{n\to \infty} F_n(x) = \begin{cases} 0 & x\leq 0\\1-e^{-x} & x>0\end{cases}$.
+        >> Thus the limiting distribution of $nX_{(1)}$ is $F(x) = \begin{cases} 0 & x\leq 0\\1-e^{-x} & x>0\end{cases}$.
+        >> The support of $n(1-X_{(n)})$ is $[0,n]$. Now we consider the cdf:
+        >> For $x \leq 0$, $F_n(x) = P(n(1-X_{(n)}) \leq x) = 0$.
+        >> For $x \geq n$, $F_n(x) = P(n(1-X_{(n)}) \leq x) = 1$.
+        >> For $0 < x < n$, $F_n(x) = P(n(1-X_{(n)}) \leq x) = P(1-X_{(n)} \leq x/n) = P(X_{(n)} \geq 1-x/n) = 1 - P(X_{(n)} < 1-x/n) = 1 - \prod_{i=1}^n P(X_i < 1-x/n) = 1 - (1-x/n)^n$.
+        >> Thus, $F_(x) = \begin{cases} 0 & x\leq 0\\1-(1-x/n)^n & 0<x<n\\1 & x\geq n\end{cases}$. (i.e., same as $nX_{(1)}$)
+        >> Thus the limiting distribution of $n(1-X_{(n)})$ is $F(x) = \begin{cases} 0 & x\leq 0\\1-e^{-x} & x>0\end{cases}$.
+        >> Note: This result is because if $X \sim \text{Unif}[0,1]$, then $1-X \sim \text{Unif}[0,1]$. Then, $X_{(i)} = \min_{1\leq i\leq n} X_i \overset{d}{=} \min_{1\leq i\leq n} (1- X_i) = 1 - \max_{1\leq i\leq n} X_i = 1 - X_{(n)}$.
+    >> 2. The support of $X_{(1)}$ is $[0,1]$. Now we consider the cdf:
+        >> For $x \leq 0$, $F_n(x) = P(X_{(1)} \leq x) = 0$.
+        >> For $x \geq 1$, $F_n(x) = P(X_{(1)} \leq x) = 1$.
+        >> For $0 < x < 1$, $F_n(x) = P(X_{(1)} \leq x) = 1 - P(X_{(1)} > x) = 1 - \prod_{i=1}^n P(X_i > x) = 1 - \prod_{i=1}^n (1-x) = 1 - (1-x)^n$.
+        >> Thus, $F_(x) = \begin{cases} 0 & x\leq 0\\1-(1-x)^n & 0<x<1\\1 & x\geq 1\end{cases}$.
+        >> Therefore, $\lim_{n\to \infty} F_n(x) = \begin{cases} 0 & x\leq 0\\1 & x>0\end{cases}$.
+        >> Thus the limiting distribution of $X_{(1)}$ is $F(x) = \begin{cases} 0 & x< 0\\1 & x\geq 0\end{cases}$, or we can say $X_{(1)} \overset{d}{\to} 0$ (equivalently, $X_{(1)} \overset{d}{\to} X$ for $P(X=0) = 1$).
+        >> (Since $\lim_{n\to \infty} F_n(x) = F(x)$ for any $x\neq 0$ and $F(x)$ is not continuous at $x=0$, we do not require $\lim_{n\to \infty} F_n(0) = F(0)$.)
+        >> The support of $X_{(n)}$ is $[0,1]$. Now we consider the cdf:
+        >> For $x \leq 0$, $F_n(x) = P(X_{(n)} \leq x) = 0$.
+        >> For $x \geq 1$, $F_n(x) = P(X_{(n)} \leq x) = 1$.
+        >> For $0 < x < 1$, $F_n(x) = P(X_{(n)} \leq x) = P(X_{(n)} < x) = \prod_{i=1}^n P(X_i < x) = \prod_{i=1}^n x = x^n$.
+        >> Thus, $F_(x) = \begin{cases} 0 & x\leq 0\\x^n & 0<x<1\\1 & x\geq 1\end{cases}$.
+        >> Therefore, $\lim_{n\to \infty} F_n(x) = \begin{cases} 0 & x< 1\\1 & x\geq 1\end{cases}$.
+        >> Thus the limiting distribution of $X_{(n)}$ is $F(x) = \begin{cases} 0 & x< 1\\1 & x\geq 1\end{cases}$, or we can say $X_{(n)} \overset{d}{\to} 1$ (equivalently, $X_{(n)} \overset{d}{\to} X$ for $P(X=1) = 1$).
+
+### 5.2 Convergence in Probability
+- Definition: Let $X_1, X_2, ...$ be a sequence of r.v.s with cdf $F_1(x), F_2(x), ...$. Let $X$ be a r.v. with cdf $F(x)$. If for any (given) $\epsilon > 0$, $\lim_{n\to \infty} P(|X_n - X| > \epsilon) = 0$ or equivalently $\lim_{n\to \infty} P(|X_n - X| \leq \epsilon) = 1$, then we say $X_n$ converges in probability to $X$, denoted by $X_n \overset{p}{\to} X$.
+- Remark:
+    1. It is the limit for a probability. That is why we call it convergence in probability.
+    2. Interpretation of $X_n \overset{p}{\to} X$: as $n \to \infty$, $X_n$ cannot be $\epsilon$ away from $X$, that is, $X_n$ is close to $X$ as $n \to \infty$. Because of this, we expect that $F_n(x)$ becomes close to $F(x)$ if $X_n \overset{p}{\to} X$.
+    > Theorem: If $X_n \overset{p}{\to} X$, then $X_n \overset{d}{\to} X$, that is to say, convergence in probability implies convergence in distribution.
+    > However, the converse is not true:
+    > Example: if we take $X_1 = ... = X_n = Z \sim N(0,1)$, let $X = -Z \sim N(0,1)$ then $X_n \overset{p}{\to} X$.
+    > Next we show $X_n \overset{d}{\not\to} X$.
+    > For $\epsilon = 1$, $P(|X_n - X| > \epsilon) = P(|2Z| > \epsilon) = P(|Z| > 1/2) = 2P(Z > 1/2) > 0$ for all $n$.
+
+- Convergence in probability to a constant: Let $X_1,X_2,...$ be a sequence of r.v.s and $a$ be a constant. If $\lim_{n\to \infty} P(|X_n - a| > \epsilon) = 0$ for any (given) $\epsilon > 0$, then we say $X_n$ converges in probability to $a$, denoted by $X_n \overset{p}{\to} a$.
+    > Theorem: $X_n \overset{p}{\to} a \Longleftrightarrow X_n \overset{d}{\to} a$. We say $X_n \overset{d}{\to} a$ if $\lim_{n\to \infty} P(X_n \leq x) = \begin{cases} 0 & x<a\\1 & x\geq a\end{cases}$, or $X_n \overset{d}{\to} X$, where $P(X=a) =1$.
+    > Proof: Since convergence in probability implies convergence in distribution, we only need to show $F_n(x) \to F(x)$ for all $x$ at which $F$ is continuous.
+    > We only need to show $\lim_{n\to \infty} P(|X_n-a| > \epsilon) = 0$ for any $\epsilon > 0$, if $X_n \overset{d}{\to} a$.
+    > 1. $P(|X_n-a| > \epsilon) \geq 0$
+    > 2. $P(|X_n-a| > \epsilon) =  P(X_n > a+\epsilon) + P(X_n < a-\epsilon) \leq 1 - P(X_n \leq a+\epsilon) + P(X_n \leq a-\epsilon)$. Since $X_n \overset{d}{\to} a$, then $\lim_{n\to \infty} P(X_n \leq a+\epsilon) = 1$ and $\lim_{n\to \infty} 1 - P(X_n \leq a+\epsilon) + P(X_n \leq a-\epsilon) = 0$. Hence, by sqeezing theorem, $\lim_{n\to \infty} P(|X_n-a| > \epsilon) = 0$, and therefore $X_n \overset{d}{\to} a \Longrightarrow X_n \overset{p}{\to} a$.
+
+    > Example 1: $X_1,...,X_n \overset{iid}{\sim} Unif(0,1)$. Let $X_{(1)} = \min_{1\leq i \leq n} X_i$ and $X_{(n)} = \max_{1\leq i \leq n} X_i$. Find the limiting distribution of $X_{(1)}$ and $X_{(n)}$.
+    >> Solution: We have shown that $X_{(1)} \overset{d}{\to} 0$ and $X_{(n)} \overset{d}{\to} 1$. Hence, by the theorem above, $X_{(1)} \overset{p}{\to} 0$ and $X_{(n)} \overset{p}{\to} 1$.
+
+    > Example 2: We assume $X_1,...,X_n \overset{iid}{\sim} f(x,\theta) = e^{-(x-\theta)}$ for $x \geq \theta$ and 0 elsewhere. Define $X_{(1)} = \min_{1\leq i \leq n} X_i$ and $X_{(n)} = \max_{1\leq i \leq n} X_i$. Prove $X_{(1)} \overset{p}{\to} \theta$.
+    >> Method 1: By definition, we only need to show for any $\epsilon > 0$, $\lim_{n\to \infty} P(|X_{(1)}-\theta| > \epsilon) = 0$.
+        >> 1. $P(|X_{(1)}-\theta| > \epsilon) \geq 0$
+        >> 2. $P(|X_{(1)}-\theta| > \epsilon) = P(\{X_{(1)} > \epsilon + \theta\}\cup \{X_{(1)} > \theta - \epsilon \}) = P(X_{(1)} > \epsilon + \theta) + P(X_{(1)} > \theta - \epsilon) = P(X_{(1)} > \epsilon + \theta) = P(\bigcup_{i=1}^n X_i > \epsilon + \theta) = P(X_1 > \epsilon + \theta)^n = (1 - P(X_1 \leq \epsilon + \theta))^n = (1 - (1 - e^{-(\epsilon + \theta)}))^n = (e^{-(\epsilon + \theta)})^n = e^{-n(\epsilon + \theta)} \to 0$ as $n \to \infty$.
+        >> Hence, $X_{(1)} \overset{p}{\to} \theta$.
+    >> Method 2: To show $X_{(1)} \overset{p}{\to} \theta$, we only need to show $X_{(1)} \overset{d}{\to} \theta$. In other words, we need to prove $\lim_{n \to 0} P(X_{(1)} \leq x) = \begin{cases} 0 & x < \theta\\1 & x \geq \theta\end{cases}$.
+        >> For $x < \theta$, $P(X_{(1)} \leq x) = 0$.
+        >> For $x \geq \theta$, $P(X_{(1)} \leq x) = 1 - P(X_{(1)} > x) = 1 - P(\bigcap_{i=1}^n X_i > x) = 1 - \prod_{i=1}^n P(X_i > x) = 1 - \prod_{i=1}^n e^{-(x-\theta)} = 1 - e^{-n(x-\theta)} \to 1$ as $n \to \infty$.
+        >> Hence, $F_n(x) = \begin{cases} 0 & x < \theta\\1 - e^{-n(x-\theta)} & x \geq \theta\end{cases}$, thus $\lim_{n \to 0} P(X_{(1)} \leq x) = \begin{cases} 0 & x \geq \theta\\1 & x > \theta\end{cases}$. Therefore, the limiting cdf is: $F(x) = \begin{cases} 0 & x < \theta\\1 & x \geq \theta\end{cases}$ since $F$ is not continuous at $x=\theta$.
+
+A brief summary:
+So far we have two convergence modes:
+1. Convergence in distribution: $X_n \overset{d}{\to} X$.
+2. Convergence in probability: $X_n \overset{p}{\to} X$.
+Generally speaking: $X_n \overset{d}{\to} X \Longrightarrow X_n \overset{p}{\to} X$, but the converse is not true (consider previous example).
+But there is one special case in which two modes are equivalent, i.e., $X_n \overset{d}{\to} X \Longleftrightarrow X_n \overset{p}{\to} X$, for this setting, we focus on $X_{(1)} = \min_{1\leq i \leq n} X_i$ and $X_{(n)} = \max_{1\leq i \leq n} X_i$.
+
+- Next, we focus on convergence in distribution in probability for $\bar{X_n} = \frac{1}{n}\sum_{i=1}^{n}X_i$, where we assume $X_1,...,X_n \overset{iid}{\sim} f(x,\theta)$, where $\theta$ is unknown.
+    1. Convergence in Probability: Does $\bar{X_n} \overset{p}{\to} \mu$? (Weak Law of Large Numbers)
+    2. Convergence in distribution: Does $\sqrt{n}(\bar{X_n} - \mu) \overset{d}{\to} N$? (Central Limit Theorem)
+
+    - To prove the WLLN, Markov inequality is useful.
+        Suppose $X$ is an r.v.. For any $k>0$ and $C$ is a positive constant. Then we have $P(|X| \geq C) \leq \frac{E(|X|^k)}{C^k}$. (bound probability by the $k$th moment)
+        In particular, we consider $k=2$ and replace $X$ with $X-\mu$ where $\mu = E(X)$, then we have $P(|X-\mu| \geq C) \leq \frac{E(|X-\mu|^2)}{C^2} = \frac{Var(X)}{C^2}$.
+    - The Weak Law of Large Numbers (WLLN)
+        Suppose $X_1,...,X_n$ are independent with a common mean $\mu < \infty$ and a common variance $\sigma^2 < \infty$.
+        Then $\bar{X_n} \overset{p}{\to} \mu$ where $\bar{X_n} = \frac{1}{n}\sum_{i=1}^n X_i$.
+        > Proof: We only neeed to show for any $\epsilon > -$, $\lim_{n\to \infty} P(|\bar{X_n} - \mu| > \epsilon) = 0$.
+            > 1. P(|\bar{X_n} - \mu| > \epsilon) \geq 0
+            > 2. By the Markov inequality we have $P(|\bar{X_n} - \mu| > \epsilon) \leq \frac{E[(\bar{X_n}-\mu)^2]}{\epsilon^2} = \frac{Var(\bar{X_n})}{\epsilon^2} = \frac{Var(\frac{1}{n}\sum_{i=1}^n X_i)}{\epsilon^2} = \frac{1}{n^2\epsilon^2}Var(\sum_{i=1}^n X_i) = \frac{1}{n^2\epsilon^2}\sum_{i=1}^n Var(X_i) = \frac{1}{n\epsilon^2}\sigma^2 \to 0$ as $n \to \infty$. By squeeze theorem, $\lim_{n\to \infty} P(|\bar{X_n} - \mu| > \epsilon) = 0$, therefore $\bar{X_n} \overset{p}{\to} \mu$. 
+
+        > Example 3: (Application of WLLN) Suppose $X_1,...,X_n \overset{iid}{\sim} \chi_1^2$, then $\bar{X_n} \overset{p}{\to} 1$.
+        >> Proof:
+            >> 1. $X_1,...,X_n$ are iid
+            >> 2. $E(X_1) = E(\chi_1^2) = E(Z^2) = Var(Z) + (E(Z))^2 \leq \infty$, where $Z \sim N(0,1)$.
+            >> 3. $Var(X_1) = Var(\chi_1^2) = Var(Z^2) < \infty$.
+            >> Then, 1st way, $Var(Z^2) = E(Z^4) - (E(Z^2))^2$.
+            >> 2nd way, $\chi_1^2 \overset{d}{=} Gamma(\alpha = 1/2, \beta = 2)
+            >> Then, $Var(\chi_1^2) = \alpha \beta^2 = 2 < \infty$. Lastly, by the WLLN, $\bar{X_n} \overset{p}{\to} 1$.
+
+        > Example 4: Suppose $Y_n \sim \chi_n^2$. Then, $\frac{Y_n}{n} \overset{p}{\to} 1$.
+        >> Proof: Since $Y_n \sim \chi^2_n, Y_n = \sum_{i=1}^nZ_i^2, where Z_1,...,Z_n \overset{iid}{\sim} N(0,1)$, then $Y_n/n = \frac{1}{n}\sum_{i=1}^n Z_i^2$.
+            >> 1. $Z_1^2,...,Z_n^2$ are iid.
+            >> 2. E(Z_1^2) = 1 < \infty$.
+            >> 3. Var(Z_1^2) = 2 < \infty$.
+            >> Then, by the WLLN, $\frac{Y_n}{n} \overset{p}{\to} 1$.
+
+        > Example 5: Suppose $X_1,...,X_n \overset{iid}{\sim} \text{Poisson}{\mu}$, then $\bar{X_n} = \frac{1}{n}\sum_{i=1}^n X_i \overset{p}{\to} E(X_i) = \mu$.
+        >> Solution:
+            >> 1. $X_1,...,X_n$ are iid.
+            >> 2. $E(X_1) = \mu < \infty$.
+            >> 3. $Var(X_1) = \mu < \infty$.
+            >> Then, by the WLLN, $\bar{X_n} \overset{p}{\to} \mu$.
+
+        > Practice 6: If $Y_n \sim \text{Poisson}(n), does \frac{Y_n}{n} \overset{p}{\to} \mu$?
+
+### 5.3 Some Useful Limiting Theorems
+In this section, we will discuss some theorems regarding the convergecne in distribution of $\bar{X_n}$ and $g(\bar{X_n})$, wherre $g$ is a known function.
+- The Central Limit Theorem (CLT)
+    Let $X_1,X_2,...$ be iid with $E(X_i) = \mu < \infty$ and $Var(X_i) = \sigma^2 < \infty$. Let $\bar{X_n} = \frac{1}{n}\sum_{i=1}^n X_i$. Then, the limiting distribution of $\frac{\sqrt{n}(\bar{X_n} - \mu)}{\sigma}$ is the cdf of $N(0,1)$, i.e., $\frac{\sqrt{n}(\bar{X_n} - \mu)}{\sigma} \overset{d}{\to} N(0,1)$.
+    
+    Proof of CLT relies on the following theorem:
+    - Theorem: Let $X_1,X_2,...$ be a sequence of r.v.s such that $X_n$ has mgf $M_n(t)$ and $X$ be a r.v. with mgf $M(t)$. If there exist some $h>0$ such that $\lim_{h\to\infty} M_n(t) \to M(t)$ for any $|t| < h$, then $X_n \overset{d}{\to} X$.
+        In other words, convergence in mgf implies convergence in distribution.
+
+    > Proof: By the theorem above, to show $\frac{\sqrt{n}(\bar{X_n} - \mu)}{\sigma} \overset{d}{\to} N(0,1)$, we only need to show the mgf of $\frac{\sqrt{n}(\bar{X_n} - \mu)}{\sigma}$ converges to the mgf of $N(0,1)$, which is $M(t) = e^{t^2/2}$.
+    > Step 1: Find the mgf of $\frac{\sqrt{n}(\bar{X_n} - \mu)}{\sigma}$, denoted by $M_n(t)$. Note: $\frac{\sqrt{n}(\bar{X_n} - \mu)}{\sigma} = \frac{\sqrt{n}(\frac{1}{n}\sum_{i=1}^n X_i - n\mu)}{\sigma} = \frac{(\frac{1}{\sqrt{n}}\sum_{i=1}^n X_i - n\mu)}{\sigma}$. Let $Y_i = \frac{X_i-\mu}{\sigma}$, then $\frac{\sqrt{n}(\bar{X_n} - \mu)}{\sigma} = \frac{1}{\sqrt{n}}\sum_{i=1}^nY_i$.
+    > Obviously $Y_1,...,Y_n$ are iid, and $E(Y_i) = 0, Var(Y_i) = 1$. Suppose the mgf of $Y_i$ exists and is $M_Y(t)$, then $M_n(t) = E(e^{t\frac{1}{\sqrt{n}}\sum_{i=1}^nY_i}) = E(\prod_{i=1}^n e^{\frac{t}{\sqrt{n}}Y_i}) = \prod_{i=1}^n E(e^{\frac{t}{\sqrt{n}}Y_i}) = \prod_{i=1}^n M_Y(\frac{t}{\sqrt{n}}) = (M_Y(\frac{t}{\sqrt{n}}))^n = [M_Y(0) + M'_Y(0) \cdot t/\sqrt{n}+\frac{M''_Y(0)}{2} \cdot (t/\sqrt{n})^2 + o(1/2)]^n$. Here, we have ![definition of small-o notation](https://en.wikipedia.org/wiki/Big_O_notation#Little-o_notation).
+    > Aside: $\lim_{n\to\infty} (1+\frac{x}{n} + o(1/n))^n = e^x$. Then, $\lim_{n\to \infty} M_n(t) = e^{t^2/2}$, which is the mgf of $N(0,1)$.
+    > Step 2: Since $\lim_{n \to \infty} M_n(t) = M(t)$ for any $|t| < h$, by the theorem above, $\frac{\sqrt{n}(\bar{X_n} - \mu)}{\sigma} \overset{d}{\to} N(0,1)$.
