@@ -550,8 +550,8 @@ Suppose $X \sim N(0,1)$. Find the mgf of X.
     2. $Cov(X+Y, Z) = Cov(X,Z) + Cov(Y,Z)$.
 
 - Variance formula
-    1. $Var(aX+bY) &= Cov(aX+bY, aX+bY)$
-        $Cov(aX, aX)+ Cov(aX, bY) + Cov(bY, aX) + Cov(bY, bY) &= Var(aX) + 2abCov(X,Y) + Var(bY) = a^2Var(X) + 2abCov(X,Y) + b^2Var(Y)$
+    1. $Var(aX+bY) = Cov(aX+bY, aX+bY)$
+        $Cov(aX, aX)+ Cov(aX, bY) + Cov(bY, aX) + Cov(bY, bY) = Var(aX) + 2abCov(X,Y) + Var(bY) = a^2Var(X) + 2abCov(X,Y) + b^2Var(Y)$
     2. $$Var\left(\sum_{i=1}^n\right) = \sum_{i=1}^n Var(X_i) + 2\sum_{i<j}Cov(X_i, X_j)$$
     3. If $X_1,...,X_n$ are independent, $$Var\left(\sum_{i=1}^n\right) = \sum_{i=1}^n Var(X_i)$$
 
@@ -637,7 +637,7 @@ Suppose $X \sim N(0,1)$. Find the mgf of X.
         $f(x,y) = f_1(x|y)f_2(y) = f_2(y|x)f_1(x)$ as $f_1(x|y) = \frac{f(x,y)}{f_2(y)}$ and $f_2(y|x) = \frac{f(x,y)}{f_1(x)}$.
 
 > Example 1: $Y \sim \text{Poisson}(\mu)$. $X|Y=y \sim \text{Binomial}(y,p)$, where $p \in (0,1)$ is a constant. Find the marginal p.f. of $X$.
->> Solution: The joint pf of $(X,Y)$ is $$f(x,y) = f_2(y) f_1(x|y) = \frac{\mu^ye^{-\mu}}{y!}\binom{y}{x}p^x(1-p)^{y-x}$ <b>for ==$x=0,1,...,y$ and $y=0,1,...$</b>==.
+>> Solution: The joint pf of $(X,Y)$ is $f(x,y) = f_2(y) f_1(x|y) = \frac{\mu^ye^{-\mu}}{y!}\binom{y}{x}p^x(1-p)^{y-x}$ <b>for ==$x=0,1,...,y$ and $y=0,1,...$</b>==.
 >> The support of $X$ is $A=\{0,1,...\}$, given $x \in \{0,1,...\}$, $f_1(x) = \sum_{y=x}^\infty f(x,y) = \sum_{y=x}^\infty \frac{\mu^ye^{-\mu}}{y!}\binom{y}{x}p^x(1-p)^{y-x} = \sum_{y=x}^\infty \frac{\mu^ye^{-\mu}}{y!}\frac{y!}{x!(y-x)!}p^x(1-p)^{y-x} = \frac{(\mu p)^x}{x!}e^{-\mu p}\sum_{y=x}^\infty \frac{(\mu(1-p))^{y-x}}{(y-x)!}$. Let $t=y-x$, then, $f_1(x)= \frac{(\mu p)^x}{x!}e^{-\mu p}\sum_{t=0}^\infty \frac{(\mu(1-p))^t}{t!} = \frac{(\mu p)^x}{x!}e^{-\mu p}e^{\mu(1-p)} = \frac{(\mu p)^x}{x!}e^{-\mu p}$. Then, $X\sim \text{Poisson}(\mu p)$.
 
 > Example 2: Suppose $Y$ has pdf $f_2(y) = \frac{y^{\alpha -1}e^{-y}}{\Gamma(\alpha)}$ for $y > 0$, i.e. $Y \sim \text{Gamma}(\alpha,1)$, and the conditional pdf of $X$ given $Y=y$ is $f_1(x|y) = ye^{-xy}$ for $x > 0$, i.e. $X|Y=y \sim \text{Gamma}(1,1/y)$. Find the marginal pdf of $X$.
@@ -921,9 +921,9 @@ Next, we introduce properties of some important distributions (normal, $\chi^2$,
     - If $Y_i \sim \chi_{k_i}^2$, where $k_i \in \mathbb{N}^+$ and $Y_1, ..., Y_n$ are independent.
         Then $T = \sum_{i=1}^n Y_i \sim \chi_d^2$, where $d = \sum_{i=1}^n k_i$.
         > Proof: 
-        > - Step 1: $\chi_1^2 is the same as \text{Gamma}(\alpha=\frac{1}{2}, \beta=\frac{1}{2})$ (See example of $Y=Z^2$ in 4.1).
+        > - Step 1: $\chi_1^2$ is the same as $\text{Gamma}(\alpha=\frac{1}{2}, \beta=\frac{1}{2})$ (See example of $Y=Z^2$ in 4.1).
         > - Step 2: for $\chi_n^2 = \sum_{i=1}^n Z_i$, where $Z_i \overset{iid}{\sim} N(0,1)$. Let $S = \sum_{i=1}^n Z_i^2$, then $S \sim \chi_n^2$. So the mgf of $S$ is $M_S(t) = E(e^{tS}) = E(e^{t\sum_{i=1}^n Z_i^2}) =\prod_{i=1}^n M_{Z_i^2}(t) = [M_{Z_i^2}(t)]^n$. Since $Z_i^2 \sim \text{Gamma}(\alpha=\frac{1}{2}, \beta=\frac{1}{2})$, then $M_{Z_i^2}(t) = \left(\frac{1}{1-\beta t}\right)^\alpha = \left(\frac{1}{1-2t}\right)^{\frac{1}{2}}$. Then, $M_S(t) = \left(\frac{1}{1-2t}\right)^{\frac{n}{2}}$.
-        > - Step 3: Since $Y_i \sim \chi^2_{k_i}, then mgf of $Y_i$ is $M_{Y_i}(t) = \left(\frac{1}{1-2t}\right)^{\frac{k_i}{2}}$. Now $T = \sum_{i=1}^n Y_i$ and $Y_i$s are independent, then $M_T(t) = \prod_{i=1}^n M_{Y_i}(t) = \prod_{i=1}^n \left(\frac{1}{1-2t}\right)^{\frac{k_i}{2}} = \left(\frac{1}{1-2t}\right)^{\frac{d}{2}}$. Therefore, by uniquesness property of mgf, $T \sim \chi_d^2$.
+        > - Step 3: Since $Y_i \sim \chi^2_{k_i}$, then mgf of $Y_i$ is $M_{Y_i}(t) = \left(\frac{1}{1-2t}\right)^{\frac{k_i}{2}}$. Now $T = \sum_{i=1}^n Y_i$ and $Y_i$s are independent, then $M_T(t) = \prod_{i=1}^n M_{Y_i}(t) = \prod_{i=1}^n \left(\frac{1}{1-2t}\right)^{\frac{k_i}{2}} = \left(\frac{1}{1-2t}\right)^{\frac{d}{2}}$. Therefore, by uniquesness property of mgf, $T \sim \chi_d^2$.
 
 3. $t$ distribution
     Definition: If $X \sim N(0,1)$ and $Y \sim \chi_n^2$, $n \in \mathbb{N}^+$, and $X$ and $Y$ are independent, then $\frac{X}{\sqrt{Y/n}} \sim t_n$.
@@ -932,7 +932,7 @@ Next, we introduce properties of some important distributions (normal, $\chi^2$,
      If $X_i \overset{iid}{\sim} N(\mu, \sigma^2)$ for $i=1,...,n$, let $\bar{X} = \frac{1}{n} \sum_{i=1}^n X_i$ and $S^2 = \frac{1}{n-1}\sum_{i=1}^n (X_i-\bar{X})^2$, then 
         1. $\bar{X}$ is independent of $S^2$.
             > Proof: To show this, we only need to prove $\bar{X}$ is independent of $(X_1-\bar{X}, ...,X_n-\bar{X})^T$.
-            Consider $\begin{pmatrix} \bar{X}\\X_1-\bar{X}\\...\\X_n-\bar{X}\end{pmatrix} = A \begin{pmatrix}X_1\\...\\X_n\end{pmatrix}$, where $A \in \mathbb{R}^{(n+1) \times n} and first row of $A$ is $(1/n,...,1/n)$.
+            Consider $\begin{pmatrix} \bar{X}\\X_1-\bar{X}\\...\\X_n-\bar{X}\end{pmatrix} = A \begin{pmatrix}X_1\\...\\X_n\end{pmatrix}$, where $A \in \mathbb{R}^{(n+1) \times n}$ and first row of $A$ is $(1/n,...,1/n)$.
             Here $\begin{pmatrix}X_1\\...\\X_n\end{pmatrix}$ follows MVN, the joint distribution of  $\begin{pmatrix} \bar{X}\\X_1-\bar{X}\\...\\X_n-\bar{X}\end{pmatrix}$ is also MVN. 
             Hence, it suffices to prove $\bar{X}$ and $(X_1-\bar{X}, ..., X_n-\bar{X})^T$ are uncorrelated, i.e., we need to show $Cov(\bar{X}, X_i-\bar{X}) = 0$ for $i=1,...,n$.
             for $i=1,...,n, Cov(\bar{X}, X_i-\bar{X}) = Cov(\bar{X}, X_i) - Cov(\bar{X}, \bar{X}) = \frac{1}{n}\sum_{j=1}^nCov(X_j, X_i) - Var(X) =\sigma^2/n - \sigma^2/n = 0$. Hence, $\bar{X}$ is independent of $(X_1-\bar{X}, ...,X_n-\bar{X})^T$, which implies $\bar{X}$ is independent of $S^2$.
@@ -948,7 +948,7 @@ Next, we introduce properties of some important distributions (normal, $\chi^2$,
         Definition: If $X \sim \chi_{n}^2$ and $Y \sim \chi_{m}^2$, where $n,m \in \mathbb{N}^+$ and $X$ and $Y$ are independent, then $\frac{X/n}{Y/m} \sim F_{n,m}$.
         > Question: If $X \sim \chi_n^2$, $Y \sim \chi_m^2$ and $X$ and $Y$ are independent, then $X+Y \sim \chi^2_{n+m}$. Does $\frac{X/n}{(X+Y)/(n+m)} \sim F_{n,n+m}$?
         >> Solution: No. Consider $Cov(X, X+Y) = Cov(X,X) + Cov(X,Y) > 0$. Hence, $X$ and $X+Y$ are not independent. Therefore, $\frac{X/n}{(X+Y)/(n+m)} \sim F_{n,n+m}$ is not true.
-        If $X_1,...,X_n \overset{iid}{\sim} N(\mu_1,\sigma_1^2), Y_1,...,Y_m \overset{iid}{\sim} N(\mu_2,\sigma_2^2)$ are independent, let $S_1^2 = \frac{1}{n-1}\sum_{i=1}^n(X_i-\bar{X})^2$ and $S_2^2 = \frac{1}{m-1}\sum_{i=1}^m(Y_i-\bar{Y})^2$, then $\frac{(n-1)S_1^2}{\sigma_1^2} \sim \chi_{n-1}^2$, $\frac{(m-1)S_2^2}{\sigma_2^2} \sim \chi_{n-1}^2$, and \frac{\frac{(n-1)S_1^2}{\sigma_1^2}/n-1}{\frac{(m-1)S_2^2}{\sigma_2^2}/m-1} = \frac{S_1^2/\sigma_1^2}{S_2^2/\sigma_2^2} \sim F_{n-1,m-1}$.
+        If $X_1,...,X_n \overset{iid}{\sim} N(\mu_1,\sigma_1^2), Y_1,...,Y_m \overset{iid}{\sim} N(\mu_2,\sigma_2^2)$ are independent, let $S_1^2 = \frac{1}{n-1}\sum_{i=1}^n(X_i-\bar{X})^2$ and $S_2^2 = \frac{1}{m-1}\sum_{i=1}^m(Y_i-\bar{Y})^2$, then $\frac{(n-1)S_1^2}{\sigma_1^2} \sim \chi_{n-1}^2$, $\frac{(m-1)S_2^2}{\sigma_2^2} \sim \chi_{n-1}^2$, and $\frac{\frac{(n-1)S_1^2}{\sigma_1^2}/n-1}{\frac{(m-1)S_2^2}{\sigma_2^2}/m-1} = \frac{S_1^2/\sigma_1^2}{S_2^2/\sigma_2^2} \sim F_{n-1,m-1}$.
 
 ## 5 Limiting (Asymptotic) Distribution
 Problem: We are interested in the distribution of $\sqrt{n}(\bar{X} - \mu)$, where $X_1,...,X_n \overset{iid}{\sim} f(X)$ with $E(X_i)=\mu$, $Var(X_i)=\sigma^2$, $\bar{X} = \frac{1}{n}\sum_{i=1}^n X_i$.
@@ -973,7 +973,7 @@ Roughly speaking, we find a cdf $F$ such that when $n$ is sufficiently large, $F
         >> For $x \leq 0$, $F_n(x) = P(nX_{(1)} \leq x) = 0$.
         >> For $x \geq n$, $F_n(x) = P(nX_{(1)} \leq x) = 1$.
         >> For $0 < x < n$, $F_n(x) = P(nX_{(1)} \leq x) = P(X_{(1)} \leq x/n) = 1 - P(X_{(1)} > x/n) = 1 - \prod_{i=1}^n P(X_i > x/n) = 1 - \prod_{i=1}^n (1-x/n) = 1 - (1-x/n)^n$.
-        >> Thus, $F_(x) = \begin{cases} 0 & x\leq 0\\1-(1-x/n)^n & 0<x<n\\1 & x\geq n\end{cases}$.
+        >> Thus, $F_n(x) = \begin{cases} 0 & x\leq 0\\1-(1-x/n)^n & 0<x<n\\1 & x\geq n\end{cases}$.
         >> Therefore, $\lim_{n\to \infty} F_n(x) = \begin{cases} 0 & x\leq 0\\1-e^{-x} & x>0\end{cases}$.
         >> Thus the limiting distribution of $nX_{(1)}$ is $F(x) = \begin{cases} 0 & x\leq 0\\1-e^{-x} & x>0\end{cases}$.
         >> The support of $n(1-X_{(n)})$ is $[0,n]$. Now we consider the cdf:
@@ -1047,8 +1047,8 @@ But there is one special case in which two modes are equivalent, i.e., $X_n \ove
     - The Weak Law of Large Numbers (WLLN)
         Suppose $X_1,...,X_n$ are independent with a common mean $\mu < \infty$ and a common variance $\sigma^2 < \infty$.
         Then $\bar{X_n} \overset{p}{\to} \mu$ where $\bar{X_n} = \frac{1}{n}\sum_{i=1}^n X_i$.
-        > Proof: We only neeed to show for any $\epsilon > -$, $\lim_{n\to \infty} P(|\bar{X_n} - \mu| > \epsilon) = 0$.
-            > 1. P(|\bar{X_n} - \mu| > \epsilon) \geq 0
+        > Proof: We only neeed to show for any $\epsilon > 0$, $\lim_{n\to \infty} P(|\bar{X_n} - \mu| > \epsilon) = 0$.
+            > 1. $P(|\bar{X_n} - \mu| > \epsilon) \geq 0$;
             > 2. By the Markov inequality we have $P(|\bar{X_n} - \mu| > \epsilon) \leq \frac{E[(\bar{X_n}-\mu)^2]}{\epsilon^2} = \frac{Var(\bar{X_n})}{\epsilon^2} = \frac{Var(\frac{1}{n}\sum_{i=1}^n X_i)}{\epsilon^2} = \frac{1}{n^2\epsilon^2}Var(\sum_{i=1}^n X_i) = \frac{1}{n^2\epsilon^2}\sum_{i=1}^n Var(X_i) = \frac{1}{n\epsilon^2}\sigma^2 \to 0$ as $n \to \infty$. By squeeze theorem, $\lim_{n\to \infty} P(|\bar{X_n} - \mu| > \epsilon) = 0$, therefore $\bar{X_n} \overset{p}{\to} \mu$. 
 
         > Example 3: (Application of WLLN) Suppose $X_1,...,X_n \overset{iid}{\sim} \chi_1^2$, then $\bar{X_n} \overset{p}{\to} 1$.
@@ -1087,6 +1087,161 @@ In this section, we will discuss some theorems regarding the convergecne in dist
 
     > Proof: By the theorem above, to show $\frac{\sqrt{n}(\bar{X_n} - \mu)}{\sigma} \overset{d}{\to} N(0,1)$, we only need to show the mgf of $\frac{\sqrt{n}(\bar{X_n} - \mu)}{\sigma}$ converges to the mgf of $N(0,1)$, which is $M(t) = e^{t^2/2}$.
     > Step 1: Find the mgf of $\frac{\sqrt{n}(\bar{X_n} - \mu)}{\sigma}$, denoted by $M_n(t)$. Note: $\frac{\sqrt{n}(\bar{X_n} - \mu)}{\sigma} = \frac{\sqrt{n}(\frac{1}{n}\sum_{i=1}^n X_i - n\mu)}{\sigma} = \frac{(\frac{1}{\sqrt{n}}\sum_{i=1}^n X_i - n\mu)}{\sigma}$. Let $Y_i = \frac{X_i-\mu}{\sigma}$, then $\frac{\sqrt{n}(\bar{X_n} - \mu)}{\sigma} = \frac{1}{\sqrt{n}}\sum_{i=1}^nY_i$.
-    > Obviously $Y_1,...,Y_n$ are iid, and $E(Y_i) = 0, Var(Y_i) = 1$. Suppose the mgf of $Y_i$ exists and is $M_Y(t)$, then $M_n(t) = E(e^{t\frac{1}{\sqrt{n}}\sum_{i=1}^nY_i}) = E(\prod_{i=1}^n e^{\frac{t}{\sqrt{n}}Y_i}) = \prod_{i=1}^n E(e^{\frac{t}{\sqrt{n}}Y_i}) = \prod_{i=1}^n M_Y(\frac{t}{\sqrt{n}}) = (M_Y(\frac{t}{\sqrt{n}}))^n = [M_Y(0) + M'_Y(0) \cdot t/\sqrt{n}+\frac{M''_Y(0)}{2} \cdot (t/\sqrt{n})^2 + o(1/2)]^n$. Here, we have ![definition of small-o notation](https://en.wikipedia.org/wiki/Big_O_notation#Little-o_notation).
+    > Obviously $Y_1,...,Y_n$ are iid, and $E(Y_i) = 0, Var(Y_i) = 1$. Suppose the mgf of $Y_i$ exists and is $M_Y(t)$, then $M_n(t) = E(e^{t\frac{1}{\sqrt{n}}\sum_{i=1}^nY_i}) = E(\prod_{i=1}^n e^{\frac{t}{\sqrt{n}}Y_i}) = \prod_{i=1}^n E(e^{\frac{t}{\sqrt{n}}Y_i}) = \prod_{i=1}^n M_Y(\frac{t}{\sqrt{n}}) = (M_Y(\frac{t}{\sqrt{n}}))^n = [M_Y(0) + M'_Y(0) \cdot t/\sqrt{n}+\frac{M''_Y(0)}{2} \cdot (t/\sqrt{n})^2 + o(1/2)]^n$. Here, we have [definition of small-o notation](https://en.wikipedia.org/wiki/Big_O_notation#Little-o_notation).
     > Aside: $\lim_{n\to\infty} (1+\frac{x}{n} + o(1/n))^n = e^x$. Then, $\lim_{n\to \infty} M_n(t) = e^{t^2/2}$, which is the mgf of $N(0,1)$.
     > Step 2: Since $\lim_{n \to \infty} M_n(t) = M(t)$ for any $|t| < h$, by the theorem above, $\frac{\sqrt{n}(\bar{X_n} - \mu)}{\sigma} \overset{d}{\to} N(0,1)$.
+
+    Examples of CLT:
+    > Example 1: Suppose $X_1,X_2,... \overset{iid}{\sim} \chi_1^2$. Let $Y_n = \sum_{i=1}^n X_i$. Show that $\frac{Y_n - n}{\sqrt{2n}} \overset{d}{\to} N(0,1)$.
+    >> Solution: Let $\bar{X_n} = Y_n/n = \frac{1}{n}\sum_{i=1}^n X_i$.
+        >> 1. $X_1,X_2,...$ are iid.
+        >> 2. $E(X_1) = E(\chi_1^2) = E(Z^2) = Var(Z) + (E(Z))^2 \leq \infty$, where $Z \sim N(0,1)$.
+        >> 3. $Var(X_1) = Var(\chi_1^2) = Var(Z^2) < \infty$.
+        >> By the CLT, $\frac{\sqrt{n}(\bar{X_n} - 1)}{\sqrt{2}} \overset{d}{\to} N(0,1)$.
+        >> Then, $\frac{Y_n - n}{\sqrt{2n}} = \frac{\sum_{i=1}^n X_i - n}{\sqrt{2n}} = \frac{\sqrt{n}(\bar{X_n} - 1)}{\sqrt{2}} \overset{d}{\to} N(0,1)$.
+    
+    > Practice 2: Suppose $Y_n \sim \chi_n^2$. Show that $\frac{Y_n - n}{\sqrt{2n}} \overset{d}{\to} N(0,1)$.
+
+    > Example 3: Suppose $X_1,...,X_n \overset{iid}{\sim} \text{Poisson}(\mu)$. Let $Y_n = \sum_{i=1}^n X_i$. Find the limiting distribution of $\frac{Y_n - n\mu}{\sqrt{n\mu}}$.
+    >> Solution: Since $X_1,...,X_n \overset{iid}{\sim} \text{Poisson}(\mu)$.
+        >> 1. $X_1,...,X_n$ are iid.
+        >> 2. $E(X_i) = \mu < \infty$.
+        >> 3. $Var(X_i) = \mu < \infty$.
+        >> Let $\bar{X_n} = \frac{1}{n}\sum_{i=1}^n X_i$, then by the CLT, $\frac{\sqrt{n}(\bar{X_n} - \mu)}{\sqrt{\mu}} \overset{d}{\to} N(0,1)$.
+        >> Note that $\frac{Y_n - n\mu}{\sqrt{n\mu}} = \frac{\sum_{i=1}^n X_i - n\mu}{\sqrt{n\mu}} = \frac{\sqrt{n}(\bar{X_n} - \mu)}{\sqrt{\mu}} \overset{d}{\to} N(0,1)$.
+    
+    > Practice 4: Suppose $Y_n \sim \text{Poisson}(n\mu)$. Find the limiting distribution of $\frac{Y_n - n\mu}{\sqrt{n\mu}}$.
+
+- Continuous mapping theorem:
+    Suppose that $g$ is a continuous function,
+        1. If $X_n \overset{d}{\to} X$, then $g(X_n) \overset{d}{\to} g(X)$.
+        2. If $X_n \overset{p}{\to} X$, then $g(X_n) \overset{p}{\to} g(X)$.
+
+    > Example 1: $X_n \overset{p}{\to} a \Longrightarrow X_n^2 \overset{p}{\to} a^2$, if $X_n \geq 0$, and $a \geq 0$, then $X_n \overset{p}{\to} a \Longrightarrow \sqrt{X_n} \overset{p}{\to} \sqrt{a}$.
+
+    > Example 2: If $X_n \overset{d}{\to} Z \sim N(0,1)$, then 2X_n \overset{d}{\to} 2Z \sim N(0,4), $X_n^2 \overset{d}{\to} Z^2 \sim \chi_1^2$.
+
+- Slutsky's theorem:
+    Suppose that $X_n \overset{d}{\to} X$ and $Y_n \overset{p}{\to} a$, where $a$ is a constant. Then,
+        1. $X_n + Y_n \overset{d}{\to} X + a$.
+        2. $X_nY_n \overset{d}{\to} aX$.
+        3. $\frac{X_n}{Y_n} \overset{d}{\to} \frac{X}{a}$, if $a \neq 0$.
+    > Comment: If $X_n \overset{d}{\to} X$ and $Y_n \overset{p}{\to} Y$, then $X_n + Y_n \overset{d}{\to} X + Y$ does not hold in general.
+    > Example 1: Take $X_1 = X_2 = ... = Z \sim N(0,1)$, $Y_1 = Y_2 = ... = Z \sim N(0,1)$, let $X = -Z \sim N(0,1)$, $Y = Z \sim N(0,1)$, then $X_n \overset{d}{\to} X$ and $Y_n \overset{d}{\to} Y$, but $X_n + Y_n \overset{d}{\not\to} X + Y$, as $X+Y = 0$.
+
+    > Example 2: If $X_n \overset{d}{\to} X \sim N(0,1)$ and $Y_n \overset{p}{\to} b \neq 0$, then $X_n + Y_n \overset{d}{\to} X + b \sim N(b,1)$, $X_nY_n \overset{d}{\to} bX \sim N(0,b^2)$, $\frac{X_n}{Y_n} \overset{d}{\to} \frac{X}{b} \sim N(0,\frac{1}{b^2})$.
+
+    > Example 3: Assume $X_1,X_2,... \overset{iid}{\sim} \text{Poisson}(\mu)$. Find the limiting distribution of $U_n = \frac{\sqrt{n}(X_n - \mu)}{\sqrt{\bar{X_n}}}$ and $V_n = \sqrt{n}(X_n - \mu)$.
+    >> Solution: $U_n = \frac{\sqrt{n}(X_n - \mu)}{\sqrt{\bar{X_n}}} = \frac{\sqrt{n}(X_n - \mu)}{\sqrt{\mu}} \cdot \frac{\sqrt{\mu}}{\sqrt{\bar{X_n}}}$. By the CLT, $\frac{\sqrt{n}(X_n - \mu)}{\sqrt{\mu}} \overset{d}{\to} N(0,1)$. By the WLLN, $\bar{X_n} \overset{p}{\to} \mu$. Now if we take $g(x) = \frac{\sqrt{\mu}}{\sqrt{x}}$, then by the continuous mapping theorem $g(\bar{X_n}) \overset{p}{\to} g(\mu) = 1$. Lastly, by Slutsky's Theorem, $U_n = \frac{\sqrt{n}(X_n - \mu)}{\sqrt{\bar{X_n}}} = \frac{\sqrt{n}(X_n - \mu)}{\sqrt{\mu}} \cdot \frac{\sqrt{\mu}}{\sqrt{\bar{X_n}}} \overset{d}{\to} N(0,1) \cdot 1 = N(0,1)$.
+    >> $V_n = \sqrt{n}(X_n - \mu) = \frac{\sqrt{n}(X_n - \mu)}{\sqrt{\mu}} \cdot \sqrt{\mu}$. By the CLT, $\frac{\sqrt{n}(X_n - \mu)}{\sqrt{\mu}} \overset{d}{\to} N(0,1)$. If we take $g(x) = \sqrt{\mu}x$, then by the continuous mapping theorem $g(\frac{\sqrt{n}(X_n - \mu)}{\sqrt{\mu}}) \overset{d}{\to} g(N(0,1)) = \sqrt{mu}Z \sim N(0,\mu^2)$.
+    >
+    >> Note: This proof is identical to the proof of $P(-1.96 < \frac{\sqrt{n}(\bar{X_n} - \theta)}{\sqrt{\bar{X_n}(1-\bar{X_n})}} < 1.96) \approx 0.95$ as $n \to \infty$. (Confidence interval for $\theta$)
+
+    > Example 4: Assume $X_1,X_2,... \overset{iid}{\sim} \text{Unif}[0,1]$. Let $Y_n = \max_{1\leq i \leq n} X_i$ for $n \geq 1$. Find the limiting distribution of 1) $e^{Y_n}$, 2) $\sin (1-Y_n)$, 3) $e^{-n(1-Y_n)}$, 4) $(Y_n-1)^2[n(1-Y_n)]$.
+    >> Solution: $Y_n \overset{d}{\to} 1$, then by continuoud mapping theorem, 1) $e^{Y_n} \overset{d}{\to} e^1 = e$, 2) $\sin (1-Y_n) \overset{d}{\to} \sin (1-1) = 0$.
+    >> 3) $n(1-Y_n) \overset{d}{\to} X \sim \text{exp}(1)$, then by the continuous mapping theorem, $e^{-n(1-Y_n)} \overset{d}{\to} e^{-X}$. We let $Y = e^{-X}$, then the support of $Y$ is $(0,1)$ for $y \leq 0$, $F_Y(y) = P(Y \leq y) = 0$; for $y \geq 1$, $F_Y(y) = P(Y \leq y) = 1$; for $0 < y < 1$, $F_Y(y) = P(Y \leq y) = P(e^{-X} \leq y) = P(-X \leq \ln y) = P(X \geq -\ln y) = 1 - P(X \leq -\ln y) = 1 - F_X(-\ln y) = 1 - (1 - e^{-\ln y}) = y$. Therefore, $F_Y(y) = \begin{cases} 0 & y \leq 0\\y & 0 < y < 1\\1 & y \geq 1\end{cases}$, thus $Y \sim \text{Unif}[0,1]$.
+    >> 4) Take $g(x) = (1+x) ^2$, by continuous mapping theorem, $(Y_n+1)^2 \overset{p}{\to} 4$. Since $n(1-Y_n) \overset{d}{\to} X \sim \text{exp}(1)$, By Slutsky's theorem, $(Y_n-1)^2[n(1-Y_n)] \overset{d}{\to} 4X$, where $X \sim \text{exp}(1)$. Let $Y = 4X$, the support of $Y$ is $(0,\infty)$, for $y \leq 0$, $F_Y(y) = P(Y \leq y) = 0$; for $y > 0$, $F_Y(y) = P(Y \leq y) = P(4X \leq y) = P(X \leq \frac{y}{4}) = F_X(\frac{y}{4}) = 1 - e^{-\frac{y}{4}}$. Therefore, $F_Y(y) = \begin{cases} 0 & y \leq 0\\1 - e^{-\frac{y}{4}} & 0 < y < 1\\1 & y \geq 1\end{cases}$, thus $Y \sim \text{exp}(4)$.
+
+- Delta method:
+    Question: We want to find the limiting distribution of $\sqrt{n}[g(\bar{X_n}) - g(\mu)]$, where $g$ is a differentiable function. $X_1, ..., X_N \overset{iid}{\sim} \text{exp}(\lambda), f(x; \lambda) = \begin{cases} \lambda e^{-\lambda x} & x \geq 0\\0 & x < 0\end{cases}$. The MLE for $\lambda$ is $\hat{\lambda} = \frac{1}{\bar{X}}$. How to establish $\sqrt{n}(\hat{\lambda} - \lambda) \overset{d}{\to} N(0,1)$?
+
+    Delta method: Suppose that $\sqrt{n}(\bar{X_n} - \mu) \overset{d}{\to} N(0,\sigma^2)$, and $g$ is a differentiable at $x = \mu$, $g'(\mu) \neq 0$, then $\sqrt{n}[g(\bar{X_n}) - g(\mu)] \overset{d}{\to} N(0,\sigma^2[g'(\mu)]^2)$.
+
+    How to prove this result?
+    We consider the first-order Taylor expansion of $g(x)$ around $x = \mu$, i.e., $g(\bar{X_n}) = g(\mu) + g'(\mu)(\bar{X_n}-\mu) + R_n$, where $R_n$ is the remainder term and is ignigible, then $\sqrt{n}[g(\bar{X_n}) - g(\mu)] \approx \sqrt{n}g'(\mu)(\bar{X_n}-\mu)$. By continuous mapping theorem, let $h(x) = g'(\mu)x$, then $\sqrt{n}g'(\mu)(\bar{X_n}-\mu) \overset{d}{\to} g'(\mu)Z$, where $Z \sim N(0,\sigma^2)$. Therefore, $\sqrt{n}[g(\bar{X_n}) - g(\mu)] \overset{d}{\to} N(0,\sigma^2[g'(\mu)]^2)$.
+
+    > Example 1: Suppose $X_1,...,X_n \overset{iid}{\sim} f(x) = \begin{cases} 0 & x \leq 0\\ \frac{1}{\theta}e^{-\frac{x}{\theta}} & x > 0\end{cases}$. Find the limiting distribution of 1) $X_n$, 2) $Z_n = \frac{\sqrt{n}(X_n - \theta)}{\bar{X_n}}$, 3) $U_n = \sqrt{n}(\bar{X_n} - \theta)$, 4) $V_n = \sqrt{n}(\ln \bar{X_n} - \ln \theta)$.
+    >> Solution: 
+    >> 1) $X_1,...,X_n$ are iid; $E(X_1) = \theta < \infty$; $Var(X_1) = \theta^2 < \infty$; By the CLT, $\bar{X_n} \overset{p}{\to} \theta$.
+    >> 2) $Z_n = \frac{\sqrt{n}(X_n - \theta)}{\theta} \cdot \frac{\theta}{\bar{X_n}}$. By the CLT, \frac{\sqrt{n} (\bar{X_n}-\theta)}{\theta} \overset{d}{\to} N(0,1). By the WLLN, $\bar{X_n} \overset{p}{\to} \theta$. By the continuous mapping theorem, $\frac{\theta}{\bar{X_n}} \overset{p}{\to} \frac{\theta}{\theta} = 1$. By Slutsky's theorem, $Z_n = \frac{\sqrt{n}(X_n - \theta)}{\theta} \cdot \frac{\theta}{\bar{X_n}} \overset{d}{\to} N(0,1) \cdot 1 = N(0,1)$.
+    >> 3) $U_n = \sqrt{n}(\bar{X_n} - \theta)$. By the CLT, $\sqrt{n}(\bar{X_n} - \theta) \overset{d}{\to} N(0,\theta^2)$. By the continuous mapping theorem, $U_n = \sqrt{n}(\bar{X_n} - \theta) \overset{d}{\to} N(0,\theta^2)$.
+    >> 4) $V_n = \sqrt{n}(\ln \bar{X_n} - \ln \theta) = \sqrt{n}(\ln \frac{\bar{X_n}}{\theta}) = \sqrt{n}(\ln (1 + \frac{\bar{X_n} - \theta}{\theta}))$. By the Taylor expansion, $\ln (1 + \frac{\bar{X_n} - \theta}{\theta}) \approx \frac{\bar{X_n} - \theta}{\theta}$. By the CLT, $\sqrt{n}(\bar{X_n} - \theta) \overset{d}{\to} N(0,\theta^2)$. By the continuous mapping theorem, $\frac{\bar{X_n} - \theta}{\theta} \overset{d}{\to} \frac{N(0,\theta^2)}{\theta} = N(0,\frac{\theta^2}{\theta^2}) = N(0,1)$. By Slutsky's theorem, $V_n = \sqrt{n}(\ln \bar{X_n} - \ln \theta) = \sqrt{n}(\ln \frac{\bar{X_n}}{\theta}) = \sqrt{n}(\ln (1 + \frac{\bar{X_n} - \theta}{\theta})) \overset{d}{\to} N(0,1) \cdot 1 = N(0,1)$.
+
+    > Example 2: Suppose $X_1,...,X_n \overset{iid}{\sim} \text{Poisson}(\mu)$. Find the limiting distribution of $Z_n = \frac{\sqrt{n}(\sqrt{X_n} - \sqrt{\mu})}.
+    >> Solution: We have shown that $\sqrt{n}(\bar{X_n} - \mu) \overset{d}{\to} N(0,\mu)$. If we take $g(x) = \sqrt{x}$, then $g'(\mu) = \frac{1}{2\sqrt{\mu}} \neq 0$. By the Delta method, $\sqrt{n}(\sqrt{X_n} - \sqrt{\mu}) = \sqrt{n}(g(\bar{X_n} - g(\mu))) \overset{d}{\to} N(0,\mu(g'(\mu))^2) = N(0,\frac{1}{4})$.
+
+## 6 Point Estimation
+### 6.1 Backgroud and Notation
+Suppose $X_1,...,X_n$ are iid (is random sample) from $f(x;\theta)$. Here $f(x;\theta)$ is a p.f. for discrete r.v. or p.d.f. for continuous r.v. and $\theta$ is unknown and consist of finite number of parameters, i.e. $\theta = (\theta_1,...,\theta_k)^T$, $\theta$ can be a scalar ($k = 1$) or a vector ($k > 1$).
+    > For example:
+    > 1. $X_1,...,X_n \overset{iid}{\sim} \text{Poisson}(\mu)$, then $\theta = \mu$ is a scalar ($k=1$).
+    > 2. $X_1,...,X_n \overset{iid}{\sim} N(\mu,\sigma^2)$, then $\theta = (\mu,\sigma^2)^T$ is a vector ($k>1$).
+
+Some useful notations:
+    - $\Theta$: parameter space. It consists of all possible values $\theta$ can take.
+        1. $X_1,...,X_n \overset{iid}{\sim} \text{Poisson}(\mu)$, then $\Theta = \{\mu|\mu>0\}$.
+        2. $X_1,...,X_n \overset{iid}{\sim} N(\mu,\sigma^2)$, then $\Theta = \{(\mu,\sigma^2)|\mu \in \mathbb{R}, \sigma^2 > 0\}$.
+    - Data: $X_1,...,X_n \overset{iid}{\sim} f(x;\theta)$, are random variables
+    - Observation: $x_1,...,x_n$ are observed values of $X_1,...,X_n$, they are not random.
+    - Statistic: a function of data, and cannot depend on $\theta$.
+        > e.g. $\bar{X_n} = \frac{1}{n}\sum_{i=1}^n X_i$ is a statistic, but $\sqrt{n}(\bar{X_n} - \mu)$ is not a statistic if $\mu$ is unknown.
+    - Estimator: If a statistic $T=T(X_1,...,X_n)$ is used to estimate $\theta$, then $T$ is an estimator of $\theta$, it is a random variable.
+    - Estimate: An observed value of $T = T(X_1,...,X_n)$, also known as realization of $T$, denoted by $t = T(x_1,...,x_n)$, it is not random.
+        > e.g. $\bar{X_n}$ is an estimator of $\mu$ if $X_1,...,X_n \overset{iid}{\sim} N(\mu,\sigma^2)$. If we observe $x_1,...,x_n$, then $\bar{x_n} = \frac{1}{n}\sum_{i=1}^n x_i$ is an estimate of $\mu$.
+        > Remark: In statistics, we use $\hat{\theta} = \hat{\theta}(X_1,...,X_n)$ to denote an estimator of $\theta$. If $\hat{\theta}$ is an observed value, not a r.v., then $\hat{\theta} = \hat{\theta}(x_1,...,x_n)$ to denote an estimate of $\theta$.
+    
+### 6.2 Method of Moments
+Problem Setup: Suppose $X_1,...,X_n \overset{iid}{\sim} f(x;\theta)$, we want to estimate $\theta = (\theta_1,...,\theta_k)^T$.
+1. Let $\mu_j = E(X_i^j), j = 1,...,k$ denote the $j$th moment of $X_i$. (population moment)
+    1. $\mu_j$ is called the $j$th population moment.
+    2. $\mu_j = \mu_j(\theta)$, i.e. $\mu_j$ is a function of $\theta$.
+    > e.g. $X_1,...,X_n \overset{iid}{\sim} N(\mu,\sigma^2)$. Here, $\theta = (\mu,\sigma^2)^T$. 
+    > Then, $\mu_1 = E(X_1) = \mu = \mu_1(\theta)$, $\mu_2 = E(X_1^2) = \sigma^2 + \mu^2 = \mu_2(\theta)$.
+2. Let $\hat{\mu_j} = \frac{1}{n}\sum_{i=1}^n X_i^j, j = 1,...,k$ denote the $j$th sample moment of $X_i$. (sample moment)
+3. Idea of method of moment estimator (MM estimator)
+    Find estimator of $\theta$, denoted by $\hat{\theta}$, such that $\hat{\mu_j} = \mu_j(\hat{\theta})$. Recall $\theta \overset{\mu_j}{\to} \mu_j(\theta) = \mu_j$. Intuitively speaking, 
+
+    > 1. $X_1 \sim \text{Poisson}(\theta)$, $\mu_1 = E(X_1) = \theta = \mu_1(\theta)$. Then the MM estimator satisfies $\mu_1(\hat{\theta}) = \hat{\theta} = \frac{1}{n}\sum_{i=1}^n X_i$.
+    > 2. $X_i \sim \text{Unif}[0,\theta]$. Then, $\mu_1 = E(X_1) = \frac{\theta}{2} = g_1(\theta)$. So the MM estimator satisfies $g_1(\hat{\theta}) = \hat{\theta}/2 = \frac{1}{n}\sum_{i=1}^n X_i$, then the MM estimator of $\theta$ is $\hat{\theta} = 2\bar{X_n}$, where $\bar{X_n} = \frac{1}{n}\sum_{i=1}^n X_i$.
+    > 3. $X_i \sim f(x;\theta) = \begin{cases} \theta x^{\theta -1} & 0 < x < 1\\0 & \text{otherwise}\end{cases}$. ...... $\hat{\theta} = \frac{\bar{X}}{1-\bar{X}}, where \bar{X} = \frac{1}{n}\sum_{i=1}^n X_i$.
+    > 4. Two parameter case: $X_i \sim N(\mu,\sigma^2)$. Hence $\theta = (\mu,\sigma^2)^T$. Then, $\mu_1 = E(X_1) = \mu = g_1(\theta)$, $\mu_2 = E(X_1^2) = \sigma^2 + \mu^2 = g_2(\theta)$. Then, the MM estimator of $\theta$ satisfies $g_1(\hat{\theta}) = \hat{\mu} = \bar{X_n}$, $g_2(\hat{\theta}) = (\hat{\mu})^2 + \hat{\sigma^2} = \frac{1}{n}\sum_{i=1}^n X_i^2$. Then, $\hat{\mu} = \bar{X_n}$, $\hat{\sigma^2} = \frac{1}{n}\sum_{i=1}^n X_i^2 - (\bar{X_n})^2 = \frac{1}{n}\sum_{i=1}^n (X_i - \bar{X_n})^2$. Note $E(\hat{\sigma^2}) \neq \sigma^2$, so $\hat{\sigma^2}$ is a biased estimator of $\sigma^2$.
+
+### 6.3 Maximum Likelihood Method
+In this section we will introduce the most commonly used method for estimating unknown parameters.
+- Likelihood function
+    1. Suppose that $X_1,...,X_n$ are iid from $f(x;\theta)$, a p.f. if $X_i$ is discrete, or a p.d.f. if $X_i$ is continuous.
+    2. Given $x_1,...,x_n$, which denote the observed values of $X_1,...,X_n$, we calculate the joint p.f. or p.d.f. of $(X_1,...,X_n)$ wrt observed values $(x_1,...,x_n)$
+        1. Discrete case: joint p.f. of $X_1,...,X_n$ wrt $x_1,...,x_n$ is $P(X_1 = x_1,...,X_n = x_n) = \prod_{i=1}^n P(X_i = x_i) = \prod_{i=1}^n f(x_i;\theta)$.
+        2. Continuous case: joint p.d.f. of $X_1,...,X_n$ wrt $x_1,...,x_n$ is $f(x_1,...,x_n;\theta) = \prod_{i=1}^n f(x_i;\theta)$.
+    3. We use $L(\theta; x_1,...,x_n)$ or $L(\theta)$ to denote the joint p.f. or pdf evaluated at $x_1,...,x_n$. That is to say, $L(\theta; x_1,...,x_n) = \begin{cases} P(X_1=x_1,...,X_n=x_n) & \text{discrete case}\\ f_{X_1,...,X_n}(x_1,...,x_n;\theta) & \text{continuous case}\end{cases} = \prod_{i=1}^n f(x_i;\theta)$. Here, $L(\theta;x_1,...,x_n)$ is called the likelihood of $\theta$.
+    
+    > Comments:
+    > 1. Likelihood function measures how likely we get the observed data $x_1,...,x_n$ for a given $\theta$.
+    > 2. Smaller $L(\theta)$ indicates it is less likely for such $\theta$ to generate the observed data $x_1,...,x_n$.
+    > 3. Larger $L(\theta)$ indicates it is more likely for such $\theta$ to generate the observed data $x_1,...,x_n$.
+
+    - Idea of Maximum Likelihood Method:
+        Choose $\theta$ to maximize $L(\theta)$. In other words, we choose $\theta$ such that it is most lilely to generate the observed data $x_1,...,x_n$.
+    
+- Maximum Likelihood Estimator (MLE)
+    1. MLE maximizes $L(\theta)$, i.e., if we use $\hat{\theta} = \hat{\theta}(x_1,...,x_n)$ to denote the ML estimate, then $\hat{\theta} = \arg\max_{\theta \in \Theta} L(\theta; x_1,...,x_n)$.
+    2. ML estimator: $\hat{\theta} = \hat{\theta}(X_1,...,X_n)$.
+    3. log-likelihood function: $l(\theta) = \ln L(\theta)$. Then the ML estimator satisfies $\hat{\theta} = \arg\max_{\theta \in \Theta} L(\theta) = \arg\max_{\theta \in \Theta} l(\theta)$.
+    4. Invariance property of ML estimator: Let $\eta = g(\theta)$, i.e., $\eta$ is a function of $\theta$. Then, the MLE of $\eta$ is given by $\hat{\eta} = g(\hat{\theta})$, where $\theta$ denotes the MLE of $\theta$.
+
+    > Examples of MLE
+    > Suppose $X_1,...,X_n \overset{iid}{\sim}$
+    > 1. $\text{Poisson}(\theta)$
+    > 2. $\text{Unif}[0,\theta]$
+    > 3. $f(x;\theta) = \begin{cases} \theta x^{\theta -1} & 0 < x < 1\\0 & \text{otherwise}\end{cases}$
+    > 4. $N(\mu,\sigma^2)$
+    >> Solution:
+    >> 1. Likelihood function for $x_1,...,x_n$ is $L(\theta;x_1,...,x_n) = \prod_{i=1}^n f(x_i; \theta) = \prod_{i=1}^n \frac{\theta^{x_i}}{x_i!}e^{-\theta}$, $x_i = 0,1,2,...$. Then, the log-likelihood is, $l(\theta) = \ln L(\theta) = \sum_{i=1}^n \ln f(x_i;\theta) = \sum_{i=1}^n \ln \frac{\theta^{x_i}}{x_i!}e^{-\theta} = \sum_{i=1}^n \ln \theta^{x_i} - \sum_{i=1}^n \ln x_i! - n\theta$. Then the ML estimate of $\theta$ satisfies $\frac{dl(\theta)}{d\theta} = \sum_{i=1}^n \frac{x_i}{\theta} - n = 0$, then $\hat{\theta} = \frac{1}{n}\sum_{i=1}^n x_i = \bar{x_n}$. Therefore, the MLE of $\theta$ is $\hat{\theta} = \bar{X_n}$.
+    >> 2. Likelihood function for $x_1,...,x_n$ is $L(\theta;x_1,...,x_n) = 1/\theta^n \prod_{i=1}^n \mathbb{1}(0 \leq x_i \leq \theta) = 1/\theta^n \mathbb{1}(x_{(1)}\geq 0) \mathbb{1}(x_{(n)} \leq \theta)$, where $x_{(1)} = \min\{x_1,...,x_n\}$, $x_{(n)} = \max\{x_1,...,x_n\}$. Then, when $\theta < x_{(n)}$, $L(\theta) = 0$, when $\theta \geq x_{(n)}$, $L(\theta)$ is a monotone decreasing function of $\theta$. Therefore, the ML estimate of $\theta$ is $\hat{\theta} = x_{(n)}$. Therefore, the MLE of $\theta$ is $\hat{\theta} = x_{(n)} = \max\{X_1,...,X_n\}$.
+    >> 3. Likelihood function for $x_1,...,x_n$ is $L(\theta;x_1,...,x_n) = \prod_{i=1}^n f(x_i; \theta) = \prod_{i=1}^n \theta x_i^{\theta -1} = \theta^n (\prod_{i=1}^n x_i)^{\theta -1}$. Then, the log-likelihood is, $l(\theta) = \ln L(\theta) = \ln \theta^n + (\theta -1) \sum_{i=1}^n \ln x_i$. Then the ML estimate of $\theta$ satisfies $\frac{dl(\theta)}{d\theta} = \frac{n}{\theta} + \sum_{i=1}^n \ln x_i = 0$, then $\hat{\theta} = -\frac{n}{\sum_{i=1}^n \ln x_i}$. Therefore, the MLE of $\theta$ is $\hat{\theta} = -\frac{n}{\sum_{i=1}^n \ln X_i}$.
+    >> 4. Likelihood function for $x_1,...,x_n$ is $L(\mu, \sigma^2;x_1,...,x_n) = \prod_{i=1}^n f(x_i; \mu, \sigma^2) = \prod_{i=1}^n \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x_i-\mu)^2}{2\sigma^2}}$. Then, the log-likelihood is, $l(\mu, \sigma^2) = \ln L(\mu, \sigma^2) = \sum_{i=1}^n \ln f(x_i; \mu, \sigma^2) = \sum_{i=1}^n \ln \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x_i-\mu)^2}{2\sigma^2}} = -\frac{n}{2}\ln 2\pi - \frac{n}{2}\ln \sigma^2 - \frac{1}{2\sigma^2}\sum_{i=1}^n (x_i - \mu)^2$. Then the ML estimate of $\mu$ satisfies $\frac{\partial l(\mu, \sigma^2)}{\partial \mu} = \frac{1}{\sigma^2}\sum_{i=1}^n (x_i - \mu) = 0$, then $\hat{\mu} = \frac{1}{n}\sum_{i=1}^n x_i = \bar{x_n}$ and the ML estimate of $\sigma^2$ satisfies $\frac{\partial l}{\partial \sigma^2} = -\frac{n}{2\sigma^2} + \frac{1}{2\sigma^4}\sum_{i=1}^n (x_i - \mu)^2 = 0$, then $\hat{\sigma^2} = \frac{1}{n}\sum_{i=1}^n (x_i - \mu)^2 = \frac{1}{n}\sum_{i=1}^n (x_i - \bar{x_n})^2$. Therefore, the MLE of $\mu$ is $\hat{\mu} = \bar{X_n}$ and the MLE of $\sigma^2$ is $\hat{\sigma^2} = \frac{1}{n}\sum_{i=1}^n (X_i - \bar{X_n})^2$.
+
+### 6.4 Properties of ML Estimator
+In this section:
+1. We consider $\theta$ is a scalar, i.e., $k = 1$.
+2. We consider the ML estimator (a r.v.)
+3. The support of $X_1,...,X_n$ does not depend on $\theta$.
+    For example, if $X_1,...,X_n \overset{iid}{\sim} \text{Unif}[0,\theta]$, then the support of $X_1,...,X_n$ depends on $\theta$. Then the theories developed in this section do not apply.
+
+We define some notation first:
+1. Score function, dentoed as $S(\theta)$: $S(\theta) = \frac{d l(\theta)}{d \theta} = \frac{d \ln L(\theta; x_1,...,x_n)}{d \theta}$. Typically, the MLE $\hat{\theta}$ satisfies $S(\hat{\theta}) = 0$, when the support of $X_1,...,X_n$ does not depend on $\theta$.
+2. Information function, denoted as $I(\theta)$: $I(\theta) = -\frac{d^2 l(\theta)}{d \theta^2} = -\frac{d^2 \ln L(\theta; x_1,...,x_n)}{d \theta^2}$.
+3. Fisher information, denoted as $J(\theta)$: $J(\theta) = E(I(\theta)) = E(-\frac{d^2 l(\theta)}{d \theta^2}) = E(-\frac{d^2 \ln L(\theta; x_1,...,x_n)}{d \theta^2})$.
+> Example: If $X_1,...,X_n \overset{iid}{\sim} f(x;\theta)$. Then $L(\theta; x_1,...,x_n) = \prod_{i=1}^n f(x_i;\theta)$, $l(\theta) = \ln L(\theta) = \sum_{i=1}^n \ln f(x_i;\theta)$. Then, $S(\theta) = \frac{d l(\theta)}{d \theta} = \sum_{i=1}^n \frac{d \ln f(x_i;\theta)}{d \theta}$, $I(\theta) = -\frac{d^2 l(\theta)}{d \theta^2} = -\sum_{i=1}^n \frac{d^2 \ln f(x_i;\theta)}{d \theta^2}$, $J(\theta) = -E(\frac{d l(\theta)}{d \theta})^2 = -E(\sum_{i=1}^n \frac{d \ln f(x_i;\theta)}{d \theta})^2 = \sum_{i=1}^n -E(\frac{d \ln f(x_i;\theta)}{d \theta})^2$. Let $J_1(\theta) = -E(\frac{d l(\theta)}{d \theta})^2 = -E(\frac{d \ln f(x_1;\theta)}{d \theta})^2$, then $J(\theta) = nJ_1(\theta)$.
+
+> Example: If $X_1,...,X_n \overset{iid}{\sim} \text{Poisson}(\theta)$. Likelihood function: $L(\theta; x_1,...,x_n) = \prod_{i=1}^n f(x_i;\theta) = \prod_{i=1}^n \frac{\theta^{x_i}}{x_i!}e^{-\theta}$, log-likelihoodfunction: $l(\theta) = \ln L(\theta) = \sum_{i=1}^n \ln f(x_i;\theta) = \sum_{i=1}^n \ln \frac{\theta^{x_i}}{x_i!}e^{-\theta} = \sum_{i=1}^n \ln \theta^{x_i} - \sum_{i=1}^n \ln x_i! - n\theta$. Then, Score function $S(\theta) = \frac{d l(\theta)}{d \theta} = \sum_{i=1}^n \frac{x_i}{\theta} - n$, Information function $I(\theta) = -\frac{d S}{d \theta} = -\sum_{i=1}^n \frac{x_i}{\theta^2}$, Fisher information $J(\theta) = E(I(\theta)) = E(-\frac{d S}{d \theta}) = E(\sum_{i=1}^n \frac{x_i}{\theta^2}) = \sum_{i=1}^n E(\frac{x_i}{\theta^2}) = \sum_{i=1}^n \frac{1}{\theta^2} E(X_i) = \frac{n}{\theta^2} E(X_1) = \frac{n}{\theta^2} \theta = \frac{n}{\theta}$.
